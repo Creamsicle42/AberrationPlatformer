@@ -8,3 +8,7 @@ func enter_state(_params:Dictionary) -> void:
 
 func exit_state() -> void:
     pass
+
+
+func _on_play_button_pressed() -> void:
+    Main.app.set_state("gameplay")

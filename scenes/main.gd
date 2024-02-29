@@ -14,7 +14,7 @@ var current_app_state : Node
 
 func _ready() -> void:
     app = self
-    set_state("gameplay")
+    set_state("main_menu")
 
 
 func set_state(state_id : String, params : Dictionary = {}) -> void:
