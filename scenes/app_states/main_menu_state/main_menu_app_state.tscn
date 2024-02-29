@@ -2,8 +2,9 @@
 
 [ext_resource type="Script" path="res://scenes/app_states/main_menu_state/main_menu_app_state.gd" id="1_k3qqp"]
 
-[node name="MainMenuAppState" type="Node"]
+[node name="MainMenuAppState" type="Node" node_paths=PackedStringArray("continue_button")]
 script = ExtResource("1_k3qqp")
+continue_button = NodePath("UIElements/Control/CenterContainer/VBoxContainer/ContinueButton")
 
 [node name="UIElements" type="CanvasLayer" parent="."]
 
@@ -30,9 +31,15 @@ layout_mode = 2
 layout_mode = 2
 text = "Aberration Platformer"
 
-[node name="PlayButton" type="Button" parent="UIElements/Control/CenterContainer/VBoxContainer"]
+[node name="NewGameButton" type="Button" parent="UIElements/Control/CenterContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Play"
+text = "New Game"
 
-[connection signal="pressed" from="UIElements/Control/CenterContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[node name="ContinueButton" type="Button" parent="UIElements/Control/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Continue"
+
+[connection signal="pressed" from="UIElements/Control/CenterContainer/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="UIElements/Control/CenterContainer/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]

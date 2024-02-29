@@ -23,6 +23,7 @@ func _input(event: InputEvent) -> void:
 
 func enter_state(params : Dictionary) -> void:
     var start_level_index = params.get("start_level", 0)
+    GameDataManager.current_game_data.level_on = start_level_index
     level_manager.set_level_index(start_level_index)
     level_manager.instance_current_level()
     set_game_paused(false)
