@@ -17,6 +17,8 @@ extends Node
 @export var jump_buffer_time := 0.1
 @export var terminal_velocity := 1000.0
 @export var apex_gravity_modifier := 0.75
+@export var gravity_manager : GravityManager
+
 
 @export_group("CielBonking", "bonk_")
 @export var bonk_left_raycast : RayCast2D
@@ -52,7 +54,12 @@ func _physics_process(delta: float) -> void:
 	var h_input = Input.get_axis("left", "right")
 
 	host.velocity.x = move_toward(host.velocity.x, max_run_speed * h_input, get_acceleration() * delta)
-	host.velocity.y += get_gravity() * delta
+	host.velocity += get_gravity() * delta * gravity_manager.get_graivty_scale() * gravity_manager.get_gravity_direction()
+
+	host.up_direction = -1 * gravity_manager.get_gravity_direction()
+	bonk_center_raycast.target_position = -48 * gravity_manager.get_gravity_direction()
+	bonk_right_raycast.target_position = -48 * gravity_manager.get_gravity_direction()
+	bonk_left_raycast.target_position = -48 * gravity_manager.get_gravity_direction()
 
 	if host.is_on_wall_only():
 		wall_touch_timer = wall_touch_time
@@ -75,7 +82,7 @@ func _physics_process(delta: float) -> void:
 		jump_buffer_timer = 0
 		wall_touch_timer = 0
 
-		host.velocity.y = jump_power * -jump_dir.y
+		host.velocity.y = jump_power * -jump_dir.y * gravity_manager.get_gravity_direction().y
 		host.velocity.x += jump_power * -jump_dir.x
 	
 

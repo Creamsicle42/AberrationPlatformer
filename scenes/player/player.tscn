@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cybydn52j3wnw"]
+[gd_scene load_steps=6 format=3 uid="uid://cybydn52j3wnw"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_cgek4"]
 [ext_resource type="Script" path="res://scenes/player/platformer_behavior.gd" id="1_vpgob"]
+[ext_resource type="Script" path="res://scenes/player/gravity_manager.gd" id="3_qkcit"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b6f3p"]
 radius = 32.0
@@ -20,11 +21,15 @@ shape = SubResource("CircleShape2D_b6f3p")
 color = Color(0.341176, 0.713726, 0.25098, 1)
 polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 
-[node name="PlatformerBehavior" type="Node" parent="." node_paths=PackedStringArray("bonk_left_raycast", "bonk_center_raycast", "bonk_right_raycast")]
+[node name="PlatformerBehavior" type="Node" parent="." node_paths=PackedStringArray("gravity_manager", "bonk_left_raycast", "bonk_center_raycast", "bonk_right_raycast")]
 script = ExtResource("1_vpgob")
+gravity_manager = NodePath("../GravityManager")
 bonk_left_raycast = NodePath("../Raycasts/LeftRaycast")
 bonk_center_raycast = NodePath("../Raycasts/CenterRaycast")
 bonk_right_raycast = NodePath("../Raycasts/RightRaycast")
+
+[node name="GravityManager" type="Node" parent="."]
+script = ExtResource("3_qkcit")
 
 [node name="Raycasts" type="Node2D" parent="."]
 
