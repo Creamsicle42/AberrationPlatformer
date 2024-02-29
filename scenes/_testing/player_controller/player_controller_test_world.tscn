@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bs23g6l1t6j67"]
+
+[node name="PlayerControllerTestWorld" type="Node2D"]
+
+[node name="Collider" type="StaticBody2D" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="Collider"]
+polygon = PackedVector2Array(-64, 96, 64, 96, 64, 512, 256, 512, 256, 576, 736, 576, 736, 416, 576, 416, 576, 352, 960, 352, 960, 64, 1184, 64, 1184, 704, -64, 704)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collider"]
+polygon = PackedVector2Array(-64, 96, 64, 96, 64, 512, 256, 512, 256, 576, 736, 576, 736, 416, 576, 416, 576, 352, 960, 352, 960, 64, 1184, 64, 1184, 704, -64, 704)
