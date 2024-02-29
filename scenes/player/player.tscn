@@ -1,11 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://cybydn52j3wnw"]
+[gd_scene load_steps=8 format=3 uid="uid://cybydn52j3wnw"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_cgek4"]
 [ext_resource type="Script" path="res://scenes/player/platformer_behavior.gd" id="1_vpgob"]
 [ext_resource type="Script" path="res://scenes/player/gravity_manager.gd" id="3_qkcit"]
+[ext_resource type="Script" path="res://assets/resources/_types/gravity_area_data.gd" id="4_qj1g1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b6f3p"]
 radius = 32.0
+
+[sub_resource type="Resource" id="Resource_5e4v3"]
+script = ExtResource("4_qj1g1")
+up_direction = Vector2(0, 1)
+gravity_scale = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yow76"]
 radius = 16.0
@@ -30,6 +36,7 @@ bonk_right_raycast = NodePath("../Raycasts/RightRaycast")
 
 [node name="GravityManager" type="Node" parent="."]
 script = ExtResource("3_qkcit")
+gravity_influences = Array[ExtResource("4_qj1g1")]([SubResource("Resource_5e4v3")])
 
 [node name="Raycasts" type="Node2D" parent="."]
 
