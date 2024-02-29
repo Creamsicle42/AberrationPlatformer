@@ -3,7 +3,8 @@ extends Node
 
 
 const STATE_PATHS := {
-    "gameplay": "res://scenes/app_states/gameplay_state/gameplay_app_state.tscn"
+    "gameplay": "res://scenes/app_states/gameplay_state/gameplay_app_state.tscn",
+    "main_menu": "res://scenes/app_states/main_menu_state/main_menu_app_state.tscn",
 }
 
 
@@ -13,7 +14,7 @@ var current_app_state : Node
 
 func _ready() -> void:
     app = self
-    set_state("gameplay")
+    set_state("main_menu")
 
 
 func set_state(state_id : String, params : Dictionary = {}) -> void:

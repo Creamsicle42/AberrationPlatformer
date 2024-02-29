@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://8bvpurlo7b1"]
+
+[ext_resource type="Script" path="res://scenes/app_states/main_menu_state/main_menu_app_state.gd" id="1_k3qqp"]
+
+[node name="MainMenuAppState" type="Node"]
+script = ExtResource("1_k3qqp")
+
+[node name="UIElements" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="UIElements"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="UIElements/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIElements/Control/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UIElements/Control/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Aberration Platformer"
+
+[node name="PlayButton" type="Button" parent="UIElements/Control/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Play"
+
+[connection signal="pressed" from="UIElements/Control/CenterContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
