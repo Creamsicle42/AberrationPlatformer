@@ -30,7 +30,7 @@ func instance_current_level() -> void:
 
 	assert(current_level_node is LevelController, "Level node for resource \"%s\" is not a LevelController" % current_level_resource.name)
 
-	level_parent.add_child(current_level_node)
+	level_parent.add_child.call_deferred(current_level_node)
 
 
 ## Sets the current level resource to the next one in sequence.
