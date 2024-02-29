@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://bs23g6l1t6j67"]
+[gd_scene load_steps=2 format=3 uid="uid://bs23g6l1t6j67"]
+
+[ext_resource type="PackedScene" uid="uid://cybydn52j3wnw" path="res://scenes/player/player.tscn" id="1_qkqi3"]
 
 [node name="PlayerControllerTestWorld" type="Node2D"]
 
@@ -9,3 +11,6 @@ polygon = PackedVector2Array(-64, 96, 64, 96, 64, 512, 256, 512, 256, 576, 736, 
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collider"]
 polygon = PackedVector2Array(-64, 96, 64, 96, 64, 512, 256, 512, 256, 576, 736, 576, 736, 416, 576, 416, 576, 352, 960, 352, 960, 64, 1184, 64, 1184, 704, -64, 704)
+
+[node name="Player" parent="." instance=ExtResource("1_qkqi3")]
+position = Vector2(416, 160)

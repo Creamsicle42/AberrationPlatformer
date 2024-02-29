@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://cybydn52j3wnw"]
+[gd_scene load_steps=3 format=3 uid="uid://cybydn52j3wnw"]
+
+[ext_resource type="Script" path="res://scenes/player/platformer_behavior.gd" id="1_vpgob"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b6f3p"]
 radius = 32.0
@@ -11,3 +13,6 @@ shape = SubResource("CircleShape2D_b6f3p")
 [node name="DebugGraphics" type="Polygon2D" parent="."]
 color = Color(0.341176, 0.713726, 0.25098, 1)
 polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
+[node name="PlatformerBehavior" type="Node" parent="."]
+script = ExtResource("1_vpgob")
