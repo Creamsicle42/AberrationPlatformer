@@ -33,7 +33,7 @@ func exit_state() -> void:
 
 
 func player_reached_end_of_game() -> void:
-    pass
+    Main.app.set_state("main_menu")
 
 
 func set_game_paused(paused : bool) -> void:
