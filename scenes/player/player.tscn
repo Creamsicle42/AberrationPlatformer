@@ -14,5 +14,21 @@ shape = SubResource("CircleShape2D_b6f3p")
 color = Color(0.341176, 0.713726, 0.25098, 1)
 polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 
-[node name="PlatformerBehavior" type="Node" parent="."]
+[node name="PlatformerBehavior" type="Node" parent="." node_paths=PackedStringArray("bonk_left_raycast", "bonk_center_raycast", "bonk_right_raycast")]
 script = ExtResource("1_vpgob")
+bonk_left_raycast = NodePath("../Raycasts/LeftRaycast")
+bonk_center_raycast = NodePath("../Raycasts/CenterRaycast")
+bonk_right_raycast = NodePath("../Raycasts/RightRaycast")
+
+[node name="Raycasts" type="Node2D" parent="."]
+
+[node name="CenterRaycast" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(0, -48)
+
+[node name="RightRaycast" type="RayCast2D" parent="Raycasts"]
+position = Vector2(32, 0)
+target_position = Vector2(0, -48)
+
+[node name="LeftRaycast" type="RayCast2D" parent="Raycasts"]
+position = Vector2(-32, 0)
+target_position = Vector2(0, -48)
