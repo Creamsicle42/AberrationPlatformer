@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://cybydn52j3wnw"]
+
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_cgek4"]
+[ext_resource type="Script" path="res://scenes/player/platformer_behavior.gd" id="1_vpgob"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b6f3p"]
+radius = 32.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yow76"]
+radius = 16.0
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_cgek4")
+
+[node name="WorldCollider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_b6f3p")
+
+[node name="DebugGraphics" type="Polygon2D" parent="."]
+color = Color(0.341176, 0.713726, 0.25098, 1)
+polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
+[node name="PlatformerBehavior" type="Node" parent="." node_paths=PackedStringArray("bonk_left_raycast", "bonk_center_raycast", "bonk_right_raycast")]
+script = ExtResource("1_vpgob")
+bonk_left_raycast = NodePath("../Raycasts/LeftRaycast")
+bonk_center_raycast = NodePath("../Raycasts/CenterRaycast")
+bonk_right_raycast = NodePath("../Raycasts/RightRaycast")
+
+[node name="Raycasts" type="Node2D" parent="."]
+
+[node name="CenterRaycast" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(0, -48)
+
+[node name="RightRaycast" type="RayCast2D" parent="Raycasts"]
+position = Vector2(32, 0)
+target_position = Vector2(0, -48)
+
+[node name="LeftRaycast" type="RayCast2D" parent="Raycasts"]
+position = Vector2(-32, 0)
+target_position = Vector2(0, -48)
+
+[node name="HazardHitbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="HazardCollider" type="CollisionShape2D" parent="HazardHitbox"]
+shape = SubResource("CircleShape2D_yow76")
+
+[connection signal="body_entered" from="HazardHitbox" to="." method="_on_hazard_hitbox_body_entered"]
