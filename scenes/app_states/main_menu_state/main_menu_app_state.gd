@@ -11,4 +11,6 @@ func exit_state() -> void:
 
 
 func _on_play_button_pressed() -> void:
-    Main.app.set_state("gameplay")
+    Main.app.set_state("gameplay", {
+        "start_level": 0 if GameDataManager.current_game_data.level_on == -1 else GameDataManager.current_game_data.level_on
+    })

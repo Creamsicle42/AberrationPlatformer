@@ -54,6 +54,7 @@ func _on_event_bus_end_goal_reached() -> void:
         return
     else:
         level_manager.instance_current_level()
+        GameDataManager.save_game_data()
 
 
 func _on_pause_menu_restart_level_pressed() -> void:
@@ -69,6 +70,7 @@ func _on_pause_menu_next_level_pressed() -> void:
         return
     else:
         level_manager.instance_current_level()
+        GameDataManager.save_game_data()
 
 
 func _on_pause_menu_go_to_main_menu_pressed() -> void:
