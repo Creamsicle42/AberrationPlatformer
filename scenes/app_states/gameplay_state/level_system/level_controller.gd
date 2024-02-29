@@ -1,0 +1,6 @@
+class_name LevelController
+extends Node2D
+
+
+signal player_reached_end_goal
+signal player_killed

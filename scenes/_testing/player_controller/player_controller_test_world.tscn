@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bs23g6l1t6j67"]
+[gd_scene load_steps=3 format=3 uid="uid://bs23g6l1t6j67"]
 
+[ext_resource type="Script" path="res://scenes/app_states/gameplay_state/level_system/level_controller.gd" id="1_a5h2s"]
 [ext_resource type="PackedScene" uid="uid://cybydn52j3wnw" path="res://scenes/player/player.tscn" id="1_qkqi3"]
 
 [node name="PlayerControllerTestWorld" type="Node2D"]
+script = ExtResource("1_a5h2s")
 
 [node name="Collider" type="StaticBody2D" parent="."]
 

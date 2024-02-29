@@ -1,6 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://o7ta360kabrj"]
+[gd_scene load_steps=4 format=3 uid="uid://o7ta360kabrj"]
 
 [ext_resource type="Script" path="res://scenes/app_states/gameplay_state/gameplay_app_state.gd" id="1_qtq4f"]
+[ext_resource type="Script" path="res://scenes/app_states/gameplay_state/level_system/level_manager.gd" id="2_5uygt"]
+[ext_resource type="Resource" uid="uid://jvmfqw05h5yx" path="res://assets/resources/levels/test_level.tres" id="3_bh2we"]
 
-[node name="GameplayAppState" type="Node"]
+[node name="GameplayAppState" type="Node" node_paths=PackedStringArray("level_manager")]
 script = ExtResource("1_qtq4f")
+level_manager = NodePath("LevelManager")
+
+[node name="LevelManager" type="Node" parent="." node_paths=PackedStringArray("level_parent")]
+script = ExtResource("2_5uygt")
+level_parent = NodePath("../LevelParent")
+levels = Array[Resource("res://assets/resources/_types/level_data.gd")]([ExtResource("3_bh2we")])
+
+[node name="LevelParent" type="Node2D" parent="."]
