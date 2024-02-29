@@ -17,7 +17,7 @@ extends Node
 @export var jump_buffer_time := 0.1
 @export var terminal_velocity := 1000.0
 @export var apex_gravity_modifier := 0.75
-@export var gravity_manager : GravityManager
+
 
 
 @export_group("CielBonking", "bonk_")
@@ -25,6 +25,12 @@ extends Node
 @export var bonk_center_raycast : RayCast2D
 @export var bonk_right_raycast : RayCast2D
 @export var bonk_velocity := 400.0
+
+
+@export_group("Misc")
+@export var gravity_manager : GravityManager
+@export var air_drag : float = 1.0
+
 
 @onready var host : CharacterBody2D = owner as CharacterBody2D
 
@@ -90,6 +96,10 @@ func _physics_process(delta: float) -> void:
 		host.move_and_collide(
 			Vector2((int(bonk_left_raycast.is_colliding()) - int(bonk_right_raycast.is_colliding())) * bonk_velocity * delta, 0)
 		)
+	
+
+	if not host.is_on_floor():
+		host.velocity -= air_drag * host.velocity * delta
 
 	
 	host.velocity.y = clamp(host.velocity.y, -INF, terminal_velocity)
