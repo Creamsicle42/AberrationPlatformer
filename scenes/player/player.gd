@@ -4,6 +4,7 @@ extends CharacterBody2D
 
 
 func killed() -> void:
+    print_debug("player killed")
     GameplayEventBus.bus.player_killed.emit()
 
 
