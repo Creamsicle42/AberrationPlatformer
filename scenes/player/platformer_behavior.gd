@@ -5,7 +5,7 @@ extends Node
 @export var max_run_speed := 256.0
 @export var ground_acceleration_time := 0.1
 @export var air_acceleration_time := 0.2
-@export var ground_acceleration_threshold := 16.0
+@export var apex_threshold := 64.0
 
 
 @export var jump_height := 200.0
@@ -14,6 +14,7 @@ extends Node
 @export var wall_touch_time := 0.2
 @export var jump_buffer_time := 0.1
 @export var terminal_velocity := 1000.0
+@export var apex_gravity_modifier := 0.75
 
 
 @onready var host : CharacterBody2D = owner as CharacterBody2D
@@ -80,8 +81,10 @@ func get_jump_normal() -> Vector2:
 
 
 func get_acceleration() -> float:
-    return ground_acceleration if abs(host.velocity.y) < ground_acceleration_threshold else air_acceleration
+    return ground_acceleration if abs(host.velocity.y) < apex_threshold else air_acceleration
 
 
 func get_gravity() -> float:
-    return gravity if Input.is_action_pressed("jump") and host.velocity.y < 0 else gravity * 2.0
+    return gravity \
+        * (1.0 if Input.is_action_pressed("jump") and host.velocity.y < 0 else 2.0) \
+        * (1.0 if abs(host.velocity.y) > apex_threshold else apex_gravity_modifier)
