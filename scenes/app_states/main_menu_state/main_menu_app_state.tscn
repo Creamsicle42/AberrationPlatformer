@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://8bvpurlo7b1"]
+
+[ext_resource type="Script" path="res://scenes/app_states/main_menu_state/main_menu_app_state.gd" id="1_k3qqp"]
+
+[node name="MainMenuAppState" type="Node"]
+script = ExtResource("1_k3qqp")
