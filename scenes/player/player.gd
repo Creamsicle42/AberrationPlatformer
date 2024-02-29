@@ -2,6 +2,9 @@ class_name Player
 extends CharacterBody2D
 
 
+func get_gravity_manager() -> GravityManager:
+	return $GravityManager
+
 
 func killed() -> void:
 	print_debug("player killed")
