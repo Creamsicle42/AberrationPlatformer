@@ -1,11 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://cybydn52j3wnw"]
+[gd_scene load_steps=5 format=3 uid="uid://cybydn52j3wnw"]
 
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_cgek4"]
 [ext_resource type="Script" path="res://scenes/player/platformer_behavior.gd" id="1_vpgob"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b6f3p"]
 radius = 32.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_yow76"]
+radius = 16.0
+
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_cgek4")
 
 [node name="WorldCollider" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_b6f3p")
@@ -32,3 +38,13 @@ target_position = Vector2(0, -48)
 [node name="LeftRaycast" type="RayCast2D" parent="Raycasts"]
 position = Vector2(-32, 0)
 target_position = Vector2(0, -48)
+
+[node name="HazardHitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="HazardCollider" type="CollisionShape2D" parent="HazardHitbox"]
+shape = SubResource("CircleShape2D_yow76")
+
+[connection signal="body_entered" from="HazardHitbox" to="." method="_on_hazard_hitbox_body_entered"]

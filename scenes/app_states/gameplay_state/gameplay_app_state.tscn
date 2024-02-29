@@ -18,3 +18,6 @@ level_parent = NodePath("../LevelParent")
 levels = Array[Resource("res://assets/resources/_types/level_data.gd")]([ExtResource("3_bh2we")])
 
 [node name="LevelParent" type="Node2D" parent="."]
+
+[connection signal="end_goal_reached" from="GameplayEventBus" to="." method="_on_event_bus_end_goal_reached"]
+[connection signal="player_killed" from="GameplayEventBus" to="." method="_on_event_bus_player_killed"]
