@@ -13,9 +13,9 @@ func get_graivty_scale() -> float:
     return gravity_influences.front().gravity_scale
 
 
-func add_influince(influence : GravityAreaData) -> void:
+func add_influence(influence : GravityAreaData) -> void:
     gravity_influences.push_front(influence)
 
 
-func remove_influince(influince : GravityAreaData) -> void:
+func remove_influence(influince : GravityAreaData) -> void:
     gravity_influences.erase(influince)
