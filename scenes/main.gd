@@ -14,6 +14,7 @@ var current_app_state : Node
 
 func _ready() -> void:
     app = self
+    GameDataManager.load_game_data()
     set_state("main_menu")
 
 

@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://c3wv8xcws2fbn"]
+
+[ext_resource type="Script" path="res://scenes/app_states/gameplay_state/level_system/level_controller.gd" id="1_f6dpo"]
+[ext_resource type="PackedScene" uid="uid://cybydn52j3wnw" path="res://scenes/player/player.tscn" id="2_jyvsr"]
+[ext_resource type="PackedScene" uid="uid://tihpom3ljgua" path="res://scenes/level_objects/exit_goal/exit_goal.tscn" id="3_ksi80"]
+[ext_resource type="Script" path="res://scenes/level_objects/gravity_area/gravity_area.gd" id="4_jgb4c"]
+[ext_resource type="Script" path="res://assets/resources/_types/gravity_area_data.gd" id="5_fgvac"]
+[ext_resource type="Script" path="res://scenes/level_objects/game_camera.gd" id="6_pso2a"]
+
+[sub_resource type="Resource" id="Resource_3ye1u"]
+script = ExtResource("5_fgvac")
+up_direction = Vector2(0, -1)
+gravity_scale = 1.5
+
+[node name="LevelController" type="Node2D"]
+script = ExtResource("1_f6dpo")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(32, 0, 32, 384, 288, 384, 288, 608, 864, 608, 864, 256, 1120, 256, 1120, 0, 1184, 0, 1184, 704, -32, 704, -32, 0)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(512, -32, 512, 384, 576, 384, 576, -32)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(32, 0, 32, 384, 288, 384, 288, 608, 864, 608, 864, 256, 1120, 256, 1120, 0, 1184, 0, 1184, 704, -32, 704, -32, 0)
+
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(512, -32, 512, 384, 576, 384, 576, -32)
+
+[node name="Player" parent="." instance=ExtResource("2_jyvsr")]
+position = Vector2(160, 352)
+
+[node name="ExitGoal" parent="." instance=ExtResource("3_ksi80")]
+position = Vector2(992, 224)
+
+[node name="GravityArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("4_jgb4c")
+gravity_data = SubResource("Resource_3ye1u")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravityArea"]
+polygon = PackedVector2Array(288, 384, 864, 384, 864, 608, 288, 608)
+
+[node name="Polygon2D" type="Polygon2D" parent="GravityArea"]
+color = Color(0.760784, 0.113725, 0.415686, 0.545098)
+polygon = PackedVector2Array(288, 384, 864, 384, 864, 608, 288, 608)
+
+[node name="GameCamera" type="Camera2D" parent="."]
+position = Vector2(576, 320)
+limit_left = 0
+limit_top = 0
+limit_right = 1152
+limit_bottom = 640
+script = ExtResource("6_pso2a")
