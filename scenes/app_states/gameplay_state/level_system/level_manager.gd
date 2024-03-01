@@ -44,7 +44,6 @@ func advance_level() -> bool:
 		current_level_resource = null
 		return false
 
-	GameDataManager.current_game_data.level_on = next_index
-	
+
 	current_level_resource = levels[next_index]
 	return true
