@@ -5,9 +5,12 @@ extends Area2D
 
 
 func use_orb() -> void:
-	pass
+	$CollisionShape2D.set_deferred("disabled", true)
+	$Polygon2D.visible = false
+	$RefreshTimer.start()
 
 
 
 func _on_refresh_timer_timeout() -> void:
-	pass # Replace with function body.
+	$CollisionShape2D.set_deferred("disabled", false)
+	$Polygon2D.visible = true
