@@ -138,8 +138,9 @@ script = ExtResource("4_qj1g1")
 up_direction = Vector2(0, 1)
 gravity_scale = 1.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_yow76"]
-radius = 16.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l2vc4"]
+radius = 4.0
+height = 12.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
@@ -188,6 +189,6 @@ collision_layer = 4
 collision_mask = 4
 
 [node name="HazardCollider" type="CollisionShape2D" parent="HazardHitbox"]
-shape = SubResource("CircleShape2D_yow76")
+shape = SubResource("CapsuleShape2D_l2vc4")
 
 [connection signal="body_entered" from="HazardHitbox" to="." method="_on_hazard_hitbox_body_entered"]
