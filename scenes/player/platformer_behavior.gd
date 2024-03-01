@@ -22,8 +22,6 @@ extends Node
 @export var bounce_orb_touch_area : Area2D
 @export var bounce_orb_touch_time := 0.1
 
-
-
 @export_group("CielBonking", "bonk_")
 @export var bonk_left_raycast : RayCast2D
 @export var bonk_center_raycast : RayCast2D
@@ -39,6 +37,7 @@ extends Node
 @export_group("Animation")
 @export var sprite : AnimatedSprite2D
 @export var vertical_velocity_range := 64.0
+
 
 
 @onready var host : CharacterBody2D = owner as CharacterBody2D
@@ -76,6 +75,7 @@ func _physics_process(delta: float) -> void:
 
 	var h_input = Input.get_axis("left", "right")
 
+
 	if not wall_jump_controll_loss_timer > 0.0:
 		host.velocity.x = move_toward(host.velocity.x, max_run_speed * h_input, get_acceleration() * delta)
 	host.velocity += get_gravity() * delta * gravity_manager.get_graivty_scale() * gravity_manager.get_gravity_direction()
@@ -83,7 +83,7 @@ func _physics_process(delta: float) -> void:
 	host.up_direction = -1 * gravity_manager.get_gravity_direction()
 	bonk_center_raycast.target_position = -14 * gravity_manager.get_gravity_direction()
 	bonk_right_raycast.target_position = -14 * gravity_manager.get_gravity_direction()
-	bonk_left_raycast.target_position = -14 * gravity_manager.get_gravity_direction()
+
 
 	if host.is_on_wall_only():
 		wall_touch_timer = wall_touch_time
@@ -116,7 +116,7 @@ func _physics_process(delta: float) -> void:
 		jump_buffer_timer = 0
 		wall_touch_timer = 0
 
-		host.velocity.y = jump_power * -jump_dir.y * gravity_manager.get_gravity_direction().y
+		host.velocity.y = jump_power * -jump_dir.y
 		host.velocity.x += jump_power * -jump_dir.x
 
 		sprite.scale = Vector2(0.5, 1.5)
@@ -130,10 +130,6 @@ func _physics_process(delta: float) -> void:
 		host.move_and_collide(
 			Vector2((int(bonk_left_raycast.is_colliding()) - int(bonk_right_raycast.is_colliding())) * bonk_velocity * delta, 0)
 		)
-	
-
-	if not host.is_on_floor():
-		host.velocity -= air_drag * host.velocity * delta
 
 	
 	host.velocity.y = clamp(host.velocity.y, -INF, terminal_velocity)

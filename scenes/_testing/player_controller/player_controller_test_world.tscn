@@ -1,8 +1,8 @@
+
 [gd_scene load_steps=15 format=3 uid="uid://bs23g6l1t6j67"]
 
 [ext_resource type="Script" path="res://scenes/app_states/gameplay_state/level_system/level_controller.gd" id="1_a5h2s"]
 [ext_resource type="PackedScene" uid="uid://cybydn52j3wnw" path="res://scenes/player/player.tscn" id="1_qkqi3"]
-[ext_resource type="Script" path="res://scenes/level_objects/game_camera.gd" id="2_46xxq"]
 [ext_resource type="PackedScene" uid="uid://tihpom3ljgua" path="res://scenes/level_objects/exit_goal/exit_goal.tscn" id="3_a6g33"]
 [ext_resource type="TileSet" uid="uid://duy8d4cvjo1k3" path="res://assets/resources/tilesets/main.tres" id="5_eopp6"]
 [ext_resource type="Script" path="res://scenes/level_objects/moving_platform.gd" id="6_v2l6y"]
@@ -49,6 +49,7 @@ size = Vector2(64, 8)
 [node name="PlayerControllerTestWorld" type="Node2D"]
 script = ExtResource("1_a5h2s")
 
+
 [node name="GameCamera" type="Camera2D" parent="."]
 position = Vector2(160, 96)
 limit_left = 0
@@ -62,6 +63,7 @@ script = ExtResource("2_46xxq")
 
 [node name="Player" parent="." instance=ExtResource("1_qkqi3")]
 position = Vector2(64, 128)
+
 
 [node name="ExitGoal" parent="." instance=ExtResource("3_a6g33")]
 position = Vector2(864, 256)

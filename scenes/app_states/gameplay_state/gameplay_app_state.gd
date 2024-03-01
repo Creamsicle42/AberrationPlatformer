@@ -23,7 +23,6 @@ func _input(event: InputEvent) -> void:
 
 func enter_state(params : Dictionary) -> void:
     var start_level_index = params.get("start_level", 0)
-    GameDataManager.current_game_data.level_on = start_level_index
     level_manager.set_level_index(start_level_index)
     level_manager.instance_current_level()
     set_game_paused(false)
@@ -55,7 +54,6 @@ func _on_event_bus_end_goal_reached() -> void:
         return
     else:
         level_manager.instance_current_level()
-        GameDataManager.save_game_data()
 
 
 func _on_pause_menu_restart_level_pressed() -> void:
@@ -71,7 +69,6 @@ func _on_pause_menu_next_level_pressed() -> void:
         return
     else:
         level_manager.instance_current_level()
-        GameDataManager.save_game_data()
 
 
 func _on_pause_menu_go_to_main_menu_pressed() -> void:

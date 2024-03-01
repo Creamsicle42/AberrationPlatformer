@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://o7ta360kabrj"]
+[gd_scene load_steps=6 format=3 uid="uid://o7ta360kabrj"]
 
 [ext_resource type="Script" path="res://scenes/app_states/gameplay_state/gameplay_app_state.gd" id="1_qtq4f"]
 [ext_resource type="Script" path="res://scenes/app_states/gameplay_state/level_system/level_manager.gd" id="2_5uygt"]
 [ext_resource type="Script" path="res://scenes/app_states/gameplay_state/gameplay_event_bus.gd" id="2_745si"]
 [ext_resource type="Resource" uid="uid://jvmfqw05h5yx" path="res://assets/resources/levels/test_level.tres" id="3_bh2we"]
-[ext_resource type="Resource" uid="uid://c4mqmfikasosm" path="res://assets/resources/levels/anomaly_test_1.tres" id="5_34irk"]
 [ext_resource type="PackedScene" uid="uid://wop5emouwadi" path="res://scenes/ui/pause_menu/pause_menu.tscn" id="5_q4bcv"]
 
 [node name="GameplayAppState" type="Node" node_paths=PackedStringArray("level_manager", "pause_menu")]
@@ -19,6 +18,7 @@ script = ExtResource("2_745si")
 script = ExtResource("2_5uygt")
 level_parent = NodePath("../Gameplay/SubViewportContainer/SubViewport/LevelParent")
 levels = Array[Resource("res://assets/resources/_types/level_data.gd")]([ExtResource("3_bh2we"), ExtResource("5_34irk")])
+
 
 [node name="Gameplay" type="CanvasLayer" parent="."]
 
