@@ -32,9 +32,15 @@ extends Node
 @export var air_drag : float = 1.0
 
 
+@export_group("Animation")
+@export var sprite : AnimatedSprite2D
+@export var vertical_velocity_range := 64.0
+
+
 @onready var host : CharacterBody2D = owner as CharacterBody2D
 
 
+var jump_anim_tween : Tween
 var ground_acceleration : float
 var air_acceleration : float
 var gravity : float
@@ -46,6 +52,7 @@ var last_wall_touched : Vector2
 
 
 func _ready() -> void:
+	
 	gravity = jump_height / (2 * pow(jump_time, 2))
 	jump_power = -sqrt(2 * jump_height * gravity)
 	ground_acceleration = max_run_speed / ground_acceleration_time
@@ -63,9 +70,9 @@ func _physics_process(delta: float) -> void:
 	host.velocity += get_gravity() * delta * gravity_manager.get_graivty_scale() * gravity_manager.get_gravity_direction()
 
 	host.up_direction = -1 * gravity_manager.get_gravity_direction()
-	bonk_center_raycast.target_position = -48 * gravity_manager.get_gravity_direction()
-	bonk_right_raycast.target_position = -48 * gravity_manager.get_gravity_direction()
-	bonk_left_raycast.target_position = -48 * gravity_manager.get_gravity_direction()
+	bonk_center_raycast.target_position = -14 * gravity_manager.get_gravity_direction()
+	bonk_right_raycast.target_position = -14 * gravity_manager.get_gravity_direction()
+	bonk_left_raycast.target_position = -14 * gravity_manager.get_gravity_direction()
 
 	if host.is_on_wall_only():
 		wall_touch_timer = wall_touch_time
@@ -90,6 +97,12 @@ func _physics_process(delta: float) -> void:
 
 		host.velocity.y = jump_power * -jump_dir.y * gravity_manager.get_gravity_direction().y
 		host.velocity.x += jump_power * -jump_dir.x
+
+		sprite.scale = Vector2(0.5, 1.5)
+		if jump_anim_tween:
+			jump_anim_tween.kill()
+		jump_anim_tween = create_tween()
+		jump_anim_tween.tween_property(sprite, "scale", Vector2.ONE, 0.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
 	
 
 	if host.velocity.y < 0.0 and not bonk_center_raycast.is_colliding():
@@ -105,6 +118,18 @@ func _physics_process(delta: float) -> void:
 	host.velocity.y = clamp(host.velocity.y, -INF, terminal_velocity)
 
 	host.move_and_slide()
+
+
+	if host.is_on_floor():
+		sprite.speed_scale = 1.0
+		if abs(host.velocity.x) > 5.0:
+			sprite.play("run")
+			
+		else:
+			sprite.play("idle")
+	else:
+		sprite.animation = "in_air"
+		sprite.frame = round(clamp(host.velocity.y / vertical_velocity_range, -1, 1)) + 1
 
 
 func get_jump_normal() -> Vector2:
