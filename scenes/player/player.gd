@@ -7,6 +7,10 @@ func _ready() -> void:
 	GameCamera.camera.track_node = self
 
 
+func _process(delta: float) -> void:
+	$FlipPivot.scale.y = sign($GravityManager.get_gravity_direction().y)
+
+
 func get_gravity_manager() -> GravityManager:
 	return $GravityManager
 

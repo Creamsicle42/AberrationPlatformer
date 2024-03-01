@@ -145,7 +145,7 @@ func _physics_process(delta: float) -> void:
 	if host.is_on_wall() \
 			and (not on_wall_last_frame) \
 			and (not host.is_on_floor()) :
-		host.velocity.y = min(host.velocity.y, -abs(prev_x_velocity) * wall_bonk_velocity_ratio)
+		host.velocity.y += -abs(prev_x_velocity) * wall_bonk_velocity_ratio * gravity_manager.get_gravity_direction().y
 
 	on_wall_last_frame = host.is_on_wall()
 
@@ -171,5 +171,5 @@ func get_acceleration() -> float:
 
 func get_gravity() -> float:
 	return gravity \
-		* (1.0 if Input.is_action_pressed("jump") and host.velocity.y < 0 else 2.0) \
+		* (1.0 if Input.is_action_pressed("jump") and host.velocity.y * gravity_manager.get_gravity_direction().y < 0 else 2.0) \
 		* (1.0 if abs(host.velocity.y) > apex_threshold else apex_gravity_modifier)
