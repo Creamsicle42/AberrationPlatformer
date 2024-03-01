@@ -32,6 +32,11 @@ extends Node
 @export var air_drag : float = 1.0
 
 
+@export_group("Animation")
+@export var sprite : AnimatedSprite2D
+@export var vertical_velocity_range := 64.0
+
+
 @onready var host : CharacterBody2D = owner as CharacterBody2D
 
 
@@ -105,6 +110,18 @@ func _physics_process(delta: float) -> void:
 	host.velocity.y = clamp(host.velocity.y, -INF, terminal_velocity)
 
 	host.move_and_slide()
+
+
+	if host.is_on_floor():
+		sprite.speed_scale = 1.0
+		if abs(host.velocity.x) > 5.0:
+			sprite.play("run")
+			
+		else:
+			sprite.play("idle")
+	else:
+		sprite.animation = "in_air"
+		sprite.frame = round(clamp(host.velocity.y / vertical_velocity_range, -1, 1)) + 1
 
 
 func get_jump_normal() -> Vector2:
