@@ -19,6 +19,8 @@ extends Node
 @export var apex_gravity_modifier := 0.75
 @export var wall_jump_control_loss_time := 0.1
 @export var wall_bonk_velocity_ratio = 1.0
+@export var bounce_orb_touch_area : Area2D
+@export var bounce_orb_touch_time := 0.1
 
 
 
@@ -53,6 +55,8 @@ var wall_touch_timer : float
 var last_wall_touched : Vector2
 var wall_jump_controll_loss_timer : float
 var on_wall_last_frame : bool
+var last_bounce_orb_touched : BounceOrb
+var bounce_orb_touch_timer : float
 
 
 func _ready() -> void:
@@ -68,6 +72,7 @@ func _physics_process(delta: float) -> void:
 	jump_buffer_timer -= delta
 	wall_touch_timer -= delta
 	wall_jump_controll_loss_timer -= delta
+	bounce_orb_touch_timer -= delta
 
 	var h_input = Input.get_axis("left", "right")
 
@@ -90,13 +95,22 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("jump"):
 		jump_buffer_timer = jump_buffer_time
+	
 
-	if (coyote_timer > 0.0 or wall_touch_timer > 0.0) and jump_buffer_timer > 0.0:
+	if not bounce_orb_touch_area.get_overlapping_areas().is_empty():
+		last_bounce_orb_touched = bounce_orb_touch_area.get_overlapping_areas()[0]
+		bounce_orb_touch_timer = bounce_orb_touch_time
+
+	if (coyote_timer > 0.0 or wall_touch_timer > 0.0 or bounce_orb_touch_timer > 0.0) and jump_buffer_timer > 0.0:
 		var jump_dir = get_jump_normal()
 		if wall_touch_timer > 0.0:
 			jump_dir += last_wall_touched * 1.25
 			wall_jump_controll_loss_timer = wall_jump_control_loss_time
 		jump_dir = jump_dir.normalized()
+
+		if bounce_orb_touch_timer > 0.0:
+			bounce_orb_touch_timer = 0.0
+			last_bounce_orb_touched.use_orb()
 
 		coyote_timer = 0
 		jump_buffer_timer = 0

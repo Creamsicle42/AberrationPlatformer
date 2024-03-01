@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cybydn52j3wnw"]
+[gd_scene load_steps=27 format=3 uid="uid://cybydn52j3wnw"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_cgek4"]
 [ext_resource type="Script" path="res://scenes/player/platformer_behavior.gd" id="1_vpgob"]
@@ -142,6 +142,9 @@ gravity_scale = 1.0
 radius = 4.0
 height = 12.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_e7nkv"]
+radius = 8.0
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_cgek4")
@@ -158,13 +161,14 @@ animation = &"idle"
 [node name="WorldCollider" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_kst6t")
 
-[node name="PlatformerBehavior" type="Node" parent="." node_paths=PackedStringArray("bonk_left_raycast", "bonk_center_raycast", "bonk_right_raycast", "gravity_manager", "sprite")]
+[node name="PlatformerBehavior" type="Node" parent="." node_paths=PackedStringArray("bounce_orb_touch_area", "bonk_left_raycast", "bonk_center_raycast", "bonk_right_raycast", "gravity_manager", "sprite")]
 script = ExtResource("1_vpgob")
 max_run_speed = 128.0
 air_acceleration_time = 0.3
 jump_height = 80.0
 wall_touch_time = 0.1
 terminal_velocity = 250.0
+bounce_orb_touch_area = NodePath("../BounceOrbTouchArea")
 bonk_left_raycast = NodePath("../Raycasts/LeftRaycast")
 bonk_center_raycast = NodePath("../Raycasts/CenterRaycast")
 bonk_right_raycast = NodePath("../Raycasts/RightRaycast")
@@ -195,5 +199,12 @@ collision_mask = 4
 
 [node name="HazardCollider" type="CollisionShape2D" parent="HazardHitbox"]
 shape = SubResource("CapsuleShape2D_l2vc4")
+
+[node name="BounceOrbTouchArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BounceOrbTouchArea"]
+shape = SubResource("CircleShape2D_e7nkv")
 
 [connection signal="body_entered" from="HazardHitbox" to="." method="_on_hazard_hitbox_body_entered"]
