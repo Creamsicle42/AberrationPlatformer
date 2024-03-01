@@ -17,6 +17,8 @@ extends Node
 @export var jump_buffer_time := 0.1
 @export var terminal_velocity := 1000.0
 @export var apex_gravity_modifier := 0.75
+@export var wall_jump_control_loss_time := 0.1
+@export var wall_bonk_velocity_ratio = 1.0
 
 
 
@@ -49,6 +51,8 @@ var coyote_timer : float
 var jump_buffer_timer : float
 var wall_touch_timer : float
 var last_wall_touched : Vector2
+var wall_jump_controll_loss_timer : float
+var on_wall_last_frame : bool
 
 
 func _ready() -> void:
@@ -63,10 +67,12 @@ func _physics_process(delta: float) -> void:
 	coyote_timer -= delta
 	jump_buffer_timer -= delta
 	wall_touch_timer -= delta
+	wall_jump_controll_loss_timer -= delta
 
 	var h_input = Input.get_axis("left", "right")
 
-	host.velocity.x = move_toward(host.velocity.x, max_run_speed * h_input, get_acceleration() * delta)
+	if not wall_jump_controll_loss_timer > 0.0:
+		host.velocity.x = move_toward(host.velocity.x, max_run_speed * h_input, get_acceleration() * delta)
 	host.velocity += get_gravity() * delta * gravity_manager.get_graivty_scale() * gravity_manager.get_gravity_direction()
 
 	host.up_direction = -1 * gravity_manager.get_gravity_direction()
@@ -88,7 +94,8 @@ func _physics_process(delta: float) -> void:
 	if (coyote_timer > 0.0 or wall_touch_timer > 0.0) and jump_buffer_timer > 0.0:
 		var jump_dir = get_jump_normal()
 		if wall_touch_timer > 0.0:
-			jump_dir += last_wall_touched
+			jump_dir += last_wall_touched * 1.25
+			wall_jump_controll_loss_timer = wall_jump_control_loss_time
 		jump_dir = jump_dir.normalized()
 
 		coyote_timer = 0
@@ -117,8 +124,16 @@ func _physics_process(delta: float) -> void:
 	
 	host.velocity.y = clamp(host.velocity.y, -INF, terminal_velocity)
 
+	var prev_x_velocity := host.velocity.x
+
 	host.move_and_slide()
 
+	if host.is_on_wall() \
+			and (not on_wall_last_frame) \
+			and (not host.is_on_floor()) :
+		host.velocity.y = min(host.velocity.y, -abs(prev_x_velocity) * wall_bonk_velocity_ratio)
+
+	on_wall_last_frame = host.is_on_wall()
 
 	if host.is_on_floor():
 		sprite.speed_scale = 1.0

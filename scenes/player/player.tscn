@@ -160,10 +160,15 @@ shape = SubResource("RectangleShape2D_kst6t")
 
 [node name="PlatformerBehavior" type="Node" parent="." node_paths=PackedStringArray("bonk_left_raycast", "bonk_center_raycast", "bonk_right_raycast", "gravity_manager", "sprite")]
 script = ExtResource("1_vpgob")
+max_run_speed = 128.0
+air_acceleration_time = 0.3
+jump_height = 80.0
+wall_touch_time = 0.1
+terminal_velocity = 250.0
 bonk_left_raycast = NodePath("../Raycasts/LeftRaycast")
 bonk_center_raycast = NodePath("../Raycasts/CenterRaycast")
 bonk_right_raycast = NodePath("../Raycasts/RightRaycast")
-bonk_velocity = 40.0
+bonk_velocity = 100.0
 gravity_manager = NodePath("../GravityManager")
 sprite = NodePath("../FlipPivot/MainSprite")
 
