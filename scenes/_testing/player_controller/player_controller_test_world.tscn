@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bs23g6l1t6j67"]
+[gd_scene load_steps=9 format=3 uid="uid://bs23g6l1t6j67"]
 
 [ext_resource type="Script" path="res://scenes/app_states/gameplay_state/level_system/level_controller.gd" id="1_a5h2s"]
 [ext_resource type="PackedScene" uid="uid://cybydn52j3wnw" path="res://scenes/player/player.tscn" id="1_qkqi3"]
+[ext_resource type="Script" path="res://scenes/level_objects/game_camera.gd" id="2_46xxq"]
 [ext_resource type="PackedScene" uid="uid://tihpom3ljgua" path="res://scenes/level_objects/exit_goal/exit_goal.tscn" id="3_a6g33"]
 [ext_resource type="Script" path="res://scenes/level_objects/gravity_area/gravity_area.gd" id="4_dmrw8"]
 [ext_resource type="Script" path="res://assets/resources/_types/gravity_area_data.gd" id="5_5gc45"]
@@ -32,6 +33,14 @@ polygon = PackedVector2Array(192, 352, 256, 352, 256, 192, 192, 192)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collider2"]
 polygon = PackedVector2Array(192, 352, 256, 352, 256, 192, 192, 192)
+
+[node name="GameCamera" type="Camera2D" parent="."]
+position = Vector2(224, 480)
+position_smoothing_enabled = true
+drag_top_margin = 0.8
+drag_bottom_margin = 0.8
+editor_draw_drag_margin = true
+script = ExtResource("2_46xxq")
 
 [node name="Player" parent="." instance=ExtResource("1_qkqi3")]
 position = Vector2(224, 480)

@@ -2,6 +2,11 @@ class_name Player
 extends CharacterBody2D
 
 
+func _ready() -> void:
+	await get_tree().process_frame
+	GameCamera.camera.track_node = self
+
+
 func get_gravity_manager() -> GravityManager:
 	return $GravityManager
 
