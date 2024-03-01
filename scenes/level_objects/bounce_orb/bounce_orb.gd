@@ -3,14 +3,21 @@ extends Area2D
 
 
 
+func _ready() -> void:
+	$BounceOrb.play("glow")
+
 
 func use_orb() -> void:
 	$CollisionShape2D.set_deferred("disabled", true)
-	$Polygon2D.visible = false
+	$BounceOrb.play("die")
 	$RefreshTimer.start()
+	$BurstParticles.emitting = true
+	$IdleParticles.emitting = false
 
 
 
 func _on_refresh_timer_timeout() -> void:
 	$CollisionShape2D.set_deferred("disabled", false)
-	$Polygon2D.visible = true
+	$BounceOrb.play("glow")
+	$ReformParticles.emitting = true
+	$IdleParticles.emitting = true
