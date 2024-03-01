@@ -40,6 +40,7 @@ extends Node
 @onready var host : CharacterBody2D = owner as CharacterBody2D
 
 
+var jump_anim_tween : Tween
 var ground_acceleration : float
 var air_acceleration : float
 var gravity : float
@@ -51,6 +52,7 @@ var last_wall_touched : Vector2
 
 
 func _ready() -> void:
+	
 	gravity = jump_height / (2 * pow(jump_time, 2))
 	jump_power = -sqrt(2 * jump_height * gravity)
 	ground_acceleration = max_run_speed / ground_acceleration_time
@@ -95,6 +97,12 @@ func _physics_process(delta: float) -> void:
 
 		host.velocity.y = jump_power * -jump_dir.y * gravity_manager.get_gravity_direction().y
 		host.velocity.x += jump_power * -jump_dir.x
+
+		sprite.scale = Vector2(0.5, 1.5)
+		if jump_anim_tween:
+			jump_anim_tween.kill()
+		jump_anim_tween = create_tween()
+		jump_anim_tween.tween_property(sprite, "scale", Vector2.ONE, 0.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
 	
 
 	if host.velocity.y < 0.0 and not bonk_center_raycast.is_colliding():
