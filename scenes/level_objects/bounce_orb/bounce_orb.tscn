@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://tohkah41uh0t"]
+
+[ext_resource type="Script" path="res://scenes/level_objects/bounce_orb/bounce_orb.gd" id="1_j2gdv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1j601"]
+radius = 8.0
+
+[node name="BounceOrb" type="Area2D"]
+script = ExtResource("1_j2gdv")
+
+[node name="RefreshTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1j601")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.988235, 0.933333, 0.333333, 1)
+polygon = PackedVector2Array(0, -8, 8, 0, 0, 8, -8, 0)
+
+[connection signal="timeout" from="RefreshTimer" to="." method="_on_refresh_timer_timeout"]
