@@ -63,9 +63,9 @@ func _physics_process(delta: float) -> void:
 	host.velocity += get_gravity() * delta * gravity_manager.get_graivty_scale() * gravity_manager.get_gravity_direction()
 
 	host.up_direction = -1 * gravity_manager.get_gravity_direction()
-	bonk_center_raycast.target_position = -48 * gravity_manager.get_gravity_direction()
-	bonk_right_raycast.target_position = -48 * gravity_manager.get_gravity_direction()
-	bonk_left_raycast.target_position = -48 * gravity_manager.get_gravity_direction()
+	bonk_center_raycast.target_position = -14 * gravity_manager.get_gravity_direction()
+	bonk_right_raycast.target_position = -14 * gravity_manager.get_gravity_direction()
+	bonk_left_raycast.target_position = -14 * gravity_manager.get_gravity_direction()
 
 	if host.is_on_wall_only():
 		wall_touch_timer = wall_touch_time

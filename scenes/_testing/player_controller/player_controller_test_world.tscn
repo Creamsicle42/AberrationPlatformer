@@ -29,7 +29,6 @@ polygon = PackedVector2Array(192, 352, 256, 352, 256, 192, 192, 192)
 
 [node name="GameCamera" type="Camera2D" parent="."]
 position = Vector2(224, 480)
-position_smoothing_enabled = true
 drag_top_margin = 0.8
 drag_bottom_margin = 0.8
 editor_draw_drag_margin = true
