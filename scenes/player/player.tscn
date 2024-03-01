@@ -1,8 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://cybydn52j3wnw"]
+[gd_scene load_steps=26 format=3 uid="uid://cybydn52j3wnw"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_cgek4"]
 [ext_resource type="Script" path="res://scenes/player/platformer_behavior.gd" id="1_vpgob"]
 [ext_resource type="Texture2D" uid="uid://dg5e3xs2b5b43" path="res://assets/textures/player/player_spritesheet.png" id="2_rqrr0"]
+[ext_resource type="Script" path="res://scenes/gen/flip_pivot.gd" id="2_xyij7"]
 [ext_resource type="Script" path="res://scenes/player/gravity_manager.gd" id="3_qkcit"]
 [ext_resource type="Script" path="res://assets/resources/_types/gravity_area_data.gd" id="4_qj1g1"]
 
@@ -144,7 +145,11 @@ radius = 16.0
 collision_layer = 2
 script = ExtResource("1_cgek4")
 
-[node name="MainSprite" type="AnimatedSprite2D" parent="."]
+[node name="FlipPivot" type="Node2D" parent="." node_paths=PackedStringArray("flip_base")]
+script = ExtResource("2_xyij7")
+flip_base = NodePath("..")
+
+[node name="MainSprite" type="AnimatedSprite2D" parent="FlipPivot"]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_rindt")
 animation = &"idle"
@@ -159,7 +164,7 @@ bonk_center_raycast = NodePath("../Raycasts/CenterRaycast")
 bonk_right_raycast = NodePath("../Raycasts/RightRaycast")
 bonk_velocity = 40.0
 gravity_manager = NodePath("../GravityManager")
-sprite = NodePath("../MainSprite")
+sprite = NodePath("../FlipPivot/MainSprite")
 
 [node name="GravityManager" type="Node" parent="."]
 script = ExtResource("3_qkcit")
