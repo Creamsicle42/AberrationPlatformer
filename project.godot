@@ -18,6 +18,7 @@ config/icon="res://assets/textures/misc/icon.svg"
 [autoload]
 
 GameDataManager="*res://src/game_data_manager.gd"
+FadeLayer="*res://scenes/ui/fade_layer/fade_layer.tscn"
 
 [display]
 

@@ -7,6 +7,8 @@ extends Node
 @export var ground_acceleration_time := 0.1
 @export var air_acceleration_time := 0.2
 @export var apex_threshold := 64.0
+@export var dash_power := 1.25
+@export var dash_time := 1.5
 
 
 @export_group("Jumping")
@@ -40,6 +42,7 @@ extends Node
 @export var sprite : AnimatedSprite2D
 @export var vertical_velocity_range := 64.0
 @export var run_dust_particles : CPUParticles2D
+@export var dash_dust_particles : CPUParticles2D
 @export var jump_trail_particles : CPUParticles2D
 @export var dust_cloud_particles : PackedScene
 
@@ -60,6 +63,7 @@ var wall_jump_controll_loss_timer : float
 var on_wall_last_frame : bool
 var last_bounce_orb_touched : BounceOrb
 var bounce_orb_touch_timer : float
+var dash_timer : float
 
 
 func _ready() -> void:
@@ -80,7 +84,8 @@ func _physics_process(delta: float) -> void:
 	var h_input = Input.get_axis("left", "right")
 
 	if not wall_jump_controll_loss_timer > 0.0:
-		host.velocity.x = move_toward(host.velocity.x, max_run_speed * h_input, get_acceleration() * delta)
+		host.velocity.x = move_toward(host.velocity.x, max_run_speed * h_input * (dash_power if dash_timer <= 0.0 else 1.0)
+		, get_acceleration() * delta)
 	host.velocity += get_gravity() * delta * gravity_manager.get_graivty_scale() * gravity_manager.get_gravity_direction()
 
 	host.up_direction = -1 * gravity_manager.get_gravity_direction()
@@ -92,8 +97,14 @@ func _physics_process(delta: float) -> void:
 		wall_touch_timer = wall_touch_time
 		last_wall_touched = host.get_wall_normal()
 
+	if (max_run_speed - abs(host.velocity.x)) < 5.0 and host.is_on_floor():
+		dash_timer -= delta
+	
+	if abs(host.velocity.x) < 16.0:
+		dash_timer = clamp(dash_timer + delta, 0, dash_time)
 
 	run_dust_particles.emitting = host.is_on_floor() and abs(host.velocity.x) / 10.0
+	dash_dust_particles.emitting = host.is_on_floor() and abs(host.velocity.x) / 10.0 and dash_timer <= 0.0
 
 
 	if host.is_on_floor():
@@ -112,11 +123,13 @@ func _physics_process(delta: float) -> void:
 		if wall_touch_timer > 0.0:
 			jump_dir += last_wall_touched * 1.25
 			wall_jump_controll_loss_timer = wall_jump_control_loss_time
+			dash_timer = 0.0
 		jump_dir = jump_dir.normalized()
 
 		if bounce_orb_touch_timer > 0.0:
 			bounce_orb_touch_timer = 0.0
 			last_bounce_orb_touched.use_orb()
+
 
 		jump_trail_particles.emitting = true
 		var dust_cloud :CPUParticles2D= dust_cloud_particles.instantiate()

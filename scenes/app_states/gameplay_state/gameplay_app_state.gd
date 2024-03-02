@@ -27,6 +27,7 @@ func enter_state(params : Dictionary) -> void:
     level_manager.set_level_index(start_level_index)
     level_manager.instance_current_level()
     set_game_paused(false)
+    FadeLayer.fade_in()
 
 
 func exit_state() -> void:
@@ -34,6 +35,7 @@ func exit_state() -> void:
 
 
 func player_reached_end_of_game() -> void:
+
     Main.app.set_state("main_menu")
 
 
@@ -45,10 +47,15 @@ func set_game_paused(paused : bool) -> void:
 
 
 func _on_event_bus_player_killed() -> void:
+    FadeLayer.fade_out()
+    await FadeLayer.fade_complete
     level_manager.instance_current_level()
+    FadeLayer.fade_in()
 
 
 func _on_event_bus_end_goal_reached() -> void:
+    FadeLayer.fade_out()
+    await FadeLayer.fade_complete
     var more_levels_exist = level_manager.advance_level()
 
     if not more_levels_exist: 
@@ -57,14 +64,19 @@ func _on_event_bus_end_goal_reached() -> void:
     else:
         level_manager.instance_current_level()
         GameDataManager.save_game_data()
+    FadeLayer.fade_in()
 
 
 func _on_pause_menu_restart_level_pressed() -> void:
+    FadeLayer.fade_out()
+    await FadeLayer.fade_complete
     level_manager.instance_current_level()
     set_game_paused(false)
 
 
 func _on_pause_menu_next_level_pressed() -> void:
+    FadeLayer.fade_out()
+    await FadeLayer.fade_complete
     var more_levels_exist = level_manager.advance_level()
 
     if not more_levels_exist: 
@@ -73,9 +85,12 @@ func _on_pause_menu_next_level_pressed() -> void:
     else:
         level_manager.instance_current_level()
         GameDataManager.save_game_data()
+    FadeLayer.fade_in()
 
 
 func _on_pause_menu_go_to_main_menu_pressed() -> void:
+    FadeLayer.fade_out()
+    await FadeLayer.fade_complete
     Main.app.set_state("main_menu")
 
 

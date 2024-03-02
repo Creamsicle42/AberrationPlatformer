@@ -183,6 +183,26 @@ damping_min = 30.0
 damping_max = 40.0
 angle_max = 720.0
 scale_amount_min = 0.1
+scale_amount_max = 0.5
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="DashDustParticles" type="CPUParticles2D" parent="FlipPivot"]
+material = SubResource("CanvasItemMaterial_v05qq")
+position = Vector2(0, 8)
+emitting = false
+lifetime = 0.5
+lifetime_randomness = 0.1
+texture = ExtResource("7_5j8p1")
+direction = Vector2(0, -1)
+spread = 100.0
+gravity = Vector2(0, -10)
+initial_velocity_min = 30.0
+initial_velocity_max = 60.0
+damping_min = 30.0
+damping_max = 40.0
+angle_max = 720.0
+scale_amount_min = 0.2
 anim_speed_min = 1.0
 anim_speed_max = 1.0
 
@@ -210,7 +230,7 @@ anim_speed_max = 1.0
 [node name="WorldCollider" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_kst6t")
 
-[node name="PlatformerBehavior" type="Node" parent="." node_paths=PackedStringArray("bounce_orb_touch_area", "bonk_left_raycast", "bonk_center_raycast", "bonk_right_raycast", "gravity_manager", "sprite", "run_dust_particles", "jump_trail_particles")]
+[node name="PlatformerBehavior" type="Node" parent="." node_paths=PackedStringArray("bounce_orb_touch_area", "bonk_left_raycast", "bonk_center_raycast", "bonk_right_raycast", "gravity_manager", "sprite", "run_dust_particles", "dash_dust_particles", "jump_trail_particles")]
 script = ExtResource("1_vpgob")
 max_run_speed = 128.0
 air_acceleration_time = 0.3
@@ -225,6 +245,7 @@ bonk_velocity = 100.0
 gravity_manager = NodePath("../GravityManager")
 sprite = NodePath("../FlipPivot/MainSprite")
 run_dust_particles = NodePath("../FlipPivot/RunDustParticles")
+dash_dust_particles = NodePath("../FlipPivot/DashDustParticles")
 jump_trail_particles = NodePath("../FlipPivot/JumpTrailParticles")
 dust_cloud_particles = ExtResource("6_yopic")
 
