@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://wop5emouwadi" path="res://scenes/ui/pause_menu/pause_menu.tscn" id="5_q4bcv"]
 
 [node name="GameplayAppState" type="Node" node_paths=PackedStringArray("level_manager", "pause_menu")]
-process_mode = 3
 script = ExtResource("1_qtq4f")
 level_manager = NodePath("LevelManager")
 pause_menu = NodePath("PauseMenu")
