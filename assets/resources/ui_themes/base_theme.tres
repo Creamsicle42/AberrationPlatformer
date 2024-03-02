@@ -1,0 +1,31 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://c4wvjyxn2urmq"]
+
+[ext_resource type="FontFile" uid="uid://b5lu316vfv1hv" path="res://assets/fonts/RobotoMono-VariableFont_wght.ttf" id="1_l1lb6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1ksqx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_snjoy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gipkb"]
+bg_color = Color(0.0901961, 0.0901961, 0.101961, 0.784314)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e6cv7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hnuhv"]
+
+[resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_disabled_color = Color(1, 1, 1, 0.501961)
+Button/colors/font_focus_color = Color(0.894118, 0.231373, 0.266667, 1)
+Button/colors/font_hover_color = Color(0.894118, 0.231373, 0.266667, 1)
+Button/colors/font_pressed_color = Color(0.0941176, 0.0784314, 0.145098, 1)
+Button/font_sizes/font_size = 30
+Button/fonts/font = ExtResource("1_l1lb6")
+Button/styles/disabled = SubResource("StyleBoxEmpty_1ksqx")
+Button/styles/focus = SubResource("StyleBoxEmpty_snjoy")
+Button/styles/hover = SubResource("StyleBoxFlat_gipkb")
+Button/styles/normal = SubResource("StyleBoxEmpty_e6cv7")
+Button/styles/pressed = SubResource("StyleBoxEmpty_hnuhv")
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/font_sizes/font_size = 32
+Label/fonts/font = ExtResource("1_l1lb6")
