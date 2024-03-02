@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://scenes/level_objects/moving_platform.gd" id="6_v2l6y"]
 [ext_resource type="Script" path="res://assets/resources/_types/moving_platform_tween_target.gd" id="7_diw3v"]
 [ext_resource type="PackedScene" uid="uid://tohkah41uh0t" path="res://scenes/level_objects/bounce_orb/bounce_orb.tscn" id="8_biu6d"]
-[ext_resource type="PackedScene" uid="uid://d3wgg3kr0vud" path="res://scenes/level_objects/moving_platform.tscn" id="8_xyu3o"]
+[ext_resource type="PackedScene" uid="uid://d3wgg3kr0vud" path="res://scenes/level_objects/one_way_platform/one_way_platform.tscn" id="8_y3qi5"]
 [ext_resource type="Script" path="res://scenes/level_objects/gravity_area/gravity_area.gd" id="9_obytk"]
 [ext_resource type="Script" path="res://assets/resources/_types/gravity_area_data.gd" id="10_ajrcv"]
 [ext_resource type="Texture2D" uid="uid://bmf0lctj8pm6n" path="res://assets/textures/backgrounds/forest/paralax_bkgd_Sky.png" id="11_bk3bf"]
@@ -126,7 +126,7 @@ loop = false
 script = ExtResource("6_v2l6y")
 targets = Array[ExtResource("7_diw3v")]([SubResource("Resource_44h72"), SubResource("Resource_ju2bg"), SubResource("Resource_njek3"), SubResource("Resource_qgyl6")])
 
-[node name="MovingPlatform" parent="Path2D/MovingPlatform" instance=ExtResource("8_xyu3o")]
+[node name="MovingPlatform" parent="Path2D/MovingPlatform" instance=ExtResource("8_y3qi5")]
 
 [node name="BounceOrb" parent="." instance=ExtResource("8_biu6d")]
 position = Vector2(392, 88)
