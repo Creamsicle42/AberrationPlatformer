@@ -21,6 +21,7 @@ level_parent = NodePath("../Gameplay/SubViewportContainer/SubViewport/LevelParen
 levels = Array[Resource("res://assets/resources/_types/level_data.gd")]([ExtResource("3_bh2we"), ExtResource("5_34irk")])
 
 [node name="Gameplay" type="CanvasLayer" parent="."]
+process_mode = 1
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Gameplay"]
 anchors_preset = 15
