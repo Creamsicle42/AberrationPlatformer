@@ -39,6 +39,9 @@ extends Node
 @export_group("Animation")
 @export var sprite : AnimatedSprite2D
 @export var vertical_velocity_range := 64.0
+@export var run_dust_particles : CPUParticles2D
+@export var jump_trail_particles : CPUParticles2D
+@export var dust_cloud_particles : PackedScene
 
 
 @onready var host : CharacterBody2D = owner as CharacterBody2D
@@ -90,6 +93,9 @@ func _physics_process(delta: float) -> void:
 		last_wall_touched = host.get_wall_normal()
 
 
+	run_dust_particles.emitting = host.is_on_floor() and abs(host.velocity.x) / 10.0
+
+
 	if host.is_on_floor():
 		coyote_timer = coyote_time
 
@@ -111,6 +117,14 @@ func _physics_process(delta: float) -> void:
 		if bounce_orb_touch_timer > 0.0:
 			bounce_orb_touch_timer = 0.0
 			last_bounce_orb_touched.use_orb()
+
+		jump_trail_particles.emitting = true
+		var dust_cloud :CPUParticles2D= dust_cloud_particles.instantiate()
+
+		host.get_parent().add_child(dust_cloud)
+		dust_cloud.global_position = jump_trail_particles.global_position
+		dust_cloud.emitting = true
+		get_tree().create_timer(1.0).timeout.connect(dust_cloud.queue_free)
 
 		coyote_timer = 0
 		jump_buffer_timer = 0
@@ -139,6 +153,7 @@ func _physics_process(delta: float) -> void:
 	host.velocity.y = clamp(host.velocity.y, -INF, terminal_velocity)
 
 	var prev_x_velocity := host.velocity.x
+	var prev_y_velocity := host.velocity.y
 
 	host.move_and_slide()
 
@@ -148,6 +163,14 @@ func _physics_process(delta: float) -> void:
 		host.velocity.y += -abs(prev_x_velocity) * wall_bonk_velocity_ratio * gravity_manager.get_gravity_direction().y
 
 	on_wall_last_frame = host.is_on_wall()
+
+	if host.is_on_floor() and prev_y_velocity > 128.0:
+		var dust_cloud :CPUParticles2D= dust_cloud_particles.instantiate()
+		host.get_parent().add_child(dust_cloud)
+		dust_cloud.global_position = jump_trail_particles.global_position
+		dust_cloud.emitting = true
+		get_tree().create_timer(1.0).timeout.connect(dust_cloud.queue_free)
+
 
 	if host.is_on_floor():
 		sprite.speed_scale = 1.0

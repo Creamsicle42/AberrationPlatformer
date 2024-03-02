@@ -1,11 +1,14 @@
-[gd_scene load_steps=27 format=3 uid="uid://cybydn52j3wnw"]
+[gd_scene load_steps=31 format=3 uid="uid://cybydn52j3wnw"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_cgek4"]
 [ext_resource type="Script" path="res://scenes/player/platformer_behavior.gd" id="1_vpgob"]
+[ext_resource type="PackedScene" uid="uid://cvn8ne5yh5afa" path="res://scenes/effects/gravity_change_particles.tscn" id="2_40tvw"]
 [ext_resource type="Texture2D" uid="uid://dg5e3xs2b5b43" path="res://assets/textures/player/player_spritesheet.png" id="2_rqrr0"]
 [ext_resource type="Script" path="res://scenes/gen/flip_pivot.gd" id="2_xyij7"]
 [ext_resource type="Script" path="res://scenes/player/gravity_manager.gd" id="3_qkcit"]
 [ext_resource type="Script" path="res://assets/resources/_types/gravity_area_data.gd" id="4_qj1g1"]
+[ext_resource type="PackedScene" uid="uid://lalosu8joqn4" path="res://scenes/effects/dust_cloud_particles.tscn" id="6_yopic"]
+[ext_resource type="Texture2D" uid="uid://v5ppttmi63jg" path="res://assets/textures/particles/particle_dust.png" id="7_5j8p1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rxtf6"]
 atlas = ExtResource("2_rqrr0")
@@ -130,6 +133,12 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_v05qq"]
+particles_animation = true
+particles_anim_h_frames = 10
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kst6t"]
 size = Vector2(8, 16)
 
@@ -148,6 +157,7 @@ radius = 8.0
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_cgek4")
+gravity_change_particles = ExtResource("2_40tvw")
 
 [node name="FlipPivot" type="Node2D" parent="." node_paths=PackedStringArray("flip_base")]
 script = ExtResource("2_xyij7")
@@ -158,10 +168,49 @@ position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_rindt")
 animation = &"idle"
 
+[node name="RunDustParticles" type="CPUParticles2D" parent="FlipPivot"]
+material = SubResource("CanvasItemMaterial_v05qq")
+position = Vector2(0, 8)
+emitting = false
+lifetime = 0.5
+lifetime_randomness = 0.1
+texture = ExtResource("7_5j8p1")
+direction = Vector2(0, -1)
+spread = 100.0
+gravity = Vector2(0, -10)
+initial_velocity_max = 40.0
+damping_min = 30.0
+damping_max = 40.0
+angle_max = 720.0
+scale_amount_min = 0.1
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="JumpTrailParticles" type="CPUParticles2D" parent="FlipPivot"]
+material = SubResource("CanvasItemMaterial_v05qq")
+position = Vector2(0, 8)
+emitting = false
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.8
+lifetime_randomness = 0.1
+texture = ExtResource("7_5j8p1")
+direction = Vector2(0, -1)
+spread = 100.0
+gravity = Vector2(0, -10)
+initial_velocity_max = 40.0
+damping_min = 30.0
+damping_max = 40.0
+angle_max = 720.0
+scale_amount_min = 0.1
+scale_amount_max = 0.5
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
 [node name="WorldCollider" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_kst6t")
 
-[node name="PlatformerBehavior" type="Node" parent="." node_paths=PackedStringArray("bounce_orb_touch_area", "bonk_left_raycast", "bonk_center_raycast", "bonk_right_raycast", "gravity_manager", "sprite")]
+[node name="PlatformerBehavior" type="Node" parent="." node_paths=PackedStringArray("bounce_orb_touch_area", "bonk_left_raycast", "bonk_center_raycast", "bonk_right_raycast", "gravity_manager", "sprite", "run_dust_particles", "jump_trail_particles")]
 script = ExtResource("1_vpgob")
 max_run_speed = 128.0
 air_acceleration_time = 0.3
@@ -175,6 +224,9 @@ bonk_right_raycast = NodePath("../Raycasts/RightRaycast")
 bonk_velocity = 100.0
 gravity_manager = NodePath("../GravityManager")
 sprite = NodePath("../FlipPivot/MainSprite")
+run_dust_particles = NodePath("../FlipPivot/RunDustParticles")
+jump_trail_particles = NodePath("../FlipPivot/JumpTrailParticles")
+dust_cloud_particles = ExtResource("6_yopic")
 
 [node name="GravityManager" type="Node" parent="."]
 script = ExtResource("3_qkcit")
@@ -207,4 +259,5 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BounceOrbTouchArea"]
 shape = SubResource("CircleShape2D_e7nkv")
 
+[connection signal="gravity_changed" from="GravityManager" to="." method="_on_gravity_manager_gravity_changed"]
 [connection signal="body_entered" from="HazardHitbox" to="." method="_on_hazard_hitbox_body_entered"]
