@@ -8,7 +8,7 @@ extends Node
 @export var air_acceleration_time := 0.2
 @export var apex_threshold := 64.0
 @export var dash_power := 1.25
-@export var dash_time := 1.5
+@export var dash_time := 2.0
 
 
 @export_group("Jumping")
@@ -101,7 +101,7 @@ func _physics_process(delta: float) -> void:
 		dash_timer -= delta
 	
 	if abs(host.velocity.x) < 16.0:
-		dash_timer = clamp(dash_timer + delta, 0, dash_time)
+		dash_timer = dash_time
 
 	run_dust_particles.emitting = host.is_on_floor() and abs(host.velocity.x) / 10.0
 	dash_dust_particles.emitting = host.is_on_floor() and abs(host.velocity.x) / 10.0 and dash_timer <= 0.0

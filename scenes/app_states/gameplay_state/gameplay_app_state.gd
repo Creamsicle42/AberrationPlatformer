@@ -72,6 +72,7 @@ func _on_pause_menu_restart_level_pressed() -> void:
     await FadeLayer.fade_complete
     level_manager.instance_current_level()
     set_game_paused(false)
+    FadeLayer.fade_in()
 
 
 func _on_pause_menu_next_level_pressed() -> void:
