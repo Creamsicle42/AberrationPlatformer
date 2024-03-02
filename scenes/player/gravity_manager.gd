@@ -14,6 +14,7 @@ func get_graivty_scale() -> float:
 
 
 func add_influence(influence : GravityAreaData) -> void:
+    if gravity_influences.has(influence): return
     gravity_influences.push_front(influence)
 
 
