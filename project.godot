@@ -18,11 +18,20 @@ config/icon="res://assets/textures/misc/icon.svg"
 [autoload]
 
 GameDataManager="*res://src/game_data_manager.gd"
+FadeLayer="*res://scenes/ui/fade_layer/fade_layer.tscn"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+
+[editor]
+
+movie_writer/movie_file="C:/Users/defue/Documents/PersonalProjects/GameDevelopment/Active/Project-AcerollaJam/Videos/new_art_demo.avi"
+
+[gui]
+
+theme/custom="res://assets/resources/ui_themes/base_theme.tres"
 
 [input]
 
