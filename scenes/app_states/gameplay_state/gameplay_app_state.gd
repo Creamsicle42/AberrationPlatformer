@@ -40,8 +40,8 @@ func player_reached_end_of_game() -> void:
 func set_game_paused(paused : bool) -> void:
     is_game_paused = paused
     pause_menu.visible = paused
-    
-    level_manager.current_level_node.set_deferred("process_mode", Node.PROCESS_MODE_DISABLED if paused else Node.PROCESS_MODE_INHERIT)
+    get_tree().paused = paused
+    #level_manager.current_level_node.set_deferred("process_mode", Node.PROCESS_MODE_DISABLED if paused else Node.PROCESS_MODE_INHERIT)
 
 
 func _on_event_bus_player_killed() -> void:

@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://wop5emouwadi" path="res://scenes/ui/pause_menu/pause_menu.tscn" id="5_q4bcv"]
 
 [node name="GameplayAppState" type="Node" node_paths=PackedStringArray("level_manager", "pause_menu")]
+process_mode = 3
 script = ExtResource("1_qtq4f")
 level_manager = NodePath("LevelManager")
 pause_menu = NodePath("PauseMenu")
@@ -21,6 +22,7 @@ level_parent = NodePath("../Gameplay/SubViewportContainer/SubViewport/LevelParen
 levels = Array[Resource("res://assets/resources/_types/level_data.gd")]([ExtResource("3_bh2we"), ExtResource("5_34irk")])
 
 [node name="Gameplay" type="CanvasLayer" parent="."]
+process_mode = 1
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Gameplay"]
 anchors_preset = 15
