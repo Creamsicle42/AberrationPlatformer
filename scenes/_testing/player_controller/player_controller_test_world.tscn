@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bs23g6l1t6j67"]
+[gd_scene load_steps=23 format=3 uid="uid://bs23g6l1t6j67"]
 
 [ext_resource type="Script" path="res://scenes/app_states/gameplay_state/level_system/level_controller.gd" id="1_a5h2s"]
 [ext_resource type="PackedScene" uid="uid://cybydn52j3wnw" path="res://scenes/player/player.tscn" id="1_qkqi3"]
@@ -10,6 +10,11 @@
 [ext_resource type="PackedScene" uid="uid://tohkah41uh0t" path="res://scenes/level_objects/bounce_orb/bounce_orb.tscn" id="8_biu6d"]
 [ext_resource type="Script" path="res://scenes/level_objects/gravity_area/gravity_area.gd" id="9_obytk"]
 [ext_resource type="Script" path="res://assets/resources/_types/gravity_area_data.gd" id="10_ajrcv"]
+[ext_resource type="Texture2D" uid="uid://bmf0lctj8pm6n" path="res://assets/textures/backgrounds/forest/paralax_bkgd_Sky.png" id="11_bk3bf"]
+[ext_resource type="Texture2D" uid="uid://buc7d3f33hp5t" path="res://assets/textures/backgrounds/forest/paralax_bkgd_Mountains.png" id="12_y0vjv"]
+[ext_resource type="Texture2D" uid="uid://cckyoui2nmsur" path="res://assets/textures/backgrounds/forest/paralax_bkgd_DistantClouds.png" id="13_ap5b3"]
+[ext_resource type="Texture2D" uid="uid://i1i1o5xg76a2" path="res://assets/textures/backgrounds/forest/paralax_bkgd_Clouds.png" id="13_mrsev"]
+[ext_resource type="Texture2D" uid="uid://btv7i4ticwpn4" path="res://assets/textures/backgrounds/forest/paralax_bkgd_DistantTrees.png" id="14_blfji"]
 
 [sub_resource type="Curve2D" id="Curve2D_6xr0a"]
 _data = {
@@ -128,3 +133,54 @@ polygon = PackedVector2Array(520, 16, 672, 16, 672, 152, 520, 152)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravityArea"]
 polygon = PackedVector2Array(520, 16, 672, 16, 672, 152, 520, 152)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_offset = Vector2(100, 0)
+scroll_limit_end = Vector2(768, 192)
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.05, 0)
+motion_mirroring = Vector2(320, 0)
+
+[node name="ParalaxBkgdSky" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(160, 90)
+texture = ExtResource("11_bk3bf")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.1, 0)
+motion_mirroring = Vector2(320, 0)
+
+[node name="ParalaxBkgdSky" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(160, 90)
+texture = ExtResource("12_y0vjv")
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.13, 0)
+motion_mirroring = Vector2(320, 0)
+
+[node name="ParalaxBkgdSky" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5"]
+position = Vector2(160, 90)
+texture = ExtResource("13_ap5b3")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.15, 0)
+motion_mirroring = Vector2(320, 0)
+
+[node name="ParalaxBkgdSky" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2(160, 90)
+texture = ExtResource("13_mrsev")
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.25, 0)
+motion_mirroring = Vector2(320, 0)
+
+[node name="ParalaxBkgdSky" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+position = Vector2(160, 90)
+texture = ExtResource("14_blfji")
+
+[node name="ParallaxLayer6" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="ParallaxBackground/ParallaxLayer6"]
+color = Color(0.258824, 0.203922, 0.364706, 0.643137)
+polygon = PackedVector2Array(0, 0, 320, 0, 320, 192, 0, 192)
