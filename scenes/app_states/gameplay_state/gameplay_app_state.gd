@@ -35,6 +35,9 @@ func exit_state() -> void:
 
 
 func send_player_to_level(id: String, spawnpoint: String) -> void:
+	GameDataManager.current_game_data.level_on = id
+	GameDataManager.current_game_data.checkpoint_on = spawnpoint
+	GameDataManager.save_game_data()
 	FadeLayer.fade_out()
 	await FadeLayer.fade_complete
 	level_manager.go_to_level(id, spawnpoint)
