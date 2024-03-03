@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scenes/app_states/gameplay_state/level_system/level_manager.gd" id="2_5uygt"]
 [ext_resource type="Script" path="res://scenes/app_states/gameplay_state/gameplay_event_bus.gd" id="2_745si"]
 [ext_resource type="Resource" uid="uid://jvmfqw05h5yx" path="res://assets/resources/levels/test_level.tres" id="3_bh2we"]
-[ext_resource type="Resource" uid="uid://c4mqmfikasosm" path="res://assets/resources/levels/anomaly_test_1.tres" id="5_34irk"]
+[ext_resource type="Script" path="res://scenes/app_states/gameplay_state/level_nameplate.gd" id="5_bpwq7"]
 [ext_resource type="PackedScene" uid="uid://wop5emouwadi" path="res://scenes/ui/pause_menu/pause_menu.tscn" id="5_q4bcv"]
 
 [node name="GameplayAppState" type="Node" node_paths=PackedStringArray("level_manager", "pause_menu")]
@@ -18,7 +18,7 @@ script = ExtResource("2_745si")
 [node name="LevelManager" type="Node" parent="." node_paths=PackedStringArray("level_parent")]
 script = ExtResource("2_5uygt")
 level_parent = NodePath("../Gameplay/SubViewportContainer/SubViewport/LevelParent")
-levels = Array[Resource("res://assets/resources/_types/level_data.gd")]([ExtResource("3_bh2we"), ExtResource("5_34irk")])
+levels = [ExtResource("3_bh2we")]
 
 [node name="Gameplay" type="CanvasLayer" parent="."]
 process_mode = 1
@@ -42,10 +42,30 @@ render_target_update_mode = 4
 
 [node name="LevelParent" type="Node2D" parent="Gameplay/SubViewportContainer/SubViewport"]
 
-[node name="PauseMenu" parent="." instance=ExtResource("5_q4bcv")]
+[node name="CenterContainer" type="CenterContainer" parent="Gameplay"]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -400.0
+offset_right = 400.0
+offset_bottom = 200.0
+grow_horizontal = 2
 
-[connection signal="end_goal_reached" from="GameplayEventBus" to="." method="_on_event_bus_end_goal_reached"]
+[node name="LevelNameplate" type="Label" parent="Gameplay/CenterContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Level Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("5_bpwq7")
+
+[node name="PauseMenu" parent="." instance=ExtResource("5_q4bcv")]
+layer = 3
+visible = false
+
 [connection signal="player_killed" from="GameplayEventBus" to="." method="_on_event_bus_player_killed"]
+[connection signal="player_warp_needed" from="GameplayEventBus" to="." method="_on_gameplay_event_bus_player_warp_needed"]
+[connection signal="level_changed" from="LevelManager" to="Gameplay/CenterContainer/LevelNameplate" method="_on_level_manager_level_changed"]
 [connection signal="continue_pressed" from="PauseMenu" to="." method="_on_pause_menu_continue_pressed"]
 [connection signal="go_to_main_menu_pressed" from="PauseMenu" to="." method="_on_pause_menu_go_to_main_menu_pressed"]
 [connection signal="next_level_pressed" from="PauseMenu" to="." method="_on_pause_menu_next_level_pressed"]
