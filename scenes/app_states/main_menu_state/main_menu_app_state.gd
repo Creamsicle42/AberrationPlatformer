@@ -19,8 +19,8 @@ func _on_new_game_button_pressed() -> void:
 	FadeLayer.fade_out()
 	await FadeLayer.fade_complete
 	Main.app.set_state("gameplay", {
-		"start_level": "test_1",
-		"start_spawnpoint": "test"
+		"start_level": "sewers_1",
+		"start_spawnpoint": "start"
 	})
 
 
