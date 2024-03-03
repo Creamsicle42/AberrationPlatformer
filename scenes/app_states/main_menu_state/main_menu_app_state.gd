@@ -7,7 +7,7 @@ extends Node
 
 func enter_state(_params:Dictionary) -> void:
 	FadeLayer.fade_in()
-	if GameDataManager.current_game_data.level_on == -1:
+	if GameDataManager.current_game_data.level_on == "":
 		continue_button.disabled = true
 
 
@@ -19,7 +19,8 @@ func _on_new_game_button_pressed() -> void:
 	FadeLayer.fade_out()
 	await FadeLayer.fade_complete
 	Main.app.set_state("gameplay", {
-		"start_level": 0
+		"start_level": "test_1",
+		"start_spawnpoint": "test"
 	})
 
 
@@ -27,6 +28,7 @@ func _on_continue_button_pressed() -> void:
 	FadeLayer.fade_out()
 	await FadeLayer.fade_complete
 	Main.app.set_state("gameplay", {
-		"start_level": GameDataManager.current_game_data.level_on
+		"start_level": GameDataManager.current_game_data.level_on,
+		"start_spawnpoint": GameDataManager.current_game_data.checkpoint_on
 	})
 	

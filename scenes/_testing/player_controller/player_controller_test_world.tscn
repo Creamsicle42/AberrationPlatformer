@@ -81,8 +81,15 @@ frame_6/duration = 1.0
 frame_7/texture = ExtResource("17_uce6w")
 frame_7/duration = 1.0
 
-[node name="PlayerControllerTestWorld" type="Node2D"]
+[node name="PlayerControllerTestWorld" type="Node2D" node_paths=PackedStringArray("player", "spawnpoints")]
 script = ExtResource("1_a5h2s")
+player = NodePath("Player")
+spawnpoints = NodePath("Spawnpoints")
+
+[node name="Spawnpoints" type="Node2D" parent="."]
+
+[node name="Test" type="Node2D" parent="Spawnpoints"]
+position = Vector2(64, 128)
 
 [node name="GameCamera" type="Camera2D" parent="."]
 position = Vector2(160, 96)
