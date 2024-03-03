@@ -7,8 +7,11 @@ extends Node
 ## Keeps track of what the current level is, and handles resetting it, and moving to the next level when needed
 
 
+signal level_changed (new_level_id)
+
+
 @export var level_parent : Node
-@export var levels : Dictionary
+@export var levels : Array[LevelData]
 
 
 var current_level_spawnpoint : String
@@ -17,7 +20,9 @@ var current_level_node : LevelController
 
 
 func go_to_level(level_id : String, spawnpoint_id : String) -> void:
-	current_level_resource = levels[level_id]
+	if current_level_resource == null or level_id == current_level_resource.name:
+		level_changed.emit(level_id)
+	current_level_resource = levels.reduce(func(n:LevelData, acc): return n if n.name == level_id else acc)
 	current_level_spawnpoint = spawnpoint_id
 
 	assert(current_level_resource != null, "Cannot instance level, no current level assigned.")
