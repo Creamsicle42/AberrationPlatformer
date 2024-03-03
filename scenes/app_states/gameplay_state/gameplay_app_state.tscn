@@ -18,7 +18,7 @@ script = ExtResource("2_745si")
 [node name="LevelManager" type="Node" parent="." node_paths=PackedStringArray("level_parent")]
 script = ExtResource("2_5uygt")
 level_parent = NodePath("../Gameplay/SubViewportContainer/SubViewport/LevelParent")
-levels = [ExtResource("3_bh2we")]
+levels = Array[Resource("res://assets/resources/_types/level_data.gd")]([ExtResource("3_bh2we")])
 
 [node name="Gameplay" type="CanvasLayer" parent="."]
 process_mode = 1
@@ -43,7 +43,7 @@ render_target_update_mode = 4
 [node name="LevelParent" type="Node2D" parent="Gameplay/SubViewportContainer/SubViewport"]
 
 [node name="CenterContainer" type="CenterContainer" parent="Gameplay"]
-anchors_preset = -1
+anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -400.0
