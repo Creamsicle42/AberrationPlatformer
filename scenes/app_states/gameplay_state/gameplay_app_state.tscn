@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://o7ta360kabrj"]
+[gd_scene load_steps=11 format=3 uid="uid://o7ta360kabrj"]
 
 [ext_resource type="Script" path="res://scenes/app_states/gameplay_state/gameplay_app_state.gd" id="1_qtq4f"]
 [ext_resource type="Script" path="res://scenes/app_states/gameplay_state/level_system/level_manager.gd" id="2_5uygt"]
@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://ccrt2betqqqwy" path="res://assets/resources/levels/sewers_1.tres" id="5_umaqc"]
 [ext_resource type="Resource" uid="uid://572lus7e8gde" path="res://assets/resources/levels/sanctum.tres" id="6_yf7oq"]
 [ext_resource type="Resource" uid="uid://bma2ubpk7waju" path="res://assets/resources/levels/lab_1.tres" id="7_s0wop"]
+[ext_resource type="Resource" uid="uid://s3cs4pksufvd" path="res://assets/resources/levels/lab_vertical.tres" id="8_o7mcc"]
 
 [node name="GameplayAppState" type="Node" node_paths=PackedStringArray("level_manager", "pause_menu")]
 script = ExtResource("1_qtq4f")
@@ -21,7 +22,7 @@ script = ExtResource("2_745si")
 [node name="LevelManager" type="Node" parent="." node_paths=PackedStringArray("level_parent")]
 script = ExtResource("2_5uygt")
 level_parent = NodePath("../Gameplay/SubViewportContainer/SubViewport/LevelParent")
-levels = Array[Resource("res://assets/resources/_types/level_data.gd")]([ExtResource("3_bh2we"), ExtResource("5_umaqc"), ExtResource("6_yf7oq"), ExtResource("7_s0wop")])
+levels = Array[Resource("res://assets/resources/_types/level_data.gd")]([ExtResource("3_bh2we"), ExtResource("5_umaqc"), ExtResource("6_yf7oq"), ExtResource("7_s0wop"), ExtResource("8_o7mcc")])
 
 [node name="Gameplay" type="CanvasLayer" parent="."]
 process_mode = 1
