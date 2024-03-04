@@ -1,50 +1,24 @@
-[gd_scene load_steps=13 format=3 uid="uid://ddwu58lgwwnkd"]
+[gd_scene load_steps=10 format=3 uid="uid://ddwu58lgwwnkd"]
 
 [ext_resource type="PackedScene" uid="uid://drum6yi7jjfk0" path="res://scenes/levels/template_level.tscn" id="1_xrt2j"]
-[ext_resource type="Script" path="res://scenes/level_objects/moving_platform.gd" id="2_610om"]
-[ext_resource type="Script" path="res://assets/resources/_types/moving_platform_tween_target.gd" id="3_5cqpa"]
-[ext_resource type="PackedScene" uid="uid://d3wgg3kr0vud" path="res://scenes/level_objects/one_way_platform/one_way_platform.tscn" id="4_emn2y"]
+[ext_resource type="Script" path="res://scenes/level_objects/flag_tester.gd" id="3_r6gs1"]
+[ext_resource type="Script" path="res://scenes/level_objects/gravity_area/gravity_area.gd" id="4_24f4k"]
+[ext_resource type="Script" path="res://assets/resources/_types/gravity_area_data.gd" id="5_0sita"]
 [ext_resource type="Script" path="res://scenes/level_objects/transfer_area.gd" id="5_me2ra"]
-
-[sub_resource type="Curve2D" id="Curve2D_8152g"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 120, 64, 0, 0, 0, 0, 384, 64)
-}
-point_count = 2
-
-[sub_resource type="Resource" id="Resource_tut80"]
-script = ExtResource("3_5cqpa")
-target = 1.0
-duration = 5.0
-trans_type = 0
-ease_type = 0
-
-[sub_resource type="Resource" id="Resource_qrqx3"]
-script = ExtResource("3_5cqpa")
-target = 1.0
-duration = 2.0
-trans_type = 0
-ease_type = 0
-
-[sub_resource type="Resource" id="Resource_fjjar"]
-script = ExtResource("3_5cqpa")
-target = 0.0
-duration = 5.0
-trans_type = 0
-ease_type = 0
-
-[sub_resource type="Resource" id="Resource_yogur"]
-script = ExtResource("3_5cqpa")
-target = 0.0
-duration = 2.0
-trans_type = 0
-ease_type = 0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ndtky"]
 size = Vector2(16, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ps1pi"]
 size = Vector2(48, 16)
+
+[sub_resource type="Resource" id="Resource_708is"]
+script = ExtResource("5_0sita")
+up_direction = Vector2(0, -1)
+gravity_scale = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_imnag"]
+size = Vector2(296, 40)
 
 [node name="Sewers1" instance=ExtResource("1_xrt2j")]
 
@@ -69,17 +43,7 @@ limit_top = 0
 limit_right = 640
 limit_bottom = 180
 
-[node name="Path2D" type="Path2D" parent="." index="5"]
-curve = SubResource("Curve2D_8152g")
-
-[node name="MovingPlatform" type="PathFollow2D" parent="Path2D" index="0"]
-position = Vector2(120, 64)
-script = ExtResource("2_610om")
-targets = Array[ExtResource("3_5cqpa")]([SubResource("Resource_tut80"), SubResource("Resource_qrqx3"), SubResource("Resource_fjjar"), SubResource("Resource_yogur")])
-
-[node name="MovingPlatform" parent="Path2D/MovingPlatform" index="0" instance=ExtResource("4_emn2y")]
-
-[node name="TransferArea" type="Area2D" parent="." index="6"]
+[node name="TransferArea" type="Area2D" parent="." index="5"]
 position = Vector2(648, 152)
 collision_layer = 2
 collision_mask = 2
@@ -90,7 +54,7 @@ spawnpoint_id = "from_sewers"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransferArea" index="0"]
 shape = SubResource("RectangleShape2D_ndtky")
 
-[node name="TransferArea2" type="Area2D" parent="." index="7"]
+[node name="TransferArea2" type="Area2D" parent="." index="6"]
 position = Vector2(40, -8)
 collision_layer = 2
 collision_mask = 2
@@ -100,3 +64,22 @@ spawnpoint_id = "sewers_1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransferArea2" index="0"]
 shape = SubResource("RectangleShape2D_ps1pi")
+
+[node name="FlagTester" type="Node" parent="." index="7"]
+script = ExtResource("3_r6gs1")
+flag = "abberation_created"
+
+[node name="GravityArea" type="Area2D" parent="FlagTester" index="0"]
+position = Vector2(256, 32)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("4_24f4k")
+gravity_data = SubResource("Resource_708is")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FlagTester/GravityArea" index="0"]
+position = Vector2(-4, 4)
+shape = SubResource("RectangleShape2D_imnag")
+
+[node name="Polygon2D" type="Polygon2D" parent="FlagTester/GravityArea" index="1"]
+color = Color(0.180392, 0.0705882, 0.14902, 0.701961)
+polygon = PackedVector2Array(144, -16, 144, 24, -152, 24, -152, -16)
