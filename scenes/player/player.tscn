@@ -148,8 +148,8 @@ up_direction = Vector2(0, 1)
 gravity_scale = 1.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l2vc4"]
-radius = 4.0
-height = 12.0
+radius = 5.0
+height = 16.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e7nkv"]
 radius = 8.0
