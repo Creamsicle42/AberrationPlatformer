@@ -36,7 +36,7 @@ position = Vector2(240, -16)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("3_g8fl7")
-level_id = "lab_7"
+level_id = "lab_6"
 spawnpoint_id = "lab_8"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransferArea" index="0"]

@@ -9,6 +9,7 @@ func enter_state(_params:Dictionary) -> void:
 	FadeLayer.fade_in()
 	if GameDataManager.current_game_data.level_on == "":
 		continue_button.disabled = true
+	$UIElements/Control/CenterContainer/VBoxContainer/NewGameButton.grab_focus()
 
 
 func exit_state() -> void:

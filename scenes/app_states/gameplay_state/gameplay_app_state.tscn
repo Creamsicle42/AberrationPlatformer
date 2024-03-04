@@ -80,7 +80,6 @@ script = ExtResource("5_bpwq7")
 
 [node name="SpeechBubbleContainer" parent="Gameplay" node_paths=PackedStringArray("reference_viewport") instance=ExtResource("19_2y7p7")]
 visible = false
-anchors_preset = 8
 reference_viewport = NodePath("../SubViewportContainer/SubViewport")
 
 [node name="PauseMenu" parent="." instance=ExtResource("5_q4bcv")]

@@ -110,6 +110,8 @@ func _physics_process(delta: float) -> void:
 	run_dust_particles.emitting = host.is_on_floor() and abs(host.velocity.x) / 10.0
 	dash_dust_particles.emitting = host.is_on_floor() and abs(host.velocity.x) / 10.0 and dash_timer <= 0.0
 
+	if dash_timer <= 0.0 and host.is_on_floor():
+		Input.start_joy_vibration(0, 0.5, 0.1, 0.1)
 
 	if host.is_on_floor():
 		coyote_timer = coyote_time
@@ -129,6 +131,8 @@ func _physics_process(delta: float) -> void:
 			wall_jump_controll_loss_timer = wall_jump_control_loss_time
 			dash_timer = 0.0
 		jump_dir = jump_dir.normalized()
+
+		Input.start_joy_vibration(0, 0.3, 0.0, 0.15)
 
 		if bounce_orb_touch_timer > 0.0:
 			bounce_orb_touch_timer = 0.0
@@ -167,6 +171,7 @@ func _physics_process(delta: float) -> void:
 		host.velocity -= air_drag * host.velocity * delta
 
 	
+	
 	host.velocity.y = clamp(host.velocity.y, -INF, terminal_velocity)
 
 	var prev_x_velocity := host.velocity.x
@@ -182,6 +187,7 @@ func _physics_process(delta: float) -> void:
 	on_wall_last_frame = host.is_on_wall()
 
 	if host.is_on_floor() and prev_y_velocity > 128.0:
+		Input.start_joy_vibration(0, 0.5, 0.2, 0.15)
 		var dust_cloud :CPUParticles2D= dust_cloud_particles.instantiate()
 		host.get_parent().add_child(dust_cloud)
 		dust_cloud.global_position = jump_trail_particles.global_position
