@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://k527a0lhnahw"]
+[gd_scene load_steps=17 format=3 uid="uid://k527a0lhnahw"]
 
 [ext_resource type="PackedScene" uid="uid://drum6yi7jjfk0" path="res://scenes/levels/template_level.tscn" id="1_a3gsf"]
 [ext_resource type="Script" path="res://scenes/level_objects/transfer_area.gd" id="2_hf6ho"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scenes/level_objects/moving_platform.gd" id="4_ropjb"]
 [ext_resource type="Script" path="res://assets/resources/_types/moving_platform_tween_target.gd" id="5_3r586"]
 [ext_resource type="PackedScene" uid="uid://d3wgg3kr0vud" path="res://scenes/level_objects/one_way_platform/one_way_platform.tscn" id="6_4evel"]
+[ext_resource type="PackedScene" uid="uid://doftbtj7w77h7" path="res://scenes/level_objects/gem_pickup/gem_pickup.tscn" id="7_5a2v4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3bxaq"]
 size = Vector2(48, 40)
@@ -148,3 +149,7 @@ script = ExtResource("4_ropjb")
 targets = Array[ExtResource("5_3r586")]([SubResource("Resource_ldm16"), SubResource("Resource_3wp72")])
 
 [node name="MovingPlatform" parent="Path2D2/MovingPlatform" index="0" instance=ExtResource("6_4evel")]
+
+[node name="GemPickup" parent="." index="12" instance=ExtResource("7_5a2v4")]
+position = Vector2(248, 48)
+pickup_id = "lab_6/gem"

@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bjmtrhufvmut1"]
+[gd_scene load_steps=9 format=3 uid="uid://bjmtrhufvmut1"]
 
 [ext_resource type="PackedScene" uid="uid://drum6yi7jjfk0" path="res://scenes/levels/template_level.tscn" id="1_fxbyi"]
 [ext_resource type="Script" path="res://scenes/level_objects/transfer_area.gd" id="2_7hwew"]
 [ext_resource type="Script" path="res://scenes/level_objects/gravity_area/gravity_area.gd" id="3_egqda"]
 [ext_resource type="Script" path="res://assets/resources/_types/gravity_area_data.gd" id="4_pr7d5"]
+[ext_resource type="PackedScene" uid="uid://doftbtj7w77h7" path="res://scenes/level_objects/gem_pickup/gem_pickup.tscn" id="5_kjb4v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jf4ww"]
 size = Vector2(16, 32)
@@ -97,3 +98,7 @@ shape = SubResource("RectangleShape2D_g78vk")
 [node name="Polygon2D" type="Polygon2D" parent="GravityArea" index="1"]
 color = Color(0.180392, 0.0705882, 0.14902, 0.701961)
 polygon = PackedVector2Array(-32, 160, 32, 160, 32, -152, -32, -152)
+
+[node name="GemPickup" parent="." index="10" instance=ExtResource("5_kjb4v")]
+position = Vector2(96, 304)
+pickup_id = "lab_vertical/gem"

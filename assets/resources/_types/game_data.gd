@@ -4,3 +4,4 @@ extends Resource
 
 @export var level_on : String = ""
 @export var checkpoint_on : String = ""
+@export var flags : Dictionary

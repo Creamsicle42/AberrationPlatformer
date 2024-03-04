@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://ct3u7toj8ar5d"]
+[gd_scene load_steps=10 format=3 uid="uid://ct3u7toj8ar5d"]
 
 [ext_resource type="PackedScene" uid="uid://drum6yi7jjfk0" path="res://scenes/levels/template_level.tscn" id="1_y8guh"]
 [ext_resource type="Script" path="res://scenes/level_objects/gravity_area/gravity_area.gd" id="2_croem"]
 [ext_resource type="Script" path="res://scenes/level_objects/transfer_area.gd" id="2_tddlv"]
 [ext_resource type="Script" path="res://assets/resources/_types/gravity_area_data.gd" id="3_x5kvf"]
+[ext_resource type="PackedScene" uid="uid://doftbtj7w77h7" path="res://scenes/level_objects/gem_pickup/gem_pickup.tscn" id="5_ub1ds"]
 
 [sub_resource type="Resource" id="Resource_ahb0c"]
 script = ExtResource("3_x5kvf")
@@ -104,3 +105,7 @@ spawnpoint_id = "lab_3"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransferArea3" index="0"]
 position = Vector2(-1, 8)
 shape = SubResource("RectangleShape2D_1hfa0")
+
+[node name="GemPickup" parent="." index="10" instance=ExtResource("5_ub1ds")]
+position = Vector2(144, 320)
+pickup_id = "lab_3/gem"
