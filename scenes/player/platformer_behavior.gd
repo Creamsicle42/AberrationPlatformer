@@ -2,6 +2,9 @@ class_name PlatformerBehavior
 extends Node
 
 
+@export var controll_locked := false
+
+
 @export_group("Horizontal")
 @export var max_run_speed := 256.0
 @export var ground_acceleration_time := 0.1
@@ -82,7 +85,7 @@ func _physics_process(delta: float) -> void:
 	wall_jump_controll_loss_timer -= delta
 	bounce_orb_touch_timer -= delta
 
-	var h_input = Input.get_axis("left", "right")
+	var h_input = Input.get_axis("left", "right") if not controll_locked else 0.0
 
 	if not wall_jump_controll_loss_timer > 0.0:
 		host.velocity.x = move_toward(host.velocity.x, max_run_speed * h_input * (dash_power if dash_timer <= 0.0 else 1.0)
@@ -111,7 +114,7 @@ func _physics_process(delta: float) -> void:
 	if host.is_on_floor():
 		coyote_timer = coyote_time
 
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump") and not controll_locked:
 		jump_buffer_timer = jump_buffer_time
 	
 
