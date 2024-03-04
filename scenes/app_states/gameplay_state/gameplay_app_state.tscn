@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://o7ta360kabrj"]
+[gd_scene load_steps=22 format=3 uid="uid://o7ta360kabrj"]
 
 [ext_resource type="Script" path="res://scenes/app_states/gameplay_state/gameplay_app_state.gd" id="1_qtq4f"]
 [ext_resource type="Script" path="res://scenes/app_states/gameplay_state/level_system/level_manager.gd" id="2_5uygt"]
@@ -19,6 +19,7 @@
 [ext_resource type="Resource" uid="uid://f3nk53d41mgc" path="res://assets/resources/levels/lab_7.tres" id="14_cn6o6"]
 [ext_resource type="Resource" uid="uid://cbmclcfcht2wh" path="res://assets/resources/levels/lab_8.tres" id="16_ak17v"]
 [ext_resource type="Resource" uid="uid://bf5r3jrojnvmt" path="res://assets/resources/levels/lab_9.tres" id="17_doif3"]
+[ext_resource type="PackedScene" uid="uid://bfnaoypoxm5o4" path="res://scenes/ui/speech_bubble/speech_bubble_container.tscn" id="19_2y7p7"]
 
 [sub_resource type="Resource" id="Resource_rcckm"]
 script = ExtResource("5_5m6h1")
@@ -77,20 +78,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("5_bpwq7")
 
-[node name="SpeechBubbleContainer" type="PanelContainer" parent="Gameplay"]
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="Gameplay/SpeechBubbleContainer"]
-layout_mode = 2
-text = "This is some sample text for the
-speech bubble"
-visible_characters_behavior = 1
+[node name="SpeechBubbleContainer" parent="Gameplay" node_paths=PackedStringArray("reference_viewport") instance=ExtResource("19_2y7p7")]
+visible = false
+anchors_preset = 8
+reference_viewport = NodePath("../SubViewportContainer/SubViewport")
 
 [node name="PauseMenu" parent="." instance=ExtResource("5_q4bcv")]
 layer = 3

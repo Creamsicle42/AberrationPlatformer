@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/ui/speech_bubble/speech_bubble_container.gd" id="1_oyed7"]
 
 [node name="SpeechBubbleContainer" type="PanelContainer"]
-anchors_preset = 8
+anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5

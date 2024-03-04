@@ -1,14 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://np13agmcy1dv"]
+[gd_scene load_steps=10 format=3 uid="uid://np13agmcy1dv"]
 
 [ext_resource type="PackedScene" uid="uid://drum6yi7jjfk0" path="res://scenes/levels/template_level.tscn" id="1_bpk27"]
 [ext_resource type="Script" path="res://scenes/level_objects/transfer_area.gd" id="2_pqypq"]
 [ext_resource type="Script" path="res://scenes/level_objects/event_executor.gd" id="2_tx57x"]
 [ext_resource type="Script" path="res://assets/resources/_types/level_event/set_flag_event.gd" id="3_3tx7p"]
+[ext_resource type="Script" path="res://assets/resources/_types/level_event/speech_event.gd" id="4_rkvla"]
 
 [sub_resource type="Resource" id="Resource_1ev5y"]
 script = ExtResource("3_3tx7p")
 flag_id = "abberation_created"
 value = true
+
+[sub_resource type="Resource" id="Resource_j5sdh"]
+script = ExtResource("4_rkvla")
+text = "Test Speech"
+charachter_time = 0.025
+bubble_pos = Vector2(224, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_von8b"]
 size = Vector2(16, 32)
@@ -20,7 +27,7 @@ size = Vector2(88, 48)
 
 [node name="InitialEntryEvents" type="Node" parent="." index="0"]
 script = ExtResource("2_tx57x")
-events = Array[Resource("res://assets/resources/_types/level_event/level_event.gd")]([SubResource("Resource_1ev5y")])
+events = Array[Resource("res://assets/resources/_types/level_event/level_event.gd")]([SubResource("Resource_1ev5y"), SubResource("Resource_j5sdh")])
 
 [node name="FromSewers" type="Node2D" parent="Spawnpoints" index="0"]
 position = Vector2(16, 40)
