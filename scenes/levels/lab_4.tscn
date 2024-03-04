@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8pll3xxtognx"]
+[gd_scene load_steps=5 format=3 uid="uid://c8pll3xxtognx"]
 
 [ext_resource type="PackedScene" uid="uid://drum6yi7jjfk0" path="res://scenes/levels/template_level.tscn" id="1_kkk2g"]
 [ext_resource type="Script" path="res://scenes/level_objects/transfer_area.gd" id="2_m17jr"]
+[ext_resource type="PackedScene" uid="uid://doftbtj7w77h7" path="res://scenes/level_objects/gem_pickup/gem_pickup.tscn" id="3_h014j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wyqum"]
 size = Vector2(32, 32)
@@ -47,3 +48,11 @@ spawnpoint_id = "lab_4"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransferArea2" index="0"]
 shape = SubResource("RectangleShape2D_wyqum")
+
+[node name="GemPickup" parent="." index="7" instance=ExtResource("3_h014j")]
+position = Vector2(320, 40)
+pickup_id = "lab_4/gem_1"
+
+[node name="GemPickup2" parent="." index="8" instance=ExtResource("3_h014j")]
+position = Vector2(104, 160)
+pickup_id = "lab_4/gem_2"
