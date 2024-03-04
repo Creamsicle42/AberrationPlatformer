@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://o7ta360kabrj"]
+[gd_scene load_steps=20 format=3 uid="uid://o7ta360kabrj"]
 
 [ext_resource type="Script" path="res://scenes/app_states/gameplay_state/gameplay_app_state.gd" id="1_qtq4f"]
 [ext_resource type="Script" path="res://scenes/app_states/gameplay_state/level_system/level_manager.gd" id="2_5uygt"]
 [ext_resource type="Script" path="res://scenes/app_states/gameplay_state/gameplay_event_bus.gd" id="2_745si"]
-[ext_resource type="Resource" uid="uid://jvmfqw05h5yx" path="res://assets/resources/levels/test_level.tres" id="3_bh2we"]
+[ext_resource type="PackedScene" uid="uid://bs23g6l1t6j67" path="res://scenes/_testing/player_controller/player_controller_test_world.tscn" id="4_3d1qb"]
+[ext_resource type="Script" path="res://assets/resources/_types/level_data.gd" id="5_5m6h1"]
 [ext_resource type="Script" path="res://scenes/app_states/gameplay_state/level_nameplate.gd" id="5_bpwq7"]
 [ext_resource type="PackedScene" uid="uid://wop5emouwadi" path="res://scenes/ui/pause_menu/pause_menu.tscn" id="5_q4bcv"]
 [ext_resource type="Resource" uid="uid://ccrt2betqqqwy" path="res://assets/resources/levels/sewers_1.tres" id="5_umaqc"]
@@ -16,6 +17,12 @@
 [ext_resource type="Resource" uid="uid://dykc5vdaubbjo" path="res://assets/resources/levels/lab_5.tres" id="12_73qty"]
 [ext_resource type="Resource" uid="uid://b2gn71yx7qbvb" path="res://assets/resources/levels/lab_6.tres" id="13_ecpwy"]
 [ext_resource type="Resource" uid="uid://f3nk53d41mgc" path="res://assets/resources/levels/lab_7.tres" id="14_cn6o6"]
+[ext_resource type="Resource" uid="uid://cbmclcfcht2wh" path="res://assets/resources/levels/lab_8.tres" id="16_ak17v"]
+
+[sub_resource type="Resource" id="Resource_rcckm"]
+script = ExtResource("5_5m6h1")
+name = "test_1"
+level_scene = ExtResource("4_3d1qb")
 
 [node name="GameplayAppState" type="Node" node_paths=PackedStringArray("level_manager", "pause_menu")]
 script = ExtResource("1_qtq4f")
@@ -28,7 +35,7 @@ script = ExtResource("2_745si")
 [node name="LevelManager" type="Node" parent="." node_paths=PackedStringArray("level_parent")]
 script = ExtResource("2_5uygt")
 level_parent = NodePath("../Gameplay/SubViewportContainer/SubViewport/LevelParent")
-levels = Array[Resource("res://assets/resources/_types/level_data.gd")]([ExtResource("3_bh2we"), ExtResource("5_umaqc"), ExtResource("6_yf7oq"), ExtResource("7_s0wop"), ExtResource("8_o7mcc"), ExtResource("9_0ddqv"), ExtResource("10_ghdob"), ExtResource("11_yngpk"), ExtResource("12_73qty"), ExtResource("13_ecpwy"), ExtResource("14_cn6o6")])
+levels = Array[ExtResource("5_5m6h1")]([SubResource("Resource_rcckm"), ExtResource("5_umaqc"), ExtResource("6_yf7oq"), ExtResource("7_s0wop"), ExtResource("8_o7mcc"), ExtResource("9_0ddqv"), ExtResource("10_ghdob"), ExtResource("11_yngpk"), ExtResource("12_73qty"), ExtResource("13_ecpwy"), ExtResource("14_cn6o6"), ExtResource("16_ak17v")])
 
 [node name="Gameplay" type="CanvasLayer" parent="."]
 process_mode = 1
