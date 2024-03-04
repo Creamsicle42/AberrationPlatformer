@@ -2,6 +2,9 @@ class_name PlatformerBehavior
 extends Node
 
 
+@export var controll_locked := false
+
+
 @export_group("Horizontal")
 @export var max_run_speed := 256.0
 @export var ground_acceleration_time := 0.1
@@ -19,10 +22,11 @@ extends Node
 @export var jump_buffer_time := 0.1
 @export var terminal_velocity := 1000.0
 @export var apex_gravity_modifier := 0.75
-@export var wall_jump_control_loss_time := 0.1
+@export var wall_jump_control_loss_time := 0.15
 @export var wall_bonk_velocity_ratio = 1.0
 @export var bounce_orb_touch_area : Area2D
 @export var bounce_orb_touch_time := 0.1
+@export var dash_jump_bonus := 1.2
 
 
 
@@ -63,7 +67,7 @@ var wall_jump_controll_loss_timer : float
 var on_wall_last_frame : bool
 var last_bounce_orb_touched : BounceOrb
 var bounce_orb_touch_timer : float
-var dash_timer : float
+var dash_timer : float = 1.0
 
 
 func _ready() -> void:
@@ -81,7 +85,7 @@ func _physics_process(delta: float) -> void:
 	wall_jump_controll_loss_timer -= delta
 	bounce_orb_touch_timer -= delta
 
-	var h_input = Input.get_axis("left", "right")
+	var h_input = Input.get_axis("left", "right") if not controll_locked else 0.0
 
 	if not wall_jump_controll_loss_timer > 0.0:
 		host.velocity.x = move_toward(host.velocity.x, max_run_speed * h_input * (dash_power if dash_timer <= 0.0 else 1.0)
@@ -106,11 +110,13 @@ func _physics_process(delta: float) -> void:
 	run_dust_particles.emitting = host.is_on_floor() and abs(host.velocity.x) / 10.0
 	dash_dust_particles.emitting = host.is_on_floor() and abs(host.velocity.x) / 10.0 and dash_timer <= 0.0
 
+	if dash_timer <= 0.0 and host.is_on_floor():
+		Input.start_joy_vibration(0, 0.5, 0.1, 0.1)
 
 	if host.is_on_floor():
 		coyote_timer = coyote_time
 
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump") and not controll_locked:
 		jump_buffer_timer = jump_buffer_time
 	
 
@@ -125,6 +131,8 @@ func _physics_process(delta: float) -> void:
 			wall_jump_controll_loss_timer = wall_jump_control_loss_time
 			dash_timer = 0.0
 		jump_dir = jump_dir.normalized()
+
+		Input.start_joy_vibration(0, 0.3, 0.0, 0.15)
 
 		if bounce_orb_touch_timer > 0.0:
 			bounce_orb_touch_timer = 0.0
@@ -143,7 +151,7 @@ func _physics_process(delta: float) -> void:
 		jump_buffer_timer = 0
 		wall_touch_timer = 0
 
-		host.velocity.y = jump_power * -jump_dir.y * gravity_manager.get_gravity_direction().y
+		host.velocity.y = jump_power * -jump_dir.y * gravity_manager.get_gravity_direction().y * (dash_jump_bonus if dash_timer <= 0.0 else 1)
 		host.velocity.x += jump_power * -jump_dir.x
 
 		sprite.scale = Vector2(0.5, 1.5)
@@ -163,6 +171,7 @@ func _physics_process(delta: float) -> void:
 		host.velocity -= air_drag * host.velocity * delta
 
 	
+	
 	host.velocity.y = clamp(host.velocity.y, -INF, terminal_velocity)
 
 	var prev_x_velocity := host.velocity.x
@@ -178,6 +187,7 @@ func _physics_process(delta: float) -> void:
 	on_wall_last_frame = host.is_on_wall()
 
 	if host.is_on_floor() and prev_y_velocity > 128.0:
+		Input.start_joy_vibration(0, 0.5, 0.2, 0.15)
 		var dust_cloud :CPUParticles2D= dust_cloud_particles.instantiate()
 		host.get_parent().add_child(dust_cloud)
 		dust_cloud.global_position = jump_trail_particles.global_position

@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="LevelData" load_steps=3 format=3 uid="uid://jvmfqw05h5yx"]
-
-[ext_resource type="Script" path="res://assets/resources/_types/level_data.gd" id="1_ax7sf"]
-[ext_resource type="PackedScene" uid="uid://bs23g6l1t6j67" path="res://scenes/_testing/player_controller/player_controller_test_world.tscn" id="1_p5jmi"]
-
-[resource]
-script = ExtResource("1_ax7sf")
-name = "test_level"
-level_scene = ExtResource("1_p5jmi")
