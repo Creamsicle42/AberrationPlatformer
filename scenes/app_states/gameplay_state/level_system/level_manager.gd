@@ -20,7 +20,7 @@ var current_level_node : LevelController
 
 
 func go_to_level(level_id : String, spawnpoint_id : String) -> void:
-	if current_level_resource == null or level_id == current_level_resource.name:
+	if current_level_resource == null or level_id != current_level_resource.name:
 		level_changed.emit(level_id)
 	current_level_resource = levels.reduce(func(n:LevelData, acc): return n if n.name == level_id else acc)
 	current_level_spawnpoint = spawnpoint_id
