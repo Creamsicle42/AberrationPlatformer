@@ -1,6 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://bfnaoypoxm5o4"]
+[gd_scene load_steps=4 format=3 uid="uid://bfnaoypoxm5o4"]
 
 [ext_resource type="Script" path="res://scenes/ui/speech_bubble/speech_bubble_container.gd" id="1_oyed7"]
+[ext_resource type="FontFile" uid="uid://b5lu316vfv1hv" path="res://assets/fonts/RobotoMono-VariableFont_wght.ttf" id="2_0guye"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fphdj"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
 
 [node name="SpeechBubbleContainer" type="PanelContainer"]
 anchors_preset = -1
@@ -10,10 +27,16 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fphdj")
 script = ExtResource("1_oyed7")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="RichTextLabel" parent="."]
 layout_mode = 2
-text = "This is some sample text for the
-speech bubble"
+theme_override_colors/default_color = Color(0.0941176, 0.0784314, 0.145098, 1)
+theme_override_fonts/normal_font = ExtResource("2_0guye")
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "This is sample [shake rate=20.0 level=5 connected=1]text[/shake] for the speech bubble"
+fit_content = true
+autowrap_mode = 0
 visible_characters_behavior = 1
