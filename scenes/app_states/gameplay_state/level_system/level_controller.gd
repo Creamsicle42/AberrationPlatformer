@@ -7,4 +7,5 @@ extends Node2D
 
 
 func spawn_player_at_point(spawnpoint_id : String) -> void:
-	player.global_position = spawnpoints.get_node(spawnpoint_id.to_pascal_case()).global_position
+	var adjusted_id = spawnpoint_id.to_pascal_case()
+	player.global_position = spawnpoints.get_node(adjusted_id).global_position

@@ -23,6 +23,7 @@ extends Node
 @export var wall_bonk_velocity_ratio = 1.0
 @export var bounce_orb_touch_area : Area2D
 @export var bounce_orb_touch_time := 0.1
+@export var dash_jump_bonus := 1.2
 
 
 
@@ -143,7 +144,7 @@ func _physics_process(delta: float) -> void:
 		jump_buffer_timer = 0
 		wall_touch_timer = 0
 
-		host.velocity.y = jump_power * -jump_dir.y * gravity_manager.get_gravity_direction().y
+		host.velocity.y = jump_power * -jump_dir.y * gravity_manager.get_gravity_direction().y * (dash_jump_bonus if dash_timer <= 0.0 else 1)
 		host.velocity.x += jump_power * -jump_dir.x
 
 		sprite.scale = Vector2(0.5, 1.5)

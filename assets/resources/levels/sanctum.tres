@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=3 format=3 uid="uid://572lus7e8gde"]
+
+[ext_resource type="PackedScene" uid="uid://np13agmcy1dv" path="res://scenes/levels/sanctum.tscn" id="1_gsr27"]
+[ext_resource type="Script" path="res://assets/resources/_types/level_data.gd" id="2_qggxy"]
+
+[resource]
+script = ExtResource("2_qggxy")
+name = "sanctum"
+level_scene = ExtResource("1_gsr27")

@@ -149,7 +149,7 @@ gravity_scale = 1.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l2vc4"]
 radius = 4.0
-height = 12.0
+height = 16.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e7nkv"]
 radius = 8.0
@@ -237,6 +237,7 @@ air_acceleration_time = 0.3
 jump_height = 80.0
 wall_touch_time = 0.1
 terminal_velocity = 250.0
+wall_bonk_velocity_ratio = 0.5
 bounce_orb_touch_area = NodePath("../BounceOrbTouchArea")
 bonk_left_raycast = NodePath("../Raycasts/LeftRaycast")
 bonk_center_raycast = NodePath("../Raycasts/CenterRaycast")
