@@ -19,7 +19,7 @@ extends Node
 @export var jump_buffer_time := 0.1
 @export var terminal_velocity := 1000.0
 @export var apex_gravity_modifier := 0.75
-@export var wall_jump_control_loss_time := 0.1
+@export var wall_jump_control_loss_time := 0.15
 @export var wall_bonk_velocity_ratio = 1.0
 @export var bounce_orb_touch_area : Area2D
 @export var bounce_orb_touch_time := 0.1
@@ -64,7 +64,7 @@ var wall_jump_controll_loss_timer : float
 var on_wall_last_frame : bool
 var last_bounce_orb_touched : BounceOrb
 var bounce_orb_touch_timer : float
-var dash_timer : float
+var dash_timer : float = 1.0
 
 
 func _ready() -> void:
