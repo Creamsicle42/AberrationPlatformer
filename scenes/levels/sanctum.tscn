@@ -25,8 +25,8 @@ bubble_pos = Vector2(224, 64)
 
 [sub_resource type="Resource" id="Resource_3jowv"]
 script = ExtResource("4_rkvla")
-text = "You can do all sorts of [color=#124e89]neat things[\\color] with these."
-charachter_time = 0.02
+text = "You can do all sorts of [color=#124e89]neat things[/color] with these."
+charachter_time = 0.03
 bubble_pos = Vector2(224, 64)
 
 [sub_resource type="Resource" id="Resource_f7hi0"]

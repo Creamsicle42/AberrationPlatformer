@@ -28,10 +28,12 @@ func _input(event: InputEvent) -> void:
 		current_state = States.HIDDEN
 		visible = false
 		text_accepted.emit()
+		return
 	if event.is_action_pressed("jump") and current_state == States.SHOWING_TEXT:
 		tween.stop()
 		$Label.visible_ratio = 1.0
 		current_state = States.AWAITING_INPUT
+		return
 
 
 func show_text(text : String, show_time : float, show_position : Vector2) -> void:
