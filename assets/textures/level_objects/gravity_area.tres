@@ -1,0 +1,27 @@
+[gd_resource type="AnimatedTexture" load_steps=8 format=3 uid="uid://bxg2baam0vbmc"]
+
+[ext_resource type="Texture2D" uid="uid://2vtnbw6vqekf" path="res://assets/textures/level_objects/gravity_area1.png" id="1_enbv4"]
+[ext_resource type="Texture2D" uid="uid://dfvxjcd37flcu" path="res://assets/textures/level_objects/gravity_area2.png" id="2_ifpmn"]
+[ext_resource type="Texture2D" uid="uid://bmfhire7m0bgx" path="res://assets/textures/level_objects/gravity_area3.png" id="3_b7b86"]
+[ext_resource type="Texture2D" uid="uid://5hhx57stbjdo" path="res://assets/textures/level_objects/gravity_area4.png" id="4_tv3b5"]
+[ext_resource type="Texture2D" uid="uid://bbqc4j2qs4db7" path="res://assets/textures/level_objects/gravity_area5.png" id="5_ww0os"]
+[ext_resource type="Texture2D" uid="uid://c1ks8utmad41y" path="res://assets/textures/level_objects/gravity_area7.png" id="6_cd5w4"]
+[ext_resource type="Texture2D" uid="uid://cfnlomnriulim" path="res://assets/textures/level_objects/gravity_area8.png" id="7_fgmdm"]
+
+[resource]
+frames = 8
+speed_scale = 10.0
+frame_0/texture = ExtResource("1_enbv4")
+frame_1/texture = ExtResource("2_ifpmn")
+frame_1/duration = 1.0
+frame_2/texture = ExtResource("3_b7b86")
+frame_2/duration = 1.0
+frame_3/texture = ExtResource("4_tv3b5")
+frame_3/duration = 1.0
+frame_4/texture = ExtResource("5_ww0os")
+frame_4/duration = 1.0
+frame_5/duration = 1.0
+frame_6/texture = ExtResource("6_cd5w4")
+frame_6/duration = 1.0
+frame_7/texture = ExtResource("7_fgmdm")
+frame_7/duration = 1.0
