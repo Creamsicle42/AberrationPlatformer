@@ -27,6 +27,7 @@ func _ready() -> void:
 			is_moving = true
 			collector = body
 	)
+	GameplayEventBus.bus.do_pickup.connect(collect)
 	print_debug(get_flag())
 
 
@@ -46,6 +47,7 @@ func _physics_process(delta: float) -> void:
 
 
 func collect() -> void:
+	if not is_moving: return
 	GameDataManager.current_game_data.flags[get_flag()] = true
 	GameDataManager.current_game_data.flags["gems_collected"] = GameDataManager.current_game_data.flags.get("gems_collected", 0) + 1
 	queue_free()

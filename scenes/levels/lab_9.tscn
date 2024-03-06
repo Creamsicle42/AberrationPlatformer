@@ -91,3 +91,12 @@ shape = SubResource("RectangleShape2D_b83yh")
 [node name="GemPickup" parent="." index="10" instance=ExtResource("6_wgecm")]
 position = Vector2(400, 96)
 pickup_id = "lab_9/gem"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PickupArea" index="0"]
+polygon = PackedVector2Array(160, 120, 216, 120, 216, 112, 160, 112)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="PickupArea" index="1"]
+polygon = PackedVector2Array(72, 96, 16, 96, 16, 72, 8, 72, 8, 104, 80, 104, 80, 96)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="PickupArea" index="2"]
+polygon = PackedVector2Array(560, 128, 632, 128, 632, 104, 640, 104, 640, 136, 560, 136)

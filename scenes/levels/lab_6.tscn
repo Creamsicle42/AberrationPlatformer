@@ -155,3 +155,12 @@ targets = Array[ExtResource("5_3r586")]([SubResource("Resource_ldm16"), SubResou
 [node name="GemPickup" parent="." index="12" instance=ExtResource("7_5a2v4")]
 position = Vector2(248, 48)
 pickup_id = "lab_6/gem"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PickupArea" index="0"]
+polygon = PackedVector2Array(32, 144, 112, 144, 112, 136, 32, 136)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="PickupArea" index="1"]
+polygon = PackedVector2Array(392, 136, 344, 136, 344, 128, 392, 128)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="PickupArea" index="2"]
+polygon = PackedVector2Array(536, 152, 624, 152, 624, 144, 536, 144)
