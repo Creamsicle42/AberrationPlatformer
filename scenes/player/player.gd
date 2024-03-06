@@ -7,6 +7,8 @@ static var player : Player
 
 @export var gravity_change_particles : PackedScene
 
+var dying := false
+
 
 func _ready() -> void:
 	player = self
@@ -27,12 +29,15 @@ func set_controlls_locked(is_locked : bool) -> void:
 
 
 func killed() -> void:
-	print_debug("player killed")
+	dying = true
+	$DeathBehavior.do_death()
+	await get_tree().create_timer(0.5).timeout
 	GameplayEventBus.bus.player_killed.emit()
 	Input.start_joy_vibration(0, 0.8, 0.8, 0.5)
 
 
 func _on_hazard_hitbox_body_entered(_body:Node2D) -> void:
+	if dying == true: return
 	killed()
 
 
