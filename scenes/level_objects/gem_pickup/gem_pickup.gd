@@ -50,7 +50,11 @@ func collect() -> void:
 	if not is_moving: return
 	GameDataManager.current_game_data.flags[get_flag()] = true
 	GameDataManager.current_game_data.flags["gems_collected"] = GameDataManager.current_game_data.flags.get("gems_collected", 0) + 1
-	queue_free()
+	is_moving = false
+	var tween = create_tween()
+	tween.tween_property(self, "global_position", collector.global_position, 0.1)
+	tween.tween_callback(queue_free)
+
 
 
 func get_flag() -> String:

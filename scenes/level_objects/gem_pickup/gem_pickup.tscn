@@ -14,6 +14,7 @@ radius = 8.0
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_dp8fl")
+acceleration = 512.0
 acceleration_curve = SubResource("Curve_khx53")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
