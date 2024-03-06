@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cybydn52j3wnw"]
+[gd_scene load_steps=34 format=3 uid="uid://cybydn52j3wnw"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_cgek4"]
 [ext_resource type="Script" path="res://scenes/player/platformer_behavior.gd" id="1_vpgob"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://assets/resources/_types/gravity_area_data.gd" id="4_qj1g1"]
 [ext_resource type="PackedScene" uid="uid://lalosu8joqn4" path="res://scenes/effects/dust_cloud_particles.tscn" id="6_yopic"]
 [ext_resource type="Texture2D" uid="uid://v5ppttmi63jg" path="res://assets/textures/particles/particle_dust.png" id="7_5j8p1"]
+[ext_resource type="Script" path="res://scenes/player/death_behavior.gd" id="10_lqxb8"]
+[ext_resource type="Texture2D" uid="uid://vfg4pi4e5dyk" path="res://assets/textures/particles/particle_diamond.png" id="11_ovw6i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rxtf6"]
 atlas = ExtResource("2_rqrr0")
@@ -154,6 +156,10 @@ height = 16.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_e7nkv"]
 radius = 8.0
 
+[sub_resource type="Curve" id="Curve_52ty3"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.252747, 1), 0.0, 0.0, 0, 0, Vector2(0.71978, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_cgek4")
@@ -280,6 +286,47 @@ collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BounceOrbTouchArea"]
 shape = SubResource("CircleShape2D_e7nkv")
+
+[node name="DeathBehavior" type="Node" parent="." node_paths=PackedStringArray("stop_nodes", "graphics_node", "death_particles")]
+script = ExtResource("10_lqxb8")
+stop_nodes = [NodePath("../FlipPivot"), NodePath("../PlatformerBehavior")]
+graphics_node = NodePath("../FlipPivot/MainSprite")
+death_particles = [NodePath("../DeathParticles2"), NodePath("../DeathParticles1")]
+
+[node name="DeathParticles2" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_v05qq")
+emitting = false
+amount = 32
+lifetime = 0.5
+lifetime_randomness = 0.1
+texture = ExtResource("7_5j8p1")
+emission_shape = 1
+emission_sphere_radius = 16.0
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 20.0
+damping_min = 30.0
+damping_max = 40.0
+angle_max = 720.0
+scale_amount_min = 0.2
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="DeathParticles1" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 32
+texture = ExtResource("11_ovw6i")
+spread = 180.0
+gravity = Vector2(0, -10)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+damping_min = 40.0
+damping_max = 100.0
+angle_max = 720.0
+scale_amount_min = 0.25
+scale_amount_max = 0.8
+scale_amount_curve = SubResource("Curve_52ty3")
 
 [connection signal="gravity_changed" from="GravityManager" to="." method="_on_gravity_manager_gravity_changed"]
 [connection signal="body_entered" from="HazardHitbox" to="." method="_on_hazard_hitbox_body_entered"]
