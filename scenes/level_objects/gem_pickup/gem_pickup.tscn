@@ -1,6 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://doftbtj7w77h7"]
+[gd_scene load_steps=4 format=3 uid="uid://doftbtj7w77h7"]
 
 [ext_resource type="Script" path="res://scenes/level_objects/gem_pickup/gem_pickup.gd" id="1_dp8fl"]
+
+[sub_resource type="Curve" id="Curve_khx53"]
+min_value = -1.0
+_data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(0.247423, 0.0109891), 4.50738, 4.50738, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wdiyb"]
 radius = 8.0
@@ -9,8 +14,10 @@ radius = 8.0
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_dp8fl")
+acceleration_curve = SubResource("Curve_khx53")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
+z_index = 10
 color = Color(0.415686, 0.870588, 0.905882, 1)
 polygon = PackedVector2Array(-8, 0, 0, 8, 8, 0, 0, -8)
 

@@ -3,7 +3,17 @@ extends Area2D
 
 
 @export var pickup_id : String
+@export var acceleration := 256.0
+@export var max_speed := 256.0
+@export var acceleration_max_dist := 64.0
+@export var acceleration_curve : Curve
+@export var friction := 1.0
 
+
+var is_moving := false
+var collector : Node2D
+
+var velocity : Vector2 = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,8 +22,27 @@ func _ready() -> void:
 		false
 	)
 	if collected : queue_free()
-	body_entered.connect(collect.unbind(1))
+	body_entered.connect(
+		func(body):
+			is_moving = true
+			collector = body
+	)
 	print_debug(get_flag())
+
+
+func _physics_process(delta: float) -> void:
+	if not is_moving : return
+
+
+	var move_delta = (collector.global_position - global_position)
+	var acc_power = acceleration_curve.sample(clamp(move_delta.length() / acceleration_max_dist, 0.0, 1.0))
+
+	velocity += move_delta.normalized() * acc_power * acceleration * delta
+	velocity = velocity.limit_length(max_speed)
+
+	velocity -= velocity * friction * delta
+
+	global_position += velocity * delta
 
 
 func collect() -> void:
