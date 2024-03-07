@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cybydn52j3wnw"]
+[gd_scene load_steps=41 format=3 uid="uid://cybydn52j3wnw"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_cgek4"]
 [ext_resource type="Script" path="res://scenes/player/platformer_behavior.gd" id="1_vpgob"]
@@ -16,6 +16,13 @@
 [ext_resource type="Script" path="res://scenes/player/death_behavior.gd" id="10_lqxb8"]
 [ext_resource type="Texture2D" uid="uid://vfg4pi4e5dyk" path="res://assets/textures/particles/particle_diamond.png" id="11_ovw6i"]
 [ext_resource type="AudioStream" uid="uid://csvc21vihdqk5" path="res://assets/resources/sound_sets/stone_footsteps.tres" id="12_rqo0m"]
+[ext_resource type="AudioStream" uid="uid://dv1uf0oqprfeq" path="res://assets/audio/sfx/wind_noise.ogg" id="17_labbn"]
+
+[sub_resource type="Curve" id="Curve_hwm2b"]
+min_value = -40.0
+max_value = 0.0
+_data = [Vector2(0, -40), 0.0, 0.0, 0, 0, Vector2(0.513393, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rxtf6"]
 atlas = ExtResource("2_rqrr0")
@@ -168,6 +175,7 @@ point_count = 4
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_cgek4")
+velocity_wind_noise = SubResource("Curve_hwm2b")
 gravity_change_particles = ExtResource("2_40tvw")
 
 [node name="FlipPivot" type="Node2D" parent="." node_paths=PackedStringArray("flip_base")]
@@ -346,6 +354,13 @@ scale_amount_max = 0.8
 scale_amount_curve = SubResource("Curve_52ty3")
 
 [node name="SFX" type="Node" parent="."]
+
+[node name="Wind" type="AudioStreamPlayer" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("17_labbn")
+volume_db = -10.0
+autoplay = true
+bus = &"SFX"
 
 [node name="Footsteps" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("12_rqo0m")

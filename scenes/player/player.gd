@@ -5,10 +5,11 @@ extends CharacterBody2D
 static var player : Player
 
 
+@export var velocity_wind_noise : Curve
 @export var gravity_change_particles : PackedScene
 
 var dying := false
-
+var wind_vol := 0.0
 
 func _ready() -> void:
 	player = self
@@ -18,7 +19,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	$FlipPivot.scale.y = sign($GravityManager.get_gravity_direction().y)
-
+	wind_vol = lerp(wind_vol, velocity.length() / 1000.0, 5.0 * delta)
+	%Wind.volume_db = velocity_wind_noise.sample(wind_vol)
 
 func get_gravity_manager() -> GravityManager:
 	return $GravityManager
