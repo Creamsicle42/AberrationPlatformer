@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cybydn52j3wnw"]
+[gd_scene load_steps=39 format=3 uid="uid://cybydn52j3wnw"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_cgek4"]
 [ext_resource type="Script" path="res://scenes/player/platformer_behavior.gd" id="1_vpgob"]
@@ -10,6 +10,9 @@
 [ext_resource type="Script" path="res://scenes/player/footstep_manager.gd" id="6_i6rjn"]
 [ext_resource type="PackedScene" uid="uid://lalosu8joqn4" path="res://scenes/effects/dust_cloud_particles.tscn" id="6_yopic"]
 [ext_resource type="Texture2D" uid="uid://v5ppttmi63jg" path="res://assets/textures/particles/particle_dust.png" id="7_5j8p1"]
+[ext_resource type="AudioStream" uid="uid://betlalklo12ny" path="res://assets/resources/sound_sets/wood_footsteps.tres" id="8_l1v16"]
+[ext_resource type="AudioStream" uid="uid://6yr37xh67oa4" path="res://assets/resources/sound_sets/grass_footsteps.tres" id="9_s4570"]
+[ext_resource type="AudioStream" uid="uid://cu3rcdkbqmsph" path="res://assets/resources/sound_sets/gravel_footsteps.tres" id="10_gs4gb"]
 [ext_resource type="Script" path="res://scenes/player/death_behavior.gd" id="10_lqxb8"]
 [ext_resource type="Texture2D" uid="uid://vfg4pi4e5dyk" path="res://assets/textures/particles/particle_diamond.png" id="11_ovw6i"]
 [ext_resource type="AudioStream" uid="uid://csvc21vihdqk5" path="res://assets/resources/sound_sets/stone_footsteps.tres" id="12_rqo0m"]
@@ -238,10 +241,17 @@ anim_speed_max = 1.0
 [node name="WorldCollider" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_kst6t")
 
-[node name="FootstepManager" type="Node" parent="." node_paths=PackedStringArray("foostep_player", "animation_player")]
+[node name="FootstepManager" type="Node" parent="." node_paths=PackedStringArray("foostep_player", "animation_player", "gravity_manager")]
 script = ExtResource("6_i6rjn")
 foostep_player = NodePath("../SFX/Footsteps")
 animation_player = NodePath("../FlipPivot/MainSprite")
+gravity_manager = NodePath("../GravityManager")
+sounds = {
+"grass": ExtResource("9_s4570"),
+"gravel": ExtResource("10_gs4gb"),
+"stone": ExtResource("12_rqo0m"),
+"wood": ExtResource("8_l1v16")
+}
 
 [node name="PlatformerBehavior" type="Node" parent="." node_paths=PackedStringArray("bounce_orb_touch_area", "bonk_left_raycast", "bonk_center_raycast", "bonk_right_raycast", "gravity_manager", "sprite", "run_dust_particles", "dash_dust_particles", "jump_trail_particles")]
 script = ExtResource("1_vpgob")
