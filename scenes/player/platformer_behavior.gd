@@ -67,7 +67,7 @@ var wall_jump_controll_loss_timer : float
 var on_wall_last_frame : bool
 var last_bounce_orb_touched : BounceOrb
 var bounce_orb_touch_timer : float
-var dash_timer : float = 1.0
+var dash_timer : float = 2.0
 
 
 func _ready() -> void:

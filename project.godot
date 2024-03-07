@@ -24,6 +24,8 @@ FadeLayer="*res://scenes/ui/fade_layer/fade_layer.tscn"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep_height"
 
 [editor]
 
@@ -76,6 +78,10 @@ jump={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":0,"pressure":0.0,"pressed":true,"script":null)
 ]
 }
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://assets/lang/lang.en.translation")
 
 [layer_names]
 

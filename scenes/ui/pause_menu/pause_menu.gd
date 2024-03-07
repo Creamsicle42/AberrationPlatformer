@@ -26,5 +26,5 @@ func _on_continue_button_pressed() -> void:
 
 
 func _on_visibility_changed() -> void:
-	$ProgressStatsContainer/GemsLabel.text = "Gems: %s" % GameDataManager.current_game_data.flags.get("gems_collected", 0)
+	%GemsLabel.text = "x%s" % GameDataManager.current_game_data.flags.get("gems_collected", 0)
 	$HBoxContainer/ColorRect2/VBoxContainer/ContinueButton.grab_focus()

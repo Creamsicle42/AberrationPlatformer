@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://drum6yi7jjfk0"]
+[gd_scene load_steps=11 format=3 uid="uid://drum6yi7jjfk0"]
 
 [ext_resource type="Script" path="res://scenes/app_states/gameplay_state/level_system/level_controller.gd" id="1_egaw1"]
 [ext_resource type="TileSet" uid="uid://duy8d4cvjo1k3" path="res://assets/resources/tilesets/main.tres" id="2_wqw7x"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://i1i1o5xg76a2" path="res://assets/textures/backgrounds/forest/paralax_bkgd_Clouds.png" id="7_nesbl"]
 [ext_resource type="Texture2D" uid="uid://btv7i4ticwpn4" path="res://assets/textures/backgrounds/forest/paralax_bkgd_DistantTrees.png" id="8_8dl5l"]
 [ext_resource type="Script" path="res://scenes/level_objects/game_camera.gd" id="9_oe326"]
+[ext_resource type="Script" path="res://scenes/level_objects/gem_pickup/pickup_area.gd" id="10_2stck"]
 
 [node name="TemplateLevel" type="Node2D" node_paths=PackedStringArray("player", "spawnpoints")]
 script = ExtResource("1_egaw1")
@@ -86,3 +87,8 @@ polygon = PackedVector2Array(0, 0, 352, 0, 352, 216, 0, 216)
 
 [node name="GameCamera" type="Camera2D" parent="."]
 script = ExtResource("9_oe326")
+
+[node name="PickupArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("10_2stck")
