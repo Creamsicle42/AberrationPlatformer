@@ -86,3 +86,9 @@ width = 2.0
 [node name="GemPickup" parent="." index="8" instance=ExtResource("5_cq8sp")]
 position = Vector2(40, 104)
 pickup_id = "lab_2/gem"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PickupArea" index="0"]
+polygon = PackedVector2Array(80, 112, 152, 112, 152, 104, 80, 104)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="PickupArea" index="1"]
+polygon = PackedVector2Array(344, 112, 384, 112, 384, 80, 376, 80, 376, 104, 344, 104)

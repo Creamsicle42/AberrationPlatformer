@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://ddwu58lgwwnkd"]
+[gd_scene load_steps=22 format=3 uid="uid://ddwu58lgwwnkd"]
 
 [ext_resource type="PackedScene" uid="uid://drum6yi7jjfk0" path="res://scenes/levels/template_level.tscn" id="1_xrt2j"]
 [ext_resource type="Texture2D" uid="uid://cll17fmwno8wg" path="res://assets/textures/backgrounds/sewer/background.png" id="2_o7254"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bxg2baam0vbmc" path="res://assets/textures/level_objects/gravity_area.tres" id="9_0l1ox"]
 [ext_resource type="PackedScene" uid="uid://cqa4726y7j0h2" path="res://scenes/effects/glow_circle.tscn" id="11_ux6wu"]
 [ext_resource type="Texture2D" uid="uid://v5ppttmi63jg" path="res://assets/textures/particles/particle_dust.png" id="12_iou8f"]
+[ext_resource type="Script" path="res://scenes/level_objects/gem_pickup/pickup_area.gd" id="13_lcsrq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ndtky"]
 size = Vector2(16, 32)
@@ -323,3 +324,11 @@ scale_amount_curve = SubResource("Curve_p5ryk")
 color_ramp = SubResource("Gradient_q67d6")
 anim_speed_min = 1.0
 anim_speed_max = 3.0
+
+[node name="PickupArea" type="Area2D" parent="." index="10"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("13_lcsrq")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PickupArea" index="0"]
+polygon = PackedVector2Array(16, 52, 100, 52, 100, 20, 100, 16, 16, 16, 16, 0, 104, 0, 104, 56, 16, 56)
