@@ -116,6 +116,9 @@ func _physics_process(delta: float) -> void:
 
 	if dash_timer <= 0.0 and host.is_on_floor():
 		Input.start_joy_vibration(0, 0.5, 0.1, 0.1)
+		sprite.speed_scale = 1.5
+	else:
+		sprite.speed_scale = 1.0
 
 	if host.is_on_floor():
 		coyote_timer = coyote_time
