@@ -364,6 +364,7 @@ bus = &"SFX"
 
 [node name="Footsteps" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("12_rqo0m")
+max_polyphony = 4
 bus = &"Footsteps"
 
 [connection signal="frame_changed" from="FlipPivot/MainSprite" to="FootstepManager" method="_on_main_sprite_frame_changed"]
