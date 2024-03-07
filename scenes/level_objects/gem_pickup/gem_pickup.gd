@@ -10,6 +10,7 @@ extends Area2D
 @export var friction := 1.0
 
 
+var time := 0.0
 var is_moving := false
 var collector : Node2D
 
@@ -29,6 +30,11 @@ func _ready() -> void:
 	)
 	GameplayEventBus.bus.do_pickup.connect(collect)
 	print_debug(get_flag())
+
+
+func _process(delta: float) -> void:
+	time += delta
+	$Sprite.position = 2 * Vector2(sin(time * 2) + cos(time * 3), cos(time * 2) + sin(time * 3))
 
 
 func _physics_process(delta: float) -> void:
@@ -51,9 +57,10 @@ func collect() -> void:
 	GameDataManager.current_game_data.flags[get_flag()] = true
 	GameDataManager.current_game_data.flags["gems_collected"] = GameDataManager.current_game_data.flags.get("gems_collected", 0) + 1
 	is_moving = false
-	var tween = create_tween()
-	tween.tween_property(self, "global_position", collector.global_position, 0.1)
-	tween.tween_callback(queue_free)
+	var tween = create_tween().parallel()
+	tween.tween_property(self, "global_position", collector.global_position, 0.2)
+	tween.tween_property(self, "scale", Vector2.ZERO, 0.2)
+	tween.tween_callback(queue_free).set_delay(0.2)
 
 
 
