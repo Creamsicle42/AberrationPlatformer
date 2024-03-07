@@ -1,9 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://doftbtj7w77h7"]
+[gd_scene load_steps=24 format=3 uid="uid://doftbtj7w77h7"]
 
 [ext_resource type="Script" path="res://scenes/level_objects/gem_pickup/gem_pickup.gd" id="1_dp8fl"]
 [ext_resource type="Texture2D" uid="uid://dplnvg60ocwfy" path="res://assets/textures/effects/white_circle.png" id="2_1uk4k"]
 [ext_resource type="Texture2D" uid="uid://467pww7nn0h4" path="res://assets/textures/level_objects/gem/gem.png" id="2_asano"]
 [ext_resource type="Texture2D" uid="uid://vfg4pi4e5dyk" path="res://assets/textures/particles/particle_diamond.png" id="3_c7j6m"]
+[ext_resource type="AudioStream" uid="uid://cm0sfpm8hikts" path="res://assets/audio/sfx/orb_retrieve.ogg" id="3_keql0"]
+[ext_resource type="AudioStream" uid="uid://hpugksidase3" path="res://assets/audio/sfx/orb_pickup.ogg" id="5_7l3bo"]
 
 [sub_resource type="Curve" id="Curve_khx53"]
 min_value = -1.0
@@ -12,6 +14,21 @@ point_count = 3
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wdiyb"]
 radius = 8.0
+
+[sub_resource type="Animation" id="Animation_j4m81"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite/Glow:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.400112, 0.400112)]
+}
 
 [sub_resource type="Animation" id="Animation_2xlx7"]
 resource_name = "pulse"
@@ -28,21 +45,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(2, 0.5, 2, 0.5),
 "update": 0,
 "values": [Vector2(0.400112, 0.400112), Vector2(0.450056, 0.450056), Vector2(0.5, 0.5), Vector2(0.450056, 0.450056)]
-}
-
-[sub_resource type="Animation" id="Animation_j4m81"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite/Glow:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.400112, 0.400112)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0pq8e"]
@@ -136,6 +138,8 @@ collision_mask = 2
 script = ExtResource("1_dp8fl")
 acceleration = 512.0
 acceleration_curve = SubResource("Curve_khx53")
+follow_sound = ExtResource("5_7l3bo")
+retrieve_sound = ExtResource("3_keql0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_wdiyb")

@@ -8,10 +8,13 @@ extends Area2D
 @export var acceleration_max_dist := 64.0
 @export var acceleration_curve : Curve
 @export var friction := 1.0
+@export var follow_sound : AudioStream
+@export var retrieve_sound : AudioStream
 
 
 var time := 0.0
 var is_moving := false
+var played_sound := false
 var collector : Node2D
 
 var velocity : Vector2 = Vector2.ZERO
@@ -27,6 +30,17 @@ func _ready() -> void:
 		func(body):
 			is_moving = true
 			collector = body
+			
+
+			if not played_sound:
+				played_sound = true
+				var player = AudioStreamPlayer.new()
+				player.stream = follow_sound
+				player.autoplay = true
+				get_parent().add_child(player)
+				player.play()
+				player.finished.connect(player.queue_free)
+			
 	)
 	GameplayEventBus.bus.do_pickup.connect(collect)
 	print_debug(get_flag())
@@ -60,6 +74,15 @@ func collect() -> void:
 	var tween = create_tween().parallel()
 	tween.tween_property(self, "global_position", collector.global_position, 0.2)
 	tween.tween_property(self, "scale", Vector2.ZERO, 0.2)
+	tween.tween_callback(
+		func():
+			var player = AudioStreamPlayer.new()
+			player.stream = retrieve_sound
+			player.autoplay = true
+			get_parent().add_child(player)
+			player.play()
+			player.finished.connect(player.queue_free)
+	)
 	tween.tween_callback(queue_free).set_delay(0.2)
 
 
