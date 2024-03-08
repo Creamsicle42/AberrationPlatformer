@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfshbwlb0vgsx"]
+
+[ext_resource type="Script" path="res://src/ui_audio.gd" id="1_5i8w5"]
+[ext_resource type="AudioStream" uid="uid://im4jdyjjr5rn" path="res://assets/audio/sfx/ui/ui_hover.ogg" id="1_bp5ra"]
+[ext_resource type="AudioStream" uid="uid://tnuwukfh4cuj" path="res://assets/audio/sfx/ui/ui_click.ogg" id="2_i6xbn"]
+
+[node name="UIAudio" type="Node"]
+script = ExtResource("1_5i8w5")
+
+[node name="Hover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_bp5ra")
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_i6xbn")
