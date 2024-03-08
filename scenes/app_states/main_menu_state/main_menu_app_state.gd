@@ -11,6 +11,8 @@ func enter_state(_params:Dictionary) -> void:
 		continue_button.disabled = true
 	%NewGameButton.grab_focus()
 
+	MusicController.fade_into_track(load("res://assets/audio/music/main_menu_loop.ogg"))
+
 
 func exit_state() -> void:
 	pass

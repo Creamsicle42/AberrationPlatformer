@@ -22,6 +22,7 @@ func _input(event: InputEvent) -> void:
 
 
 func enter_state(params : Dictionary) -> void:
+	MusicController.fade_into_track(load("res://assets/audio/music/lab_theme.ogg"))
 	var start_level_index = params.get("start_level", "test_1")
 	var start_spawnpoint_index = params.get("start_spawnpoint", "start")
 	GameDataManager.current_game_data.level_on = start_level_index
