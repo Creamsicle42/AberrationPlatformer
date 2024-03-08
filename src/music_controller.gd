@@ -4,7 +4,11 @@ extends Node
 var current_track : AudioStreamPlayer
 
 
-func fade_into_track(track : AudioStream, time := 0.5) -> void:
+func _ready() -> void:
+    process_mode = Node.PROCESS_MODE_ALWAYS
+
+
+func fade_into_track(track : AudioStream, time := 1.0) -> void:
     if current_track:
         var current_tweener = create_tween()
         current_tweener.tween_property(current_track, "volume_db", -80, time)
