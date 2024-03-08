@@ -44,3 +44,15 @@ func _on_continue_button_pressed() -> void:
 func _element_hover() -> void:
 	UiAudio.play_hover()
 
+
+
+
+func _on_settings_pannel_accept_pressed() -> void:
+	%SettingsOwner.visible = false
+	%NewGameButton.grab_focus()
+	UiAudio.player_click()
+	GameDataManager.save_game_data()
+
+func _on_settings_button_pressed() -> void:
+	%SettingsOwner.visible = true
+	UiAudio.player_click()

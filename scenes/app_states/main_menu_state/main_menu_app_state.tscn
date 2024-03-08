@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://8bvpurlo7b1"]
+[gd_scene load_steps=9 format=3 uid="uid://8bvpurlo7b1"]
 
 [ext_resource type="Script" path="res://scenes/app_states/main_menu_state/main_menu_app_state.gd" id="1_k3qqp"]
 [ext_resource type="Texture2D" uid="uid://8ncn2kamwyy8" path="res://assets/textures/ui/main_menu/mainmenu_bkg_bkg.png" id="2_ddpi1"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scenes/app_states/main_menu_state/menu_paralax_element.gd" id="3_ogqav"]
 [ext_resource type="Texture2D" uid="uid://c86em6sw2ac4g" path="res://assets/textures/ui/main_menu/mainmenu_bkg_piper.png" id="4_8g5ml"]
 [ext_resource type="Texture2D" uid="uid://cbjnlgjn30ik6" path="res://assets/textures/ui/main_menu/mainmenu_bkg_gem.png" id="5_s6kkd"]
+[ext_resource type="PackedScene" uid="uid://bjouqewaembxu" path="res://scenes/ui/settings_pannel/settings_pannel.tscn" id="7_yipi3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m4vy0"]
 bg_color = Color(0.0901961, 0.0901961, 0.101961, 0.784314)
@@ -105,10 +106,28 @@ text = "New Game"
 layout_mode = 2
 text = "Continue"
 
+[node name="SettingsButton" type="Button" parent="UIElements/HBoxContainer/Content/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
 [node name="RightSpacer" type="Control" parent="UIElements/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 1.75
+
+[node name="SettingsOwner" type="ColorRect" parent="UIElements"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0901961, 0.0901961, 0.101961, 0.784314)
+
+[node name="SettingsPannel" parent="UIElements/SettingsOwner" instance=ExtResource("7_yipi3")]
+unique_name_in_owner = true
+layout_mode = 1
 
 [connection signal="focus_entered" from="UIElements/HBoxContainer/Content/VBoxContainer/NewGameButton" to="." method="_element_hover"]
 [connection signal="mouse_entered" from="UIElements/HBoxContainer/Content/VBoxContainer/NewGameButton" to="." method="_element_hover"]
@@ -116,3 +135,7 @@ size_flags_stretch_ratio = 1.75
 [connection signal="focus_entered" from="UIElements/HBoxContainer/Content/VBoxContainer/ContinueButton" to="." method="_element_hover"]
 [connection signal="mouse_entered" from="UIElements/HBoxContainer/Content/VBoxContainer/ContinueButton" to="." method="_element_hover"]
 [connection signal="pressed" from="UIElements/HBoxContainer/Content/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="focus_entered" from="UIElements/HBoxContainer/Content/VBoxContainer/SettingsButton" to="." method="_element_hover"]
+[connection signal="mouse_entered" from="UIElements/HBoxContainer/Content/VBoxContainer/SettingsButton" to="." method="_element_hover"]
+[connection signal="pressed" from="UIElements/HBoxContainer/Content/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="accept_pressed" from="UIElements/SettingsOwner/SettingsPannel" to="." method="_on_settings_pannel_accept_pressed"]

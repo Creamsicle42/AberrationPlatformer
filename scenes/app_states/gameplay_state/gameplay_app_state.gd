@@ -26,9 +26,11 @@ func enter_state(params : Dictionary) -> void:
 	var start_level_index = params.get("start_level", "test_1")
 	var start_spawnpoint_index = params.get("start_spawnpoint", "start")
 	GameDataManager.current_game_data.level_on = start_level_index
+	GameDataManager.current_game_data.checkpoint_on = start_spawnpoint_index
 	level_manager.go_to_level(start_level_index, start_spawnpoint_index)
 	set_game_paused(false)
 	FadeLayer.fade_in()
+	GameDataManager.save_game_data()
 
 
 func exit_state() -> void:

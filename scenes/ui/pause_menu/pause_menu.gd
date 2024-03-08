@@ -32,9 +32,21 @@ func _on_continue_button_pressed() -> void:
 func _on_visibility_changed() -> void:
 	%GemsLabel.text = "x%s" % GameDataManager.current_game_data.flags.get("gems_collected", 0)
 	$HBoxContainer/ColorRect2/VBoxContainer/ContinueButton.grab_focus()
+	%SettingsContainer.visible = false
 
 
 
 func _element_hover() -> void:
 	UiAudio.play_hover()
 
+
+
+
+func _on_settings_button_pressed() -> void:
+	UiAudio.player_click()
+	%SettingsContainer.visible = true
+
+func _on_settings_pannel_accept_pressed() -> void:
+	UiAudio.player_click()
+	%SettingsContainer.visible = false
+	GameDataManager.save_game_data()
