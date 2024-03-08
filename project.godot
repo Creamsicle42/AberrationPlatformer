@@ -19,6 +19,8 @@ config/icon="res://assets/textures/misc/icon.svg"
 
 GameDataManager="*res://src/game_data_manager.gd"
 FadeLayer="*res://scenes/ui/fade_layer/fade_layer.tscn"
+UiAudio="*res://src/ui_audio.tscn"
+MusicController="*res://src/music_controller.gd"
 
 [display]
 

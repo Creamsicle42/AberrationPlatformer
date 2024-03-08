@@ -1,13 +1,41 @@
-[gd_scene load_steps=9 format=3 uid="uid://d3wgg3kr0vud"]
+[gd_scene load_steps=10 format=3 uid="uid://d3wgg3kr0vud"]
 
 [ext_resource type="Script" path="res://scenes/level_objects/one_way_platform/one_way_platform.gd" id="1_7ymx2"]
 [ext_resource type="Texture2D" uid="uid://be5i1lbin2po7" path="res://assets/textures/level_objects/moving_platform/moving_platform.png" id="1_y33ar"]
+[ext_resource type="AudioStream" uid="uid://t3hiwoofnt1t" path="res://assets/audio/sfx/moving_platform_sound.ogg" id="3_fl2k1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lv0k4"]
 size = Vector2(32, 3)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d6ftr"]
 size = Vector2(29, 6)
+
+[sub_resource type="Animation" id="Animation_18xad"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MovingPlatform:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MovingPlatform:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_ec4ni"]
 resource_name = "shake"
@@ -35,33 +63,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [-0.0174533, 0.0174533, 0.0]
-}
-
-[sub_resource type="Animation" id="Animation_18xad"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MovingPlatform:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 2)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("MovingPlatform:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4pm1l"]
@@ -118,5 +119,9 @@ angle_max = 720.0
 scale_amount_max = 4.0
 scale_amount_curve = SubResource("Curve_jckbm")
 color = Color(0.247059, 0.156863, 0.196078, 1)
+
+[node name="Shake" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_fl2k1")
+bus = &"SFX"
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered" unbinds=1]

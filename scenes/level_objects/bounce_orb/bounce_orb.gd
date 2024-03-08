@@ -13,6 +13,7 @@ func use_orb() -> void:
 	$RefreshTimer.start()
 	$BurstParticles.emitting = true
 	$IdleParticles.emitting = false
+	$AudioStreamPlayer.play()
 
 
 

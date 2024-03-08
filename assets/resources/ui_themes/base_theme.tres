@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://c4wvjyxn2urmq"]
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://c4wvjyxn2urmq"]
 
 [ext_resource type="FontFile" uid="uid://b5lu316vfv1hv" path="res://assets/fonts/RobotoMono-VariableFont_wght.ttf" id="1_l1lb6"]
 
@@ -13,6 +13,32 @@ bg_color = Color(0.0901961, 0.0901961, 0.101961, 0.784314)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hnuhv"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qdkh7"]
+bg_color = Color(0.894118, 0.231373, 0.266667, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_684px"]
+bg_color = Color(0.0941176, 0.0784314, 0.145098, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.0941176, 0.0784314, 0.145098, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eqt8x"]
+bg_color = Color(0.088, 0.088, 0.1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
 [resource]
 Button/colors/font_color = Color(1, 1, 1, 1)
 Button/colors/font_disabled_color = Color(1, 1, 1, 0.501961)
@@ -26,6 +52,9 @@ Button/styles/focus = SubResource("StyleBoxEmpty_snjoy")
 Button/styles/hover = SubResource("StyleBoxFlat_gipkb")
 Button/styles/normal = SubResource("StyleBoxEmpty_e6cv7")
 Button/styles/pressed = SubResource("StyleBoxEmpty_hnuhv")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_qdkh7")
+HSlider/styles/slider = SubResource("StyleBoxFlat_684px")
 Label/colors/font_color = Color(1, 1, 1, 1)
 Label/font_sizes/font_size = 32
 Label/fonts/font = ExtResource("1_l1lb6")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_eqt8x")

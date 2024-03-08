@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://np13agmcy1dv"]
+[gd_scene load_steps=37 format=3 uid="uid://np13agmcy1dv"]
 
 [ext_resource type="PackedScene" uid="uid://drum6yi7jjfk0" path="res://scenes/levels/template_level.tscn" id="1_bpk27"]
 [ext_resource type="Script" path="res://scenes/level_objects/transfer_area.gd" id="2_pqypq"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://bhfve2byyxot4" path="res://assets/textures/level_objects/balzor/balzor_eye.png" id="14_llqtr"]
 [ext_resource type="Texture2D" uid="uid://vfg4pi4e5dyk" path="res://assets/textures/particles/particle_diamond.png" id="15_agg7f"]
 [ext_resource type="Script" path="res://scenes/effects/balzor_eye.gd" id="15_h1rru"]
+[ext_resource type="AudioStream" uid="uid://dsxsbg5mscuky" path="res://assets/audio/sfx/scifi_lab.ogg" id="18_3vfjt"]
 
 [sub_resource type="Resource" id="Resource_1ev5y"]
 script = ExtResource("3_3tx7p")
@@ -556,5 +557,10 @@ position = Vector2(0, 8)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("14_llqtr")
 script = ExtResource("15_h1rru")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="." index="15"]
+stream = ExtResource("18_3vfjt")
+volume_db = -5.0
+autoplay = true
 
 [connection signal="body_entered" from="PlayerEnteredRoom" to="SanctumScripting" method="_on_player_entered_room_body_entered" unbinds=1]
