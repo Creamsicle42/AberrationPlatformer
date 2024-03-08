@@ -32,10 +32,12 @@ func set_controlls_locked(is_locked : bool) -> void:
 
 func killed() -> void:
 	dying = true
+	%Die.play()
 	$DeathBehavior.do_death()
 	await get_tree().create_timer(0.5).timeout
 	GameplayEventBus.bus.player_killed.emit()
 	Input.start_joy_vibration(0, 0.8, 0.8, 0.5)
+	
 
 
 func _on_hazard_hitbox_body_entered(_body:Node2D) -> void:
@@ -44,6 +46,14 @@ func _on_hazard_hitbox_body_entered(_body:Node2D) -> void:
 
 
 func _on_gravity_manager_gravity_changed() -> void:
+	if $GravityManager.get_gravity_direction() == Vector2.UP:
+		(%GravChange as AudioStreamPlayer).play()
+		(AudioServer.get_bus_effect(1,0) as AudioEffectLowPassFilter).cutoff_hz = 200
+	else:
+		(%GravRevert as AudioStreamPlayer).play()
+		(AudioServer.get_bus_effect(1,0) as AudioEffectLowPassFilter).cutoff_hz = 20000
+	
+
 	var dust_cloud :CPUParticles2D= gravity_change_particles.instantiate()
 	get_parent().add_child(dust_cloud)
 	dust_cloud.global_position = global_position

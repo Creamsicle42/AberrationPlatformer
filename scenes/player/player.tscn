@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://cybydn52j3wnw"]
+[gd_scene load_steps=44 format=3 uid="uid://cybydn52j3wnw"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_cgek4"]
 [ext_resource type="Script" path="res://scenes/player/platformer_behavior.gd" id="1_vpgob"]
@@ -17,6 +17,9 @@
 [ext_resource type="Texture2D" uid="uid://vfg4pi4e5dyk" path="res://assets/textures/particles/particle_diamond.png" id="11_ovw6i"]
 [ext_resource type="AudioStream" uid="uid://csvc21vihdqk5" path="res://assets/resources/sound_sets/stone_footsteps.tres" id="12_rqo0m"]
 [ext_resource type="AudioStream" uid="uid://dv1uf0oqprfeq" path="res://assets/audio/sfx/wind_noise.ogg" id="17_labbn"]
+[ext_resource type="AudioStream" uid="uid://85yljn3c1ms7" path="res://assets/audio/sfx/player_death.ogg" id="18_kj4o7"]
+[ext_resource type="AudioStream" uid="uid://bhi8kirugjwvx" path="res://assets/audio/sfx/gravity_change.ogg" id="19_gk5fe"]
+[ext_resource type="AudioStream" uid="uid://cbcl1veykpcdl" path="res://assets/audio/sfx/gravity_revert.ogg" id="20_36bml"]
 
 [sub_resource type="Curve" id="Curve_hwm2b"]
 min_value = -40.0
@@ -366,6 +369,23 @@ bus = &"SFX"
 stream = ExtResource("12_rqo0m")
 max_polyphony = 4
 bus = &"Footsteps"
+
+[node name="Die" type="AudioStreamPlayer" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("18_kj4o7")
+bus = &"SFX"
+
+[node name="GravChange" type="AudioStreamPlayer" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("19_gk5fe")
+volume_db = -5.0
+bus = &"SFX"
+
+[node name="GravRevert" type="AudioStreamPlayer" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("20_36bml")
+volume_db = -5.0
+bus = &"SFX"
 
 [connection signal="frame_changed" from="FlipPivot/MainSprite" to="FootstepManager" method="_on_main_sprite_frame_changed"]
 [connection signal="jumped" from="PlatformerBehavior" to="FootstepManager" method="_on_platformer_behavior_jumped"]
