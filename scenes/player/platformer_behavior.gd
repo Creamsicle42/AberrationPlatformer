@@ -2,6 +2,10 @@ class_name PlatformerBehavior
 extends Node
 
 
+signal jumped
+signal landed
+
+
 @export var controll_locked := false
 
 
@@ -112,6 +116,9 @@ func _physics_process(delta: float) -> void:
 
 	if dash_timer <= 0.0 and host.is_on_floor():
 		Input.start_joy_vibration(0, 0.5, 0.1, 0.1)
+		sprite.speed_scale = 1.5
+	else:
+		sprite.speed_scale = 1.0
 
 	if host.is_on_floor():
 		coyote_timer = coyote_time
@@ -138,6 +145,7 @@ func _physics_process(delta: float) -> void:
 			bounce_orb_touch_timer = 0.0
 			last_bounce_orb_touched.use_orb()
 
+		jumped.emit()
 
 		jump_trail_particles.emitting = true
 		var dust_cloud :CPUParticles2D= dust_cloud_particles.instantiate()
@@ -193,6 +201,7 @@ func _physics_process(delta: float) -> void:
 		dust_cloud.global_position = jump_trail_particles.global_position
 		dust_cloud.emitting = true
 		get_tree().create_timer(1.0).timeout.connect(dust_cloud.queue_free)
+		landed.emit()
 
 
 	if host.is_on_floor():

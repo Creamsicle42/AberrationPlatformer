@@ -110,5 +110,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 1.75
 
+[connection signal="focus_entered" from="UIElements/HBoxContainer/Content/VBoxContainer/NewGameButton" to="." method="_element_hover"]
+[connection signal="mouse_entered" from="UIElements/HBoxContainer/Content/VBoxContainer/NewGameButton" to="." method="_element_hover"]
 [connection signal="pressed" from="UIElements/HBoxContainer/Content/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="focus_entered" from="UIElements/HBoxContainer/Content/VBoxContainer/ContinueButton" to="." method="_element_hover"]
+[connection signal="mouse_entered" from="UIElements/HBoxContainer/Content/VBoxContainer/ContinueButton" to="." method="_element_hover"]
 [connection signal="pressed" from="UIElements/HBoxContainer/Content/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]

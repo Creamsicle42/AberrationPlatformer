@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://ddwu58lgwwnkd"]
+[gd_scene load_steps=24 format=3 uid="uid://ddwu58lgwwnkd"]
 
 [ext_resource type="PackedScene" uid="uid://drum6yi7jjfk0" path="res://scenes/levels/template_level.tscn" id="1_xrt2j"]
 [ext_resource type="Texture2D" uid="uid://cll17fmwno8wg" path="res://assets/textures/backgrounds/sewer/background.png" id="2_o7254"]
@@ -12,7 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://bxg2baam0vbmc" path="res://assets/textures/level_objects/gravity_area.tres" id="9_0l1ox"]
 [ext_resource type="PackedScene" uid="uid://cqa4726y7j0h2" path="res://scenes/effects/glow_circle.tscn" id="11_ux6wu"]
 [ext_resource type="Texture2D" uid="uid://v5ppttmi63jg" path="res://assets/textures/particles/particle_dust.png" id="12_iou8f"]
-[ext_resource type="Script" path="res://scenes/level_objects/gem_pickup/pickup_area.gd" id="13_lcsrq"]
+[ext_resource type="AudioStream" uid="uid://dsxsbg5mscuky" path="res://assets/audio/sfx/scifi_lab.ogg" id="13_gf51k"]
+[ext_resource type="Script" path="res://scenes/sounds/custom_audio_player_2D.gd" id="14_17huc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ndtky"]
 size = Vector2(16, 32)
@@ -45,6 +46,12 @@ point_count = 3
 [sub_resource type="Gradient" id="Gradient_q67d6"]
 offsets = PackedFloat32Array(0, 0.188312, 0.454545, 0.779221, 1)
 colors = PackedColorArray(0.7482, 0.79292, 0.86, 0.129412, 0.352941, 0.411765, 0.533333, 1, 0.191597, 0.219392, 0.322344, 1, 0.14902, 0.168627, 0.266667, 1, 0.0980392, 0.0823529, 0.14902, 0.152941)
+
+[sub_resource type="Curve" id="Curve_o7roo"]
+min_value = -80.0
+max_value = 0.0
+_data = [Vector2(0, -10.5494), 0.0, -32.0572, 0, 0, Vector2(0.352679, -22.8571), -84.3956, -84.3956, 0, 0, Vector2(1, -80), -100.863, 0.0, 0, 0]
+point_count = 3
 
 [node name="Sewers1" instance=ExtResource("1_xrt2j")]
 
@@ -325,10 +332,14 @@ color_ramp = SubResource("Gradient_q67d6")
 anim_speed_min = 1.0
 anim_speed_max = 3.0
 
-[node name="PickupArea" type="Area2D" parent="." index="10"]
-collision_layer = 2
-collision_mask = 2
-script = ExtResource("13_lcsrq")
-
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PickupArea" index="0"]
 polygon = PackedVector2Array(16, 52, 100, 52, 100, 20, 100, 16, 16, 16, 16, 0, 104, 0, 104, 56, 16, 56)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="." index="11"]
+stream = ExtResource("13_gf51k")
+volume_db = -80.0
+autoplay = true
+bus = &"SFX"
+script = ExtResource("14_17huc")
+position = Vector2(648, 152)
+falloff = SubResource("Curve_o7roo")

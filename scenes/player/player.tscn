@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cybydn52j3wnw"]
+[gd_scene load_steps=44 format=3 uid="uid://cybydn52j3wnw"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_cgek4"]
 [ext_resource type="Script" path="res://scenes/player/platformer_behavior.gd" id="1_vpgob"]
@@ -7,10 +7,25 @@
 [ext_resource type="Script" path="res://scenes/gen/flip_pivot.gd" id="2_xyij7"]
 [ext_resource type="Script" path="res://scenes/player/gravity_manager.gd" id="3_qkcit"]
 [ext_resource type="Script" path="res://assets/resources/_types/gravity_area_data.gd" id="4_qj1g1"]
+[ext_resource type="Script" path="res://scenes/player/footstep_manager.gd" id="6_i6rjn"]
 [ext_resource type="PackedScene" uid="uid://lalosu8joqn4" path="res://scenes/effects/dust_cloud_particles.tscn" id="6_yopic"]
 [ext_resource type="Texture2D" uid="uid://v5ppttmi63jg" path="res://assets/textures/particles/particle_dust.png" id="7_5j8p1"]
+[ext_resource type="AudioStream" uid="uid://betlalklo12ny" path="res://assets/resources/sound_sets/wood_footsteps.tres" id="8_l1v16"]
+[ext_resource type="AudioStream" uid="uid://6yr37xh67oa4" path="res://assets/resources/sound_sets/grass_footsteps.tres" id="9_s4570"]
+[ext_resource type="AudioStream" uid="uid://cu3rcdkbqmsph" path="res://assets/resources/sound_sets/gravel_footsteps.tres" id="10_gs4gb"]
 [ext_resource type="Script" path="res://scenes/player/death_behavior.gd" id="10_lqxb8"]
 [ext_resource type="Texture2D" uid="uid://vfg4pi4e5dyk" path="res://assets/textures/particles/particle_diamond.png" id="11_ovw6i"]
+[ext_resource type="AudioStream" uid="uid://csvc21vihdqk5" path="res://assets/resources/sound_sets/stone_footsteps.tres" id="12_rqo0m"]
+[ext_resource type="AudioStream" uid="uid://dv1uf0oqprfeq" path="res://assets/audio/sfx/wind_noise.ogg" id="17_labbn"]
+[ext_resource type="AudioStream" uid="uid://85yljn3c1ms7" path="res://assets/audio/sfx/player_death.ogg" id="18_kj4o7"]
+[ext_resource type="AudioStream" uid="uid://bhi8kirugjwvx" path="res://assets/audio/sfx/gravity_change.ogg" id="19_gk5fe"]
+[ext_resource type="AudioStream" uid="uid://cbcl1veykpcdl" path="res://assets/audio/sfx/gravity_revert.ogg" id="20_36bml"]
+
+[sub_resource type="Curve" id="Curve_hwm2b"]
+min_value = -40.0
+max_value = 0.0
+_data = [Vector2(0, -40), 0.0, 0.0, 0, 0, Vector2(0.513393, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rxtf6"]
 atlas = ExtResource("2_rqrr0")
@@ -163,6 +178,7 @@ point_count = 4
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_cgek4")
+velocity_wind_noise = SubResource("Curve_hwm2b")
 gravity_change_particles = ExtResource("2_40tvw")
 
 [node name="FlipPivot" type="Node2D" parent="." node_paths=PackedStringArray("flip_base")]
@@ -172,7 +188,7 @@ flip_base = NodePath("..")
 [node name="MainSprite" type="AnimatedSprite2D" parent="FlipPivot"]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_rindt")
-animation = &"idle"
+animation = &"run"
 
 [node name="RunDustParticles" type="CPUParticles2D" parent="FlipPivot"]
 material = SubResource("CanvasItemMaterial_v05qq")
@@ -235,6 +251,18 @@ anim_speed_max = 1.0
 
 [node name="WorldCollider" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_kst6t")
+
+[node name="FootstepManager" type="Node" parent="." node_paths=PackedStringArray("foostep_player", "animation_player", "gravity_manager")]
+script = ExtResource("6_i6rjn")
+foostep_player = NodePath("../SFX/Footsteps")
+animation_player = NodePath("../FlipPivot/MainSprite")
+gravity_manager = NodePath("../GravityManager")
+sounds = {
+"grass": ExtResource("9_s4570"),
+"gravel": ExtResource("10_gs4gb"),
+"stone": ExtResource("12_rqo0m"),
+"wood": ExtResource("8_l1v16")
+}
 
 [node name="PlatformerBehavior" type="Node" parent="." node_paths=PackedStringArray("bounce_orb_touch_area", "bonk_left_raycast", "bonk_center_raycast", "bonk_right_raycast", "gravity_manager", "sprite", "run_dust_particles", "dash_dust_particles", "jump_trail_particles")]
 script = ExtResource("1_vpgob")
@@ -328,5 +356,39 @@ scale_amount_min = 0.25
 scale_amount_max = 0.8
 scale_amount_curve = SubResource("Curve_52ty3")
 
+[node name="SFX" type="Node" parent="."]
+
+[node name="Wind" type="AudioStreamPlayer" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("17_labbn")
+volume_db = -80.0
+autoplay = true
+bus = &"SFX"
+
+[node name="Footsteps" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("12_rqo0m")
+max_polyphony = 4
+bus = &"Footsteps"
+
+[node name="Die" type="AudioStreamPlayer" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("18_kj4o7")
+bus = &"SFX"
+
+[node name="GravChange" type="AudioStreamPlayer" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("19_gk5fe")
+volume_db = -5.0
+bus = &"SFX"
+
+[node name="GravRevert" type="AudioStreamPlayer" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("20_36bml")
+volume_db = -5.0
+bus = &"SFX"
+
+[connection signal="frame_changed" from="FlipPivot/MainSprite" to="FootstepManager" method="_on_main_sprite_frame_changed"]
+[connection signal="jumped" from="PlatformerBehavior" to="FootstepManager" method="_on_platformer_behavior_jumped"]
+[connection signal="landed" from="PlatformerBehavior" to="FootstepManager" method="_on_platformer_behavior_landed"]
 [connection signal="gravity_changed" from="GravityManager" to="." method="_on_gravity_manager_gravity_changed"]
 [connection signal="body_entered" from="HazardHitbox" to="." method="_on_hazard_hitbox_body_entered"]

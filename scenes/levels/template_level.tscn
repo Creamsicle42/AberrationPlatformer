@@ -18,7 +18,7 @@ spawnpoints = NodePath("Spawnpoints")
 
 [node name="Spawnpoints" type="Node2D" parent="."]
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="TileMap" type="TileMap" parent="." groups=["world_tilemap"]]
 tile_set = ExtResource("2_wqw7x")
 format = 2
 layer_0/name = "BackWall"
