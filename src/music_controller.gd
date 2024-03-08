@@ -17,5 +17,6 @@ func fade_into_track(track : AudioStream, time := 0.5) -> void:
     add_child(new_track)
     current_track = new_track
     current_track.play()
+    current_track.bus = "Music"
     var new_tweener = create_tween()
     new_tweener.tween_property(current_track, "volume_db", 0, time)
