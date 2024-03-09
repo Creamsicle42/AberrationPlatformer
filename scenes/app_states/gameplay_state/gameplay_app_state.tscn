@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://o7ta360kabrj"]
+[gd_scene load_steps=26 format=3 uid="uid://o7ta360kabrj"]
 
 [ext_resource type="Script" path="res://scenes/app_states/gameplay_state/gameplay_app_state.gd" id="1_qtq4f"]
 [ext_resource type="Script" path="res://scenes/app_states/gameplay_state/level_system/level_manager.gd" id="2_5uygt"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://bfnaoypoxm5o4" path="res://scenes/ui/speech_bubble/speech_bubble_container.tscn" id="19_2y7p7"]
 [ext_resource type="Texture2D" uid="uid://c8hdydiwjsv43" path="res://assets/textures/effects/vignete_texture.png" id="20_06ybk"]
 [ext_resource type="FontFile" uid="uid://b5lu316vfv1hv" path="res://assets/fonts/RobotoMono-VariableFont_wght.ttf" id="21_nr7sn"]
+[ext_resource type="Script" path="res://scenes/app_states/gameplay_state/cutscene_slide_layer.gd" id="21_thtin"]
 
 [sub_resource type="Resource" id="Resource_rcckm"]
 script = ExtResource("5_5m6h1")
@@ -99,8 +100,10 @@ expand_mode = 1
 
 [node name="CutsceneSlideLayer" type="CanvasLayer" parent="."]
 layer = 2
+script = ExtResource("21_thtin")
 
 [node name="Back" type="PanelContainer" parent="CutsceneSlideLayer"]
+modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
