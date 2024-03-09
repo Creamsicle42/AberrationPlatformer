@@ -19,8 +19,8 @@ static var current : CutsceneSlideLayer
 var tween : Tween
 var state := States.HIDDEN
 @onready var back : PanelContainer = $Back as PanelContainer
-@onready var text : RichTextLabel = $Back/CenterContainer/SlideText as RichTextLabel
-@onready var image : TextureRect = $Back/CenterContainer/SlideImage as TextureRect
+@onready var text : RichTextLabel = $Back/CenterContainer/VBoxContainer/SlideText as RichTextLabel
+@onready var image : TextureRect = $Back/CenterContainer/VBoxContainer/SlideImage as TextureRect
 
 
 # Called when the node enters the scene tree for the first time.

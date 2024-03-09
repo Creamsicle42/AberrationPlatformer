@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://np13agmcy1dv"]
+[gd_scene load_steps=60 format=3 uid="uid://np13agmcy1dv"]
 
 [ext_resource type="PackedScene" uid="uid://drum6yi7jjfk0" path="res://scenes/levels/template_level.tscn" id="1_bpk27"]
 [ext_resource type="Script" path="res://scenes/level_objects/transfer_area.gd" id="2_pqypq"]
@@ -12,6 +12,9 @@
 [ext_resource type="Script" path="res://assets/resources/_types/level_event/hide_text_event.gd" id="8_b0sl3"]
 [ext_resource type="Texture2D" uid="uid://cfrrmrtnmo4le" path="res://assets/textures/backgrounds/sewer/back_pipes.png" id="8_rfjc6"]
 [ext_resource type="Texture2D" uid="uid://brm20ev0782e8" path="res://assets/textures/backgrounds/sewer/front_pipes.png" id="9_fnvi0"]
+[ext_resource type="Script" path="res://assets/resources/_types/level_event/slide_visible_event.gd" id="9_wn3wx"]
+[ext_resource type="Texture2D" uid="uid://16dj5kv700eo" path="res://assets/textures/tilesets/environment_tileset.png" id="10_a8djv"]
+[ext_resource type="Script" path="res://assets/resources/_types/level_event/cutscene_slide_event.gd" id="10_vpsir"]
 [ext_resource type="PackedScene" uid="uid://cqa4726y7j0h2" path="res://scenes/effects/glow_circle.tscn" id="11_qrxuo"]
 [ext_resource type="Texture2D" uid="uid://v5ppttmi63jg" path="res://assets/textures/particles/particle_dust.png" id="12_y18pr"]
 [ext_resource type="Texture2D" uid="uid://cb3jxev86av86" path="res://assets/textures/level_objects/balzor/balzor_main.png" id="13_blgsb"]
@@ -147,9 +150,16 @@ charachter_time = 0.025
 bubble_pos = Vector2(168, 40)
 await_input_at_end = true
 
-[sub_resource type="Resource" id="Resource_1g05f"]
-script = ExtResource("4_auxk5")
-lock_input = false
+[sub_resource type="Resource" id="Resource_8khml"]
+script = ExtResource("9_wn3wx")
+slow = true
+visible = true
+
+[sub_resource type="Resource" id="Resource_vc3a1"]
+script = ExtResource("10_vpsir")
+cutscene_slide = ExtResource("10_a8djv")
+cutscene_text = "This is a test of the cutscene slides"
+slide_show_time = 2.0
 
 [sub_resource type="Resource" id="Resource_10i2p"]
 script = ExtResource("4_rkvla")
@@ -202,6 +212,10 @@ charachter_time = 0.025
 bubble_pos = Vector2(168, 40)
 await_input_at_end = true
 
+[sub_resource type="Resource" id="Resource_1g05f"]
+script = ExtResource("4_auxk5")
+lock_input = false
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_von8b"]
 size = Vector2(16, 32)
 
@@ -245,7 +259,7 @@ events = Array[Resource("res://assets/resources/_types/level_event/level_event.g
 
 [node name="BadEndingEvents" type="Node" parent="." index="3"]
 script = ExtResource("2_tx57x")
-events = Array[Resource("res://assets/resources/_types/level_event/level_event.gd")]([SubResource("Resource_o23k5"), SubResource("Resource_bho43"), SubResource("Resource_s6utl"), SubResource("Resource_5cffa"), SubResource("Resource_kmo8y"), SubResource("Resource_s34e7"), SubResource("Resource_005ga"), SubResource("Resource_sydj8"), SubResource("Resource_1g05f")])
+events = Array[Resource("res://assets/resources/_types/level_event/level_event.gd")]([SubResource("Resource_o23k5"), SubResource("Resource_bho43"), SubResource("Resource_s6utl"), SubResource("Resource_5cffa"), SubResource("Resource_kmo8y"), SubResource("Resource_s34e7"), SubResource("Resource_005ga"), SubResource("Resource_sydj8"), SubResource("Resource_8khml"), SubResource("Resource_vc3a1")])
 
 [node name="GoodEndingEvents" type="Node" parent="." index="4"]
 script = ExtResource("2_tx57x")
