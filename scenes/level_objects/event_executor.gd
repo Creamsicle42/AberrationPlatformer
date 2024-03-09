@@ -6,5 +6,7 @@ extends Node
 
 
 func execute() -> void:
-    var data : Dictionary = {}
+    var data : Dictionary = {
+        "caller": self
+    }
     for event : LevelEvent in events: await event.execute(data)

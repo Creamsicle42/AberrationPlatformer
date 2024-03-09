@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://np13agmcy1dv"]
+[gd_scene load_steps=55 format=3 uid="uid://np13agmcy1dv"]
 
 [ext_resource type="PackedScene" uid="uid://drum6yi7jjfk0" path="res://scenes/levels/template_level.tscn" id="1_bpk27"]
 [ext_resource type="Script" path="res://scenes/level_objects/transfer_area.gd" id="2_pqypq"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" path="res://assets/resources/_types/level_event/player_lock_input_event.gd" id="4_auxk5"]
 [ext_resource type="Script" path="res://assets/resources/_types/level_event/speech_event.gd" id="4_rkvla"]
 [ext_resource type="Texture2D" uid="uid://cll17fmwno8wg" path="res://assets/textures/backgrounds/sewer/background.png" id="7_cbo42"]
+[ext_resource type="Script" path="res://assets/resources/_types/level_event/timeout_event.gd" id="7_r1m3e"]
+[ext_resource type="Script" path="res://assets/resources/_types/level_event/hide_text_event.gd" id="8_b0sl3"]
 [ext_resource type="Texture2D" uid="uid://cfrrmrtnmo4le" path="res://assets/textures/backgrounds/sewer/back_pipes.png" id="8_rfjc6"]
 [ext_resource type="Texture2D" uid="uid://brm20ev0782e8" path="res://assets/textures/backgrounds/sewer/front_pipes.png" id="9_fnvi0"]
 [ext_resource type="PackedScene" uid="uid://cqa4726y7j0h2" path="res://scenes/effects/glow_circle.tscn" id="11_qrxuo"]
@@ -32,23 +34,64 @@ lock_input = true
 script = ExtResource("4_rkvla")
 text = "[shake rate=20.0 level=5 connected=1]HEY YOU[/shake]"
 charachter_time = 0.025
-bubble_pos = Vector2(224, 64)
+bubble_pos = Vector2(168, 40)
+await_input_at_end = true
 
 [sub_resource type="Resource" id="Resource_3jowv"]
 script = ExtResource("4_rkvla")
-text = "Go get me 8 [color=#124e89]Science Crystals![/color]"
+text = "Another mortal come to grasp 
+at a fragment of my power..."
 charachter_time = 0.03
-bubble_pos = Vector2(224, 64)
+bubble_pos = Vector2(168, 40)
+await_input_at_end = true
+
+[sub_resource type="Resource" id="Resource_ho8us"]
+script = ExtResource("4_rkvla")
+text = "Very well..."
+charachter_time = 0.025
+bubble_pos = Vector2(168, 40)
+await_input_at_end = true
+
+[sub_resource type="Resource" id="Resource_6m8wa"]
+script = ExtResource("4_rkvla")
+text = "I shall grant you one wish!"
+charachter_time = 0.025
+bubble_pos = Vector2(168, 40)
+await_input_at_end = true
+
+[sub_resource type="Resource" id="Resource_1uhn5"]
+script = ExtResource("4_rkvla")
+text = "But first, you must bring me at least
+eight [color=#124e89]Science Crystals"
+charachter_time = 0.025
+bubble_pos = Vector2(168, 40)
+await_input_at_end = true
+
+[sub_resource type="Resource" id="Resource_7wmpl"]
+script = ExtResource("4_rkvla")
+text = "To aid you, I have created [color=#68386c]Spatial Abberations[/color]
+spread throught my temple."
+charachter_time = 0.025
+bubble_pos = Vector2(168, 40)
+await_input_at_end = true
 
 [sub_resource type="Resource" id="Resource_f7hi0"]
 script = ExtResource("4_auxk5")
 lock_input = false
 
-[sub_resource type="Resource" id="Resource_8fmnd"]
+[sub_resource type="Resource" id="Resource_d21yj"]
 script = ExtResource("4_rkvla")
 text = "Go on, get out of here!"
 charachter_time = 0.025
-bubble_pos = Vector2(224, 64)
+bubble_pos = Vector2(140, 48)
+await_input_at_end = false
+
+[sub_resource type="Resource" id="Resource_m8r7r"]
+script = ExtResource("7_r1m3e")
+time = 5.0
+
+[sub_resource type="Resource" id="Resource_0icdy"]
+script = ExtResource("8_b0sl3")
 
 [sub_resource type="Resource" id="Resource_o23k5"]
 script = ExtResource("4_auxk5")
@@ -56,15 +99,53 @@ lock_input = true
 
 [sub_resource type="Resource" id="Resource_bho43"]
 script = ExtResource("4_rkvla")
-text = "You did the bare minimum..."
+text = "Congratulations, You did the bare minimum..."
 charachter_time = 0.025
-bubble_pos = Vector2(224, 64)
+bubble_pos = Vector2(168, 40)
+await_input_at_end = true
 
 [sub_resource type="Resource" id="Resource_s6utl"]
 script = ExtResource("4_rkvla")
-text = "You get, [color=red]Bad Ending!"
+text = "Very well. I shall look into your soul and 
+determine your heart's wish!"
 charachter_time = 0.025
-bubble_pos = Vector2(224, 64)
+bubble_pos = Vector2(168, 40)
+await_input_at_end = true
+
+[sub_resource type="Resource" id="Resource_5cffa"]
+script = ExtResource("4_rkvla")
+text = "..."
+charachter_time = 0.1
+bubble_pos = Vector2(168, 40)
+await_input_at_end = true
+
+[sub_resource type="Resource" id="Resource_kmo8y"]
+script = ExtResource("4_rkvla")
+text = "Eww, I'm not doing that!"
+charachter_time = 0.025
+bubble_pos = Vector2(168, 40)
+await_input_at_end = true
+
+[sub_resource type="Resource" id="Resource_s34e7"]
+script = ExtResource("4_rkvla")
+text = ":("
+charachter_time = 0.025
+bubble_pos = Vector2(128, 128)
+await_input_at_end = true
+
+[sub_resource type="Resource" id="Resource_005ga"]
+script = ExtResource("4_rkvla")
+text = "How about a backup wish..."
+charachter_time = 0.025
+bubble_pos = Vector2(168, 40)
+await_input_at_end = true
+
+[sub_resource type="Resource" id="Resource_sydj8"]
+script = ExtResource("4_rkvla")
+text = "A lifetime supply of [color=#feae34]Cheese!"
+charachter_time = 0.025
+bubble_pos = Vector2(168, 40)
+await_input_at_end = true
 
 [sub_resource type="Resource" id="Resource_1g05f"]
 script = ExtResource("4_auxk5")
@@ -72,15 +153,54 @@ lock_input = false
 
 [sub_resource type="Resource" id="Resource_10i2p"]
 script = ExtResource("4_rkvla")
-text = "You got all the crystals..."
+text = "You have retrieved all
+of the [color=#124e89]crystals[/color]! Impressive..."
 charachter_time = 0.025
-bubble_pos = Vector2(224, 64)
+bubble_pos = Vector2(168, 40)
+await_input_at_end = true
 
 [sub_resource type="Resource" id="Resource_v3ehb"]
 script = ExtResource("4_rkvla")
-text = "You get, [color=green]Good Ending!"
+text = "Allow me to search your heart 
+for your deepest desire..."
 charachter_time = 0.025
-bubble_pos = Vector2(224, 64)
+bubble_pos = Vector2(168, 40)
+await_input_at_end = true
+
+[sub_resource type="Resource" id="Resource_kex6g"]
+script = ExtResource("4_rkvla")
+text = "..."
+charachter_time = 0.1
+bubble_pos = Vector2(168, 40)
+await_input_at_end = true
+
+[sub_resource type="Resource" id="Resource_nq6s4"]
+script = ExtResource("4_rkvla")
+text = "OH!"
+charachter_time = 0.025
+bubble_pos = Vector2(168, 40)
+await_input_at_end = true
+
+[sub_resource type="Resource" id="Resource_y5bhr"]
+script = ExtResource("4_rkvla")
+text = "Oh my!"
+charachter_time = 0.025
+bubble_pos = Vector2(168, 40)
+await_input_at_end = true
+
+[sub_resource type="Resource" id="Resource_6yoqw"]
+script = ExtResource("4_rkvla")
+text = "Very well..."
+charachter_time = 0.025
+bubble_pos = Vector2(168, 40)
+await_input_at_end = true
+
+[sub_resource type="Resource" id="Resource_fwgo7"]
+script = ExtResource("4_rkvla")
+text = "I shall take you as my [color=#b55088]lover..."
+charachter_time = 0.025
+bubble_pos = Vector2(168, 40)
+await_input_at_end = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_von8b"]
 size = Vector2(16, 32)
@@ -117,19 +237,19 @@ good_ending_executor = NodePath("../GoodEndingEvents")
 
 [node name="InitialEntryEvents" type="Node" parent="." index="1"]
 script = ExtResource("2_tx57x")
-events = Array[Resource("res://assets/resources/_types/level_event/level_event.gd")]([SubResource("Resource_1ev5y"), SubResource("Resource_5ypng"), SubResource("Resource_j5sdh"), SubResource("Resource_3jowv"), SubResource("Resource_f7hi0")])
+events = Array[Resource("res://assets/resources/_types/level_event/level_event.gd")]([SubResource("Resource_1ev5y"), SubResource("Resource_5ypng"), SubResource("Resource_j5sdh"), SubResource("Resource_3jowv"), SubResource("Resource_ho8us"), SubResource("Resource_6m8wa"), SubResource("Resource_1uhn5"), SubResource("Resource_7wmpl"), SubResource("Resource_f7hi0")])
 
 [node name="AditionalEntryEvents" type="Node" parent="." index="2"]
 script = ExtResource("2_tx57x")
-events = Array[Resource("res://assets/resources/_types/level_event/level_event.gd")]([SubResource("Resource_8fmnd")])
+events = Array[Resource("res://assets/resources/_types/level_event/level_event.gd")]([SubResource("Resource_d21yj"), SubResource("Resource_m8r7r"), SubResource("Resource_0icdy")])
 
 [node name="BadEndingEvents" type="Node" parent="." index="3"]
 script = ExtResource("2_tx57x")
-events = Array[Resource("res://assets/resources/_types/level_event/level_event.gd")]([SubResource("Resource_o23k5"), SubResource("Resource_bho43"), SubResource("Resource_s6utl"), SubResource("Resource_1g05f")])
+events = Array[Resource("res://assets/resources/_types/level_event/level_event.gd")]([SubResource("Resource_o23k5"), SubResource("Resource_bho43"), SubResource("Resource_s6utl"), SubResource("Resource_5cffa"), SubResource("Resource_kmo8y"), SubResource("Resource_s34e7"), SubResource("Resource_005ga"), SubResource("Resource_sydj8"), SubResource("Resource_1g05f")])
 
 [node name="GoodEndingEvents" type="Node" parent="." index="4"]
 script = ExtResource("2_tx57x")
-events = Array[Resource("res://assets/resources/_types/level_event/level_event.gd")]([SubResource("Resource_o23k5"), SubResource("Resource_10i2p"), SubResource("Resource_v3ehb"), SubResource("Resource_1g05f")])
+events = Array[Resource("res://assets/resources/_types/level_event/level_event.gd")]([SubResource("Resource_o23k5"), SubResource("Resource_10i2p"), SubResource("Resource_v3ehb"), SubResource("Resource_kex6g"), SubResource("Resource_nq6s4"), SubResource("Resource_y5bhr"), SubResource("Resource_6yoqw"), SubResource("Resource_fwgo7"), SubResource("Resource_1g05f")])
 
 [node name="FromSewers" type="Node2D" parent="Spawnpoints" index="0"]
 position = Vector2(16, 40)
