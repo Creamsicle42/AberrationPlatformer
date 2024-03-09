@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://o7ta360kabrj"]
+[gd_scene load_steps=25 format=3 uid="uid://o7ta360kabrj"]
 
 [ext_resource type="Script" path="res://scenes/app_states/gameplay_state/gameplay_app_state.gd" id="1_qtq4f"]
 [ext_resource type="Script" path="res://scenes/app_states/gameplay_state/level_system/level_manager.gd" id="2_5uygt"]
@@ -21,11 +21,15 @@
 [ext_resource type="Resource" uid="uid://bf5r3jrojnvmt" path="res://assets/resources/levels/lab_9.tres" id="17_doif3"]
 [ext_resource type="PackedScene" uid="uid://bfnaoypoxm5o4" path="res://scenes/ui/speech_bubble/speech_bubble_container.tscn" id="19_2y7p7"]
 [ext_resource type="Texture2D" uid="uid://c8hdydiwjsv43" path="res://assets/textures/effects/vignete_texture.png" id="20_06ybk"]
+[ext_resource type="FontFile" uid="uid://b5lu316vfv1hv" path="res://assets/fonts/RobotoMono-VariableFont_wght.ttf" id="21_nr7sn"]
 
 [sub_resource type="Resource" id="Resource_rcckm"]
 script = ExtResource("5_5m6h1")
 name = "test_1"
 level_scene = ExtResource("4_3d1qb")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_85u23"]
+bg_color = Color(0.0941176, 0.0784314, 0.145098, 1)
 
 [node name="GameplayAppState" type="Node" node_paths=PackedStringArray("level_manager", "pause_menu")]
 script = ExtResource("1_qtq4f")
@@ -92,6 +96,32 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("20_06ybk")
 expand_mode = 1
+
+[node name="CutsceneSlideLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Back" type="PanelContainer" parent="CutsceneSlideLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_85u23")
+
+[node name="CenterContainer" type="CenterContainer" parent="CutsceneSlideLayer/Back"]
+layout_mode = 2
+
+[node name="SlideImage" type="TextureRect" parent="CutsceneSlideLayer/Back/CenterContainer"]
+layout_mode = 2
+
+[node name="SlideText" type="RichTextLabel" parent="CutsceneSlideLayer/Back/CenterContainer"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("21_nr7sn")
+theme_override_font_sizes/normal_font_size = 32
+text = "Text content here"
+fit_content = true
+autowrap_mode = 0
+visible_characters_behavior = 1
 
 [node name="PauseMenu" parent="." instance=ExtResource("5_q4bcv")]
 layer = 3
