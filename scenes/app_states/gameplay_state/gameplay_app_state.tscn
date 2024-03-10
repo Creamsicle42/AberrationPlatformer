@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://o7ta360kabrj"]
+[gd_scene load_steps=27 format=3 uid="uid://o7ta360kabrj"]
 
 [ext_resource type="Script" path="res://scenes/app_states/gameplay_state/gameplay_app_state.gd" id="1_qtq4f"]
 [ext_resource type="Script" path="res://scenes/app_states/gameplay_state/level_system/level_manager.gd" id="2_5uygt"]
@@ -19,6 +19,7 @@
 [ext_resource type="Resource" uid="uid://f3nk53d41mgc" path="res://assets/resources/levels/lab_7.tres" id="14_cn6o6"]
 [ext_resource type="Resource" uid="uid://cbmclcfcht2wh" path="res://assets/resources/levels/lab_8.tres" id="16_ak17v"]
 [ext_resource type="Resource" uid="uid://bf5r3jrojnvmt" path="res://assets/resources/levels/lab_9.tres" id="17_doif3"]
+[ext_resource type="Resource" uid="uid://c4t6jdmrniwe" path="res://assets/resources/levels/intro.tres" id="18_k4lmr"]
 [ext_resource type="PackedScene" uid="uid://bfnaoypoxm5o4" path="res://scenes/ui/speech_bubble/speech_bubble_container.tscn" id="19_2y7p7"]
 [ext_resource type="Texture2D" uid="uid://c8hdydiwjsv43" path="res://assets/textures/effects/vignete_texture.png" id="20_06ybk"]
 [ext_resource type="FontFile" uid="uid://b5lu316vfv1hv" path="res://assets/fonts/RobotoMono-VariableFont_wght.ttf" id="21_nr7sn"]
@@ -43,7 +44,7 @@ script = ExtResource("2_745si")
 [node name="LevelManager" type="Node" parent="." node_paths=PackedStringArray("level_parent")]
 script = ExtResource("2_5uygt")
 level_parent = NodePath("../Gameplay/SubViewportContainer/SubViewport/LevelParent")
-levels = Array[ExtResource("5_5m6h1")]([SubResource("Resource_rcckm"), ExtResource("5_umaqc"), ExtResource("6_yf7oq"), ExtResource("7_s0wop"), ExtResource("8_o7mcc"), ExtResource("9_0ddqv"), ExtResource("10_ghdob"), ExtResource("11_yngpk"), ExtResource("12_73qty"), ExtResource("13_ecpwy"), ExtResource("14_cn6o6"), ExtResource("16_ak17v"), ExtResource("17_doif3")])
+levels = Array[ExtResource("5_5m6h1")]([SubResource("Resource_rcckm"), ExtResource("5_umaqc"), ExtResource("6_yf7oq"), ExtResource("7_s0wop"), ExtResource("8_o7mcc"), ExtResource("9_0ddqv"), ExtResource("10_ghdob"), ExtResource("11_yngpk"), ExtResource("12_73qty"), ExtResource("13_ecpwy"), ExtResource("14_cn6o6"), ExtResource("16_ak17v"), ExtResource("17_doif3"), ExtResource("18_k4lmr")])
 
 [node name="Gameplay" type="CanvasLayer" parent="."]
 process_mode = 1
@@ -119,8 +120,10 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="SlideImage" type="TextureRect" parent="CutsceneSlideLayer/Back/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(640, 0)
 layout_mode = 2
-stretch_mode = 5
+expand_mode = 5
+stretch_mode = 4
 
 [node name="SlideText" type="RichTextLabel" parent="CutsceneSlideLayer/Back/CenterContainer/VBoxContainer"]
 layout_mode = 2
