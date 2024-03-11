@@ -9,6 +9,7 @@ signal accept_pressed
 func _ready() -> void:
 	%MusicVolumeSlider.value = GameDataManager.current_game_data.music_volume
 	%SFXVolumeSlider.value = GameDataManager.current_game_data.sfx_volume
+	%FullscreenButton.button_pressed.visible = OS.has_feature("pc")
 	%FullscreenButton.button_pressed = GameDataManager.current_game_data.fullscreen
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), GameDataManager.current_game_data.sfx_volume)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), GameDataManager.current_game_data.music_volume)
