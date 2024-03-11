@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://8bvpurlo7b1"]
 
 [ext_resource type="Script" path="res://scenes/app_states/main_menu_state/main_menu_app_state.gd" id="1_k3qqp"]
-[ext_resource type="Texture2D" uid="uid://8ncn2kamwyy8" path="res://assets/textures/ui/main_menu/mainmenu_bkg_bkg.png" id="2_ddpi1"]
+[ext_resource type="Texture2D" uid="uid://bpwjhpg336erm" path="res://assets/textures/ui/main_menu/main_menu_alt.png" id="2_pcaey"]
 [ext_resource type="Texture2D" uid="uid://ce6ymjlxs7s5n" path="res://assets/textures/ui/main_menu/mainmenu_bkg_grav_area.png" id="3_fwe2w"]
 [ext_resource type="Script" path="res://scenes/app_states/main_menu_state/menu_paralax_element.gd" id="3_ogqav"]
 [ext_resource type="Texture2D" uid="uid://c86em6sw2ac4g" path="res://assets/textures/ui/main_menu/mainmenu_bkg_piper.png" id="4_8g5ml"]
@@ -25,12 +25,13 @@ anchor_right = 1.01
 anchor_bottom = 1.01
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_ddpi1")
+texture = ExtResource("2_pcaey")
 expand_mode = 1
 script = ExtResource("3_ogqav")
-power = 1.0
+power = 8.0
 
 [node name="MenuBKGD2" type="TextureRect" parent="Background"]
+visible = false
 anchors_preset = -1
 anchor_left = -0.01
 anchor_top = -0.01
@@ -44,6 +45,7 @@ script = ExtResource("3_ogqav")
 power = 2.0
 
 [node name="MenuBKGD3" type="TextureRect" parent="Background"]
+visible = false
 anchors_preset = -1
 anchor_left = -0.01
 anchor_top = -0.01
@@ -57,6 +59,7 @@ script = ExtResource("3_ogqav")
 power = 6.0
 
 [node name="MenuBKGD4" type="TextureRect" parent="Background"]
+visible = false
 anchors_preset = -1
 anchor_left = -0.01
 anchor_top = -0.01
