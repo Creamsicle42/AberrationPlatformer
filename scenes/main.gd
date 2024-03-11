@@ -15,6 +15,8 @@ var current_app_state : Node
 func _ready() -> void:
     app = self
     GameDataManager.load_game_data()
+    DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if GameDataManager.current_game_data.fullscreen else DisplayServer.WINDOW_MODE_WINDOWED)
+
     set_state("main_menu")
 
 
