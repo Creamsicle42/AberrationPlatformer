@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://o7ta360kabrj"]
+[gd_scene load_steps=27 format=3 uid="uid://o7ta360kabrj"]
 
 [ext_resource type="Script" path="res://scenes/app_states/gameplay_state/gameplay_app_state.gd" id="1_qtq4f"]
 [ext_resource type="Script" path="res://scenes/app_states/gameplay_state/level_system/level_manager.gd" id="2_5uygt"]
@@ -19,13 +19,19 @@
 [ext_resource type="Resource" uid="uid://f3nk53d41mgc" path="res://assets/resources/levels/lab_7.tres" id="14_cn6o6"]
 [ext_resource type="Resource" uid="uid://cbmclcfcht2wh" path="res://assets/resources/levels/lab_8.tres" id="16_ak17v"]
 [ext_resource type="Resource" uid="uid://bf5r3jrojnvmt" path="res://assets/resources/levels/lab_9.tres" id="17_doif3"]
+[ext_resource type="Resource" uid="uid://c4t6jdmrniwe" path="res://assets/resources/levels/intro.tres" id="18_k4lmr"]
 [ext_resource type="PackedScene" uid="uid://bfnaoypoxm5o4" path="res://scenes/ui/speech_bubble/speech_bubble_container.tscn" id="19_2y7p7"]
 [ext_resource type="Texture2D" uid="uid://c8hdydiwjsv43" path="res://assets/textures/effects/vignete_texture.png" id="20_06ybk"]
+[ext_resource type="FontFile" uid="uid://b5lu316vfv1hv" path="res://assets/fonts/RobotoMono-VariableFont_wght.ttf" id="21_nr7sn"]
+[ext_resource type="Script" path="res://scenes/app_states/gameplay_state/cutscene_slide_layer.gd" id="21_thtin"]
 
 [sub_resource type="Resource" id="Resource_rcckm"]
 script = ExtResource("5_5m6h1")
 name = "test_1"
 level_scene = ExtResource("4_3d1qb")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_85u23"]
+bg_color = Color(0.0941176, 0.0784314, 0.145098, 1)
 
 [node name="GameplayAppState" type="Node" node_paths=PackedStringArray("level_manager", "pause_menu")]
 script = ExtResource("1_qtq4f")
@@ -38,7 +44,7 @@ script = ExtResource("2_745si")
 [node name="LevelManager" type="Node" parent="." node_paths=PackedStringArray("level_parent")]
 script = ExtResource("2_5uygt")
 level_parent = NodePath("../Gameplay/SubViewportContainer/SubViewport/LevelParent")
-levels = Array[ExtResource("5_5m6h1")]([SubResource("Resource_rcckm"), ExtResource("5_umaqc"), ExtResource("6_yf7oq"), ExtResource("7_s0wop"), ExtResource("8_o7mcc"), ExtResource("9_0ddqv"), ExtResource("10_ghdob"), ExtResource("11_yngpk"), ExtResource("12_73qty"), ExtResource("13_ecpwy"), ExtResource("14_cn6o6"), ExtResource("16_ak17v"), ExtResource("17_doif3")])
+levels = Array[ExtResource("5_5m6h1")]([SubResource("Resource_rcckm"), ExtResource("5_umaqc"), ExtResource("6_yf7oq"), ExtResource("7_s0wop"), ExtResource("8_o7mcc"), ExtResource("9_0ddqv"), ExtResource("10_ghdob"), ExtResource("11_yngpk"), ExtResource("12_73qty"), ExtResource("13_ecpwy"), ExtResource("14_cn6o6"), ExtResource("16_ak17v"), ExtResource("17_doif3"), ExtResource("18_k4lmr")])
 
 [node name="Gameplay" type="CanvasLayer" parent="."]
 process_mode = 1
@@ -92,6 +98,42 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("20_06ybk")
 expand_mode = 1
+
+[node name="CutsceneSlideLayer" type="CanvasLayer" parent="."]
+process_mode = 1
+layer = 2
+script = ExtResource("21_thtin")
+
+[node name="Back" type="PanelContainer" parent="CutsceneSlideLayer"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_85u23")
+
+[node name="CenterContainer" type="CenterContainer" parent="CutsceneSlideLayer/Back"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CutsceneSlideLayer/Back/CenterContainer"]
+layout_mode = 2
+
+[node name="SlideImage" type="TextureRect" parent="CutsceneSlideLayer/Back/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(640, 360)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+expand_mode = 5
+stretch_mode = 4
+
+[node name="SlideText" type="RichTextLabel" parent="CutsceneSlideLayer/Back/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("21_nr7sn")
+theme_override_font_sizes/normal_font_size = 32
+fit_content = true
+autowrap_mode = 0
+visible_characters_behavior = 1
 
 [node name="PauseMenu" parent="." instance=ExtResource("5_q4bcv")]
 layer = 3

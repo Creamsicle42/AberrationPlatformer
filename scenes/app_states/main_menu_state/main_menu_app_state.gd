@@ -24,7 +24,7 @@ func _on_new_game_button_pressed() -> void:
 	await FadeLayer.fade_complete
 	GameDataManager.current_game_data.flags = {}
 	Main.app.set_state("gameplay", {
-		"start_level": "sewers_1",
+		"start_level": "intro",
 		"start_spawnpoint": "start"
 	})
 
