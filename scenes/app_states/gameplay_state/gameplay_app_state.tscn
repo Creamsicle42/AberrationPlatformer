@@ -120,8 +120,10 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="SlideImage" type="TextureRect" parent="CutsceneSlideLayer/Back/CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(640, 0)
+custom_minimum_size = Vector2(640, 360)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 expand_mode = 5
 stretch_mode = 4
 
