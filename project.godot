@@ -10,10 +10,12 @@ config_version=5
 
 [application]
 
-config/name="Aberration Platformer"
+config/name="Gravity Acolyte"
 run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
-config/icon="res://assets/textures/misc/icon.svg"
+boot_splash/bg_color=Color(0.0941176, 0.0784314, 0.145098, 1)
+boot_splash/show_image=false
+config/icon="res://assets/textures/ui/gem_icon.png"
 
 [autoload]
 

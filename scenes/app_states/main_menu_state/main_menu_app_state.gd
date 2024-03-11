@@ -9,7 +9,10 @@ func enter_state(_params:Dictionary) -> void:
 	FadeLayer.fade_in()
 	if GameDataManager.current_game_data.level_on == "":
 		continue_button.disabled = true
+	if not OS.has_feature("pc"):
+		%QuitButton.visible = false
 	%NewGameButton.grab_focus()
+
 
 	MusicController.fade_into_track(load("res://assets/audio/music/main_menu_loop.ogg"))
 
@@ -56,3 +59,7 @@ func _on_settings_pannel_accept_pressed() -> void:
 func _on_settings_button_pressed() -> void:
 	%SettingsOwner.visible = true
 	UiAudio.player_click()
+
+
+func _on_quit_button_pressed() -> void:
+	get_tree().quit()

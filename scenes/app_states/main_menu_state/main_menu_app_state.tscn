@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://8bvpurlo7b1"]
+[gd_scene load_steps=10 format=3 uid="uid://8bvpurlo7b1"]
 
 [ext_resource type="Script" path="res://scenes/app_states/main_menu_state/main_menu_app_state.gd" id="1_k3qqp"]
 [ext_resource type="Texture2D" uid="uid://bpwjhpg336erm" path="res://assets/textures/ui/main_menu/main_menu_alt.png" id="2_pcaey"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scenes/app_states/main_menu_state/menu_paralax_element.gd" id="3_ogqav"]
 [ext_resource type="Texture2D" uid="uid://c86em6sw2ac4g" path="res://assets/textures/ui/main_menu/mainmenu_bkg_piper.png" id="4_8g5ml"]
 [ext_resource type="Texture2D" uid="uid://cbjnlgjn30ik6" path="res://assets/textures/ui/main_menu/mainmenu_bkg_gem.png" id="5_s6kkd"]
+[ext_resource type="Texture2D" uid="uid://rol740s2giwj" path="res://assets/textures/ui/main_menu/title.png" id="7_xvo82"]
 [ext_resource type="PackedScene" uid="uid://bjouqewaembxu" path="res://scenes/ui/settings_pannel/settings_pannel.tscn" id="7_yipi3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m4vy0"]
@@ -95,10 +96,12 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_m4vy0")
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="UIElements/HBoxContainer/Content/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="UIElements/HBoxContainer/Content/VBoxContainer"]
+texture_filter = 2
 layout_mode = 2
-text = "Aberration Platformer"
-horizontal_alignment = 1
+texture = ExtResource("7_xvo82")
+expand_mode = 5
+stretch_mode = 4
 
 [node name="NewGameButton" type="Button" parent="UIElements/HBoxContainer/Content/VBoxContainer"]
 unique_name_in_owner = true
@@ -112,6 +115,11 @@ text = "Continue"
 [node name="SettingsButton" type="Button" parent="UIElements/HBoxContainer/Content/VBoxContainer"]
 layout_mode = 2
 text = "Settings"
+
+[node name="QuitButton" type="Button" parent="UIElements/HBoxContainer/Content/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Quit"
 
 [node name="RightSpacer" type="Control" parent="UIElements/HBoxContainer"]
 layout_mode = 2
@@ -141,4 +149,7 @@ layout_mode = 1
 [connection signal="focus_entered" from="UIElements/HBoxContainer/Content/VBoxContainer/SettingsButton" to="." method="_element_hover"]
 [connection signal="mouse_entered" from="UIElements/HBoxContainer/Content/VBoxContainer/SettingsButton" to="." method="_element_hover"]
 [connection signal="pressed" from="UIElements/HBoxContainer/Content/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="focus_entered" from="UIElements/HBoxContainer/Content/VBoxContainer/QuitButton" to="." method="_element_hover"]
+[connection signal="mouse_entered" from="UIElements/HBoxContainer/Content/VBoxContainer/QuitButton" to="." method="_element_hover"]
+[connection signal="pressed" from="UIElements/HBoxContainer/Content/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="accept_pressed" from="UIElements/SettingsOwner/SettingsPannel" to="." method="_on_settings_pannel_accept_pressed"]
