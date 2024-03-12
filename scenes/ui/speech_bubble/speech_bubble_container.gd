@@ -58,7 +58,7 @@ func show_text(text : String, show_time : float, show_position : Vector2, do_awa
 	anchor_top = local_position.y
 	anchor_bottom = local_position.y
 
-	$Label.text = text
+	$Label.text = tr(text)
 	$Label.visible_ratio = 0.0
 
 	if tween: tween.stop()

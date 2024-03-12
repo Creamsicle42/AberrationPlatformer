@@ -9,5 +9,5 @@ extends LevelEvent
 
 
 func execute(_data : Dictionary) -> void:
-	SpeechBubbleContainer.current.show_text(text, text.length() * charachter_time, bubble_pos, await_input_at_end)
+	SpeechBubbleContainer.current.show_text(text, tr(text).length() * charachter_time, bubble_pos, await_input_at_end)
 	if await_input_at_end: await SpeechBubbleContainer.current.text_accepted

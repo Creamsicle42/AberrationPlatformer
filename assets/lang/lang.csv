@@ -1,7 +1,8 @@
 	,en
+level_name.intro,""
 level_name.sewers_1,Sewers
 level_name.sanctum,Sanctum
-level_name.lab_1,Maintenence
+level_name.lab_1,Maintenance
 level_name.lab_vertical,Ascension Shaft
 level_name.lab_2,Alkene Inversion
 level_name.lab_3,Broken Tower
@@ -11,3 +12,30 @@ level_name.lab_6,Observation
 level_name.lab_7,High Lookout
 level_name.lab_8,Undercut
 level_name.lab_9,Momentum Preservation
+
+cutscene.intro.1,For centuries the temple of Balzor lay condemned...
+cutscene.intro.2,"Til one day, when a lone acolyte came..."
+cutscene.intro.3,"Seeking the dark desires of their heart..."
+
+cutscene.initial_entry.1,"[shake rate=20.0 level=5 connected=1]HEY YOU[/shake]"
+cutscene.initial_entry.2,"Another mortal come to grasp 
+at a fragment of my power..."
+cutscene.initial_entry.3,"Very well..."
+cutscene.initial_entry.4,"I shall grant you one wish!"
+cutscene.initial_entry.5,"But first, you must bring me at least
+eight [color=#124e89]Science Crystals"
+cutscene.initial_entry.6,"To aid you, I have created [color=#68386c]Spatial Abberations[/color]
+spread throught my temple."
+
+cutscene.repeat_entry,"Go on, get out of here!"
+
+cutscene.bad_end.1,"Congratulations, You did the bare minimum..."
+cutscene.bad_end.2,"Very well. I shall look into your soul and 
+determine your heart's wish!"
+cutscene.bad_end.3,"..."
+x,"Eww, I'm not doing that!"
+cutscene.bad_end.4,":("
+cutscene.bad_end.5,"How about a backup wish"
+cutscene.bad_end.6,"A lifetime supply of [color=#feae34]Cheese!"
+cutscene.bad_end.7,"And so the dark acolyte left unfufilled
+of their desire..."

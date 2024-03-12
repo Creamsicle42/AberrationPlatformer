@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dko54xafp76nq"]
+[gd_scene load_steps=20 format=3 uid="uid://dko54xafp76nq"]
 
 [ext_resource type="PackedScene" uid="uid://drum6yi7jjfk0" path="res://scenes/levels/template_level.tscn" id="1_cld4p"]
 [ext_resource type="Script" path="res://scenes/level_objects/event_executor.gd" id="2_6ran8"]
@@ -27,20 +27,29 @@ time = 1.0
 [sub_resource type="Resource" id="Resource_wdvji"]
 script = ExtResource("6_eao2p")
 cutscene_slide = ExtResource("5_6r2vy")
-cutscene_text = "For centures the temple of Balzor lay condemed..."
+cutscene_text = "cutscene.intro.1"
 slide_show_time = 5.0
+wait_for_accept = true
 
 [sub_resource type="Resource" id="Resource_d3ydw"]
 script = ExtResource("6_eao2p")
 cutscene_slide = ExtResource("7_vvrfn")
-cutscene_text = "Til one day, when a lone cultist came..."
+cutscene_text = "cutscene.intro.2"
 slide_show_time = 5.0
+wait_for_accept = true
 
 [sub_resource type="Resource" id="Resource_ie2i6"]
 script = ExtResource("6_eao2p")
 cutscene_slide = ExtResource("8_71own")
-cutscene_text = "Seeking the dark desires of their heart..."
+cutscene_text = "cutscene.intro.3"
 slide_show_time = 5.0
+wait_for_accept = true
+
+[sub_resource type="Resource" id="Resource_3cye4"]
+script = ExtResource("6_eao2p")
+cutscene_text = ""
+slide_show_time = 0.0
+wait_for_accept = false
 
 [sub_resource type="Resource" id="Resource_xu81i"]
 script = ExtResource("10_6f13c")
@@ -56,7 +65,7 @@ visible = false
 
 [node name="EventExecutor" type="Node" parent="." index="0"]
 script = ExtResource("2_6ran8")
-events = Array[Resource("res://assets/resources/_types/level_event/level_event.gd")]([SubResource("Resource_p5v62"), SubResource("Resource_tjd3d"), SubResource("Resource_ax142"), SubResource("Resource_wdvji"), SubResource("Resource_d3ydw"), SubResource("Resource_ie2i6"), SubResource("Resource_xu81i"), SubResource("Resource_ihupn")])
+events = Array[Resource("res://assets/resources/_types/level_event/level_event.gd")]([SubResource("Resource_p5v62"), SubResource("Resource_tjd3d"), SubResource("Resource_ax142"), SubResource("Resource_wdvji"), SubResource("Resource_d3ydw"), SubResource("Resource_ie2i6"), SubResource("Resource_3cye4"), SubResource("Resource_xu81i"), SubResource("Resource_ihupn")])
 
 [node name="Start" type="Node2D" parent="Spawnpoints" index="0"]
 position = Vector2(-224, 88)

@@ -61,7 +61,7 @@ func fade_hide() -> void:
 
 func show_slide(slide_image : Texture2D, slide_text : String, display_time : float) -> void:
 	image.texture = slide_image
-	text.text = slide_text
+	text.text = tr(slide_text)
 
 	text.visible_ratio = 0
 	if tween: tween.stop()
